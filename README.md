@@ -1,0 +1,1 @@
+R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Bioinformatics RNA-seq project.     

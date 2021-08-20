@@ -1,0 +1,352 @@
+--- 
+title: "Bioinformatics_RNA-seq"
+author: "J. Marcelo Rosales R."
+date: '**Created:** 2021-08-10;  **Update:** 2021-08-20; **Date:** `r Sys.Date()`' 
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "RNA-seq notes and trials"
+---
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```  
+   
+
+```{r eval=FALSE, include=FALSE}
+# install.packages("remotes") for copy button
+remotes::install_github("rlesur/klippy")
+```
+
+```{r klippy, echo=FALSE, include=FALSE}
+library(klippy)
+klippy::klippy()
+```
+
+# Downloading and setting up conda environments.  
+Benefit: You can install all your tools in "Conda" and export as yml and you can share that environment or create a new one base on it, and by doing so, you can have all those tools automatically installed.    
+
+## Install Miniconda, or Anaconda.  
+
+**Choose Anaconda if you:**   
+  - Are new to conda or Python   
+  - Like the convenience of having Python and over 1500 scientific packages automatically installed at once   
+  - Have the time and disk space (a few minutes and 3 GB), and/or  
+  - Don’t want to install each of the packages you want to use individually.  
+
+**Choose Miniconda if you:**  
+  - Do not mind installing each of the packages you want to use individually.  
+  - Do not have time or disk space to install over 1500 packages at once, and/or  
+  - Just want fast access to Python and the conda commands, and wish to sort out the other programs later.  
+
+> Mind that Windows and Mac installation and procedures are different. 
+
+*Does Windows need Linux to be intalled?* Yes, a version of Linux kernell for window is available for download. 
+
+Install [Anaconda](https://www.anaconda.com/) or [Miniconda](https://conda.io/miniconda.html).   
+
+```{bash, eval=FALSE }
+brew install --cask anaconda
+brew install --cask miniconda
+
+# To check the version of conda installed.  
+conda --version
+```    
+  
+  
+Quick video tutorial on how to use conda.   
+* [(Master) Conda environment](https://youtu.be/1VVCd0eSkYc).     
+* [Set up a data Science environment with Conda-Forge](https://youtu.be/ePS6lII4SEg).  
+
+**To create an environment.**   
+**The easy way:** Open the anaconda app > Environment > New > Name... Ok
+To access environment and open in terminal: anaconda app > Environment > Select environment > rna-seq_test ^ > »Open in Terminal. 
+
+**In Terminal**
+```{bash, eval=FALSE}
+# To see all the environment created.  
+conda env list  
+
+# To create a new environment in conda in terminal:  
+conda create --name rna-seq_test
+
+# To activate environment.    
+conda activate rna-seq_test
+
+# To see if we activated the environment and where (path) we are.  
+echo $path
+
+# To exit the environment and return to base/root. Check with echo $path. 
+conda deactivate
+
+# To see packages installed in env.:  
+conda config --show channels 
+
+# To see the url location of packages (repository):
+conda info
+
+# To add packages to the environment. (only to this environment: --env).  
+conda config --env --add channels conda-forge
+conda config --env --add channels bioconda 
+
+# If a package is repeated in the environment, Conda will always install the package of higher version. If you dont want that, and specifically need a version originally configured at creation of the environment.. type:   
+conda config --env --set channel_priority strict.  
+
+# To install fastqc
+conda install fastqc 
+
+#To make and export a list of the required environment/
+conda list --export > requirements.txt  
+
+#To make and export an yml file to share with others.
+conda env export > rna-seq_test.yml  
+conda env export --file  rna-seq_test.yml 
+
+# To quickly check the yml file. 
+less rna-seq_test.yml 
+
+#To see the content of a .yml file.
+head rna-seq_test.yml
+
+#To clear the terminal screen. 
+clear 
+
+# To run a Jupyter Notebook.  
+jupyter notebook   
+
+# To Keep Anaconda updated.  
+conda update conda
+
+# To Uninstall Anaconda.  
+[Uninstall page]()
+
+
+```   
+
+### Summary of Steps.   
+1. Install anaconda/miniconda for your OS from the website.  
+1. Prevent the base environment from automatically activating.  `conda config --set auto_activate_base false`   
+1. Create an empty environment.  `conda create -n rna-seq_test`.   
+1. Activate the environment `conda activate rna-seq_test`.   
+1. Add conda-forge as first channel `conda config --env --add channels conda-forge`.  
+1. Ensure that conda-forge is used if the package is available. `conda config --env --set channel_priority strict`   
+1. Install packages `conda install .... `   
+1. Install packages not in conda-forge. Search in conda webpage search. `conda install -c ....`    
+1. Verify Jupyter Notebooks in correct environment ...!?... In jupyter: `sys.executable`    
+
+![](https://youtu.be/ePS6lII4SEg){width="500" height="300"}
+
+
+Bioinformatics - Downloading and Setting Up Conda Environments
+![](https://youtu.be/ef_-BtMtDG0?list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k){width="40%"}
+
+
+# Introduction to RNA sequencing (RNA_seq)   
+
+An over simplification of the Process. 
+
+Holds 4 main sections.  
+
+1. Sample and sample analysis. Samples are taken, prepared and send to a company for analysis. (Illumina !?).  
+1. Raw data (FASTQ) - Expression quantification.  
+1. Differential expression analysis. 
+1. Pathway and Enrichment analysis.   
+
+Each of this section are subdivided in other steps, that. 
+
+**Download or acquire the files**   
+2021/07/02  
+Copy **Trial data** from MK/土橋 to [folder HD-PCFSU3-A/Experiments Data/Genewiz](file:///Volumes/HD-PCFSU3-A/Experiments%Data/Genewiz) :  
+The Report [file]( file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_RNASeq_Report.html) is here.  
+The Summary [file]( file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_QC_Report.html) is here.   
+
+
+## Alignment
+
+We need something to map our reads against once we get to the results.  
+Files for mouse (Mus musculus) are available for download at Johns Hopkins University Center for Computational Biology (CCB) at [TopHat. A spliced read mapper for RNA-Seq](https://ccb.jhu.edu/software/tophat/igenomes.shtml).  
+
+To download:   
+1. Look for the **Mus musculus Build37.2** from the NCBI.
+1. Right click the link and copy the [link address](ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Mus_musculus/NCBI/build37.2/Mus_musculus_NCBI_build37.2.tar.gz).  
+1. go back to the conda environment and type wget and the paste the link.  
+```{}
+wget ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Mus_musculus/NCBI/build37.2/Mus_musculus_NCBI_build37.2.tar.gz
+```
+
+### Using Tophat
+> Not Working!!!
+
+Tophat can be installed using the same **conda install** 
+```{}
+conda install \-c bioconda tophat
+```
+
+When this is finished installing, then we will need to get the mouse genome from the [Johns Hopkins Univeristy Center for computational BIology](http://ccb.jhu.edu/software/tophat/igenomes.shtml). The version of the mouse genome that I am using here is the [NCBI build37.2](ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Mus_musculus/NCBI/build37.2/Mus_musculus_NCBI_build37.2.tar.gz). Instead of downloading this from the website and having to move it to the cluser, I will just download it using wget into the folder that has the raw reads, trimmed reads, and the FastQC files.
+
+```{bash, eval=FALSE}
+wget ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Mus_musculus/NCBI/build37.2/Mus_musculus_NCBI_build37.2.tar.gz
+```
+
+This will take a long time to download because the file is a little less than 16GB zipped.
+
+> Installation of TopHat failed.!!!!!!!!!!!!!!!!!!!!!!! 
+
+Try STAR
+
+### Using STAR
+> Complicated!!!
+
+STAR can be installed the same way as the previous programs with **conda install** (***conda install \-c bioconda star***). In order to run STAR, we need to creaate indices just like with tophat, but STAR has this built in. I'm going to be using the same genome and GTF file as previously downloaded, but Dr. Ge uses a different zipped genome from the *gencode* database.
+
+```{bash, eval=FALSE}
+~/miniconda2/bin/STAR \
+--runThreadN 80 \
+--runMode genomeGenerate \
+--genomeDir starIndex \
+--genomeFastaFiles Index/genome.fa \ #same when we made the bowtie indices 
+--sjdbGTFfile Mus_musculus/NCBI/build37.2/Annotation/Archives/archive-2015-07-17-14-32-40/Genes/genes.gtf
+```
+
+With the index files made, we can start aligning with STAR. It's important here than we only pick the paired end reads and not use all of the reads. Tophat is able to use all 4 reads but STAR doesn't allow that, so we need to make sure that we feed in the large files from trimming.
+
+```{bash, eval=FALSE}
+~/miniconda2/bin/STAR --runThreadN 80 --genomeDir starIndex --readFilesIn 770_fp.fq 770_rp.fq --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix 2121770 --outSAMtype BAM SortedByCoordinate
+[here]()
+
+```
+
+> Complicated.!!!!!!!!!!!!!!!!!!!!!!!   
+
+
+### Downloading the Mus_musculus_NCBI_build37.2.tar.gz file my way.  
+> Esaest so far.
+
+1. Go to the iGenomes Ready-To-Use Reference Sequences and Annotations from [illumina.](https://support.illumina.com/sequencing/sequencing_software/igenome.html).  
+1. Copy the  Mus musculus (Mouse)	NCBI build37.2 [link](https://support.illumina.com/sequencing/sequencing_software/igenome.html).  
+1. Paste the link in a new tab/window on a web browser (chrome) and click enter.
+1. Popup window will ask where to save the file, choose folder and save. 
+1. File is 23Gb so it will take about 3 to 4 hrs to download. 
+
+
+### Get the Sample files. 
+
+Samples files come as "x_1.fastq.gz" or "x_2.fastq.gz", where x is the name of the file, 1 is for forward and 2 for reverse pair reads.  example:   we will place them in a folder (00_Rawdata)
+mPDL_RNA7D_Ko1_S1_L001_R1_001.fastq.gz  
+mPDL_RNA7D_Ko1_S1_L001_R2_001.fastq.gz  
+mPDL_RNA7D_Ko2_S1_L001_R1_001.fastq.gz  
+mPDL_RNA7D_Ko2_S1_L001_R2_001.fastq.gz  
+mPDL_RNA7D_Ko3_S1_L001_R1_001.fastq.gz  
+mPDL_RNA7D_Ko3_S1_L001_R2_001.fastq.gz... etc....  
+
+Download multiqc  
+```{bash, eval=FALSE}
+conda install multiqc
+```  
+
+
+### Starting to analize fastq.gz files  
+Initialize fastqc
+```{bash, eval=FALSE}
+fastqc 
+```
+
+Make an output directory named rawFastQC
+```{ , eval=FALSE}
+mkdir rawFastQC
+```
+
+Now we have to process all fastq files contained in the folder (00_Rawdata) and place the results in the directory we just made "rawFastQC".  
+
+```{bash, eval=FALSE}
+fastqc rawFastQC/*.fastq.gz -o rawFastQC/
+```
+
+Once analysis is finished. Go to the results folder (rawFastQC)
+```{ , eval=FALSE}
+cd rawFastQC
+```
+
+Create a report by read all the files contained in the results folder (rawFastQC) and combine them in one multiqc_report.html file.  
+```{ , eval=FALSE}
+rawFastQC multiqc
+
+# check if file was created.
+ls
+```
+
+## Trimming with Trimmomatic
+
+```{bash, eval=FALSE}
+conda install trimmomatic
+# parallel my also be required for task piping.
+conda install parallel
+```
+
+24:40
+Conda was used again to run Trimmomatic. This isn't as easy as using the wildcard like with FastQC because each output has to be personalized for the read files that are input into Trimmomatic. Also, we have to make sure that the adapter sequences are in the same folder that we are running so we can refer to them easily when calling the Trimmomatic program. In this case, we are using the TruSeq3-PE-2.fa adapter sequences For example:  
+
+```{bash, eval=FALSE}
+~/miniconda2/bin/trimmomatic PE SRR2121770_1.fastq.gz SRR2121770_2.fastq.gz 770_fp.fq.gz 770_fu.fq.gz 770_rp.fq.gz 770_ru.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRALING:3 MINLEN:36 &
+```
+
+This would be repeated for each of the pairs (12 in total). We are trimming paired-end reads with the TruSeq3-PE-2 adapters. We are chopping off the first and last 3 bases and if we end up with a sequence less than 36 bases, we get rid of it. We want to make sure that there are enough bases in a read to work with. These parameters can be tweaked for possibly better end results with less being discarded. When Trimmomatic is finished running, it will out put the total number of reads, the total number from both the forward and reverse reads that are kept, the number of only forward reads kept, the number of only reverse reads kept, and the number of discarded reads.  
+
+The trimmed reads can be analyzed again with FastQC to see how well the trimming worked to make the file better quality. After running FastQC on the trimmed files we see that the quality of those that were really bad quality were improved. There were a few different metrics throughout all of the files that bounced from a warning before the failing, or from passing before to a warning, and so forth, overall creating better quality read files.  
+
+> Read Check Undrstantig Trimmomatic tutorial for this section !!!!!!
+
+after trimmomatic, files will be created, .gz and .log files. Use multiqc to merge all logs in one report file. Then check the timmomatic survival Reads. If all samples are over 55M (million) reads then samples are valid for further analysis. 
+
+> Check the order again. 
+ Trimmomatic > alligment -> w/ TopHap or STAR 
+
+### Using STAR to map genes
+
+Using the Mus_musculus files we will compare our samples and find where in the genome our reads are. 
+> Build Genome Indexing and useful STAR Flags (quick).
+
+See also:
+[novocraft aling](http://www.novocraft.com/documentation/novoalign-2/novoalign-ngs-quick-start-tutorial/1040-2/). *Opens only on safari.   
+[Analyzind RNA-Seq data using Python3 Snakemake](https://github.com/ACSoupir/SnakeMake). File [Snake file](https://github.com/ACSoupir/SnakeMake/blob/master/Snakefile).  
+
+> Look for more information with rRNA and Microbial Contamination.   
+> Bioinformatics - Contamination QC and FeatureCounts
+> Quick Look at Counts and Setting Up R Project
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

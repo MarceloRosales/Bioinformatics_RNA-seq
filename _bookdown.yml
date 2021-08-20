@@ -1,0 +1,6 @@
+book_filename: "Bioinformatics_RNA-seq"
+delete_merged_file: true
+output_dir: "docs"
+language:
+  ui:
+    chapter_name: "Chapter 01"

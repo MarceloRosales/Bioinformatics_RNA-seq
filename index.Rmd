@@ -143,12 +143,14 @@ conda update conda
 1. Install packages not in conda-forge. Search in conda webpage search. `conda install -c ....`    
 1. Verify Jupyter Notebooks in correct environment ...!?... In jupyter: `sys.executable`    
 
+Video reference:    
 `![](https://youtu.be/ePS6lII4SEg){width="500" height="300"}` does not really work. 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ePS6lII4SEg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Bioinformatics - Downloading and Setting Up Conda Environments
-`![](https://youtu.be/ef_-BtMtDG0?list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k){width="40%"}` neither. 
+Bioinformatics - Downloading and Setting Up Conda Environments.   
+`![](https://youtu.be/ef_-BtMtDG0?list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k){width="40%"}` neither.   
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ef_-BtMtDG0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # Introduction to RNA sequencing (RNA_seq)   

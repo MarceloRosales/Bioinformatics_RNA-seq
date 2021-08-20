@@ -28,11 +28,11 @@ library(klippy)
 klippy::klippy()
 ```
 
+# Downloading and setting up conda environments.  
+
 [GitHub page](https://marcelorosales.github.io/Bioinformatics_RNA-seq/).  
 https://marcelorosales.github.io/Bioinformatics_RNA-seq/
 
-
-# Downloading and setting up conda environments.  
 Benefit: You can install all your tools in "Conda" and export as yml and you can share that environment or create a new one base on it, and by doing so, you can have all those tools automatically installed.    
 
 ## Install Miniconda, or Anaconda.  

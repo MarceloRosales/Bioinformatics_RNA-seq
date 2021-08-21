@@ -1,5 +1,3 @@
-fig:nice-fig
-tab:nice-tab
 downloading-and-setting-up-conda-environments.
 install-miniconda-or-anaconda.
 summary-of-steps.
@@ -10,9 +8,13 @@ using-star
 downloading-the-mus_musculus_ncbi_build37.2.tar.gz-file-my-way.
 get-the-sample-files.
 starting-to-analize-fastq.gz-files
-check-if-file-was-created.
+trimming-with-trimmomatic
 using-star-to-map-genes
-intro
+WGCNA
+wgcna-rpackage-installation-procedure.
+final-installation-workflow
+wgcna-tutorial.
+gene-expression-analysis
 literature
 methods
 applications

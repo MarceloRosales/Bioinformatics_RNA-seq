@@ -30,8 +30,7 @@ klippy::klippy()
 
 # Downloading and setting up conda environments.  
 
-[GitHub page](https://marcelorosales.github.io/Bioinformatics_RNA-seq/).  
-https://marcelorosales.github.io/Bioinformatics_RNA-seq/
+-
 
 Benefit: You can install all your tools in "Conda" and export as yml and you can share that environment or create a new one base on it, and by doing so, you can have all those tools automatically installed.    
 
@@ -153,7 +152,7 @@ Bioinformatics - Downloading and Setting Up Conda Environments.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ef_-BtMtDG0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-# Introduction to RNA sequencing (RNA_seq)   
+## Introduction to RNA sequencing (RNA_seq)   
 
 An over simplification of the Process. 
 
@@ -258,13 +257,15 @@ conda install multiqc
 
 
 ### Starting to analize fastq.gz files  
+
 Initialize fastqc
 ```{bash, eval=FALSE}
 fastqc 
 ```
 
-Make an output directory named rawFastQC
-```{ , eval=FALSE}
+Make an output directory named rawFastQC   
+
+```{bash, eval=FALSE}
 mkdir rawFastQC
 ```
 
@@ -274,20 +275,21 @@ Now we have to process all fastq files contained in the folder (00_Rawdata) and 
 fastqc rawFastQC/*.fastq.gz -o rawFastQC/
 ```
 
-Once analysis is finished. Go to the results folder (rawFastQC)
-```{ , eval=FALSE}
+Once analysis is finished. Go to the results folder (rawFastQC)   
+
+```{bash, eval=FALSE}
 cd rawFastQC
 ```
 
-Create a report by read all the files contained in the results folder (rawFastQC) and combine them in one multiqc_report.html file.  
-```{ , eval=FALSE}
-rawFastQC multiqc
+Create a report by read all the files contained in the results folder (rawFastQC) and combine them in one multiqc_report.html file.   
 
+```{bash, eval=FALSE}
+rawFastQC multiqc
 # check if file was created.
 ls
 ```
 
-## Trimming with Trimmomatic
+### Trimming with Trimmomatic   
 
 ```{bash, eval=FALSE}
 conda install trimmomatic

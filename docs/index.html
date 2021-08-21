@@ -31,7 +31,7 @@
   
   
 
-<link rel="next" href="introduction-to-rna-sequencing-rna-seq.html"/>
+<link rel="next" href="WGCNA.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -123,28 +123,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -168,31 +146,35 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#summary-of-steps."><i class="fa fa-check"></i><b>1.1.1</b> Summary of Steps.</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="introduction-to-rna-sequencing-rna-seq.html"><a href="introduction-to-rna-sequencing-rna-seq.html"><i class="fa fa-check"></i><b>2</b> Introduction to RNA sequencing (RNA_seq)</a>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#introduction-to-rna-sequencing-rna_seq"><i class="fa fa-check"></i><b>1.2</b> Introduction to RNA sequencing (RNA_seq)</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#alignment"><i class="fa fa-check"></i><b>1.3</b> Alignment</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="introduction-to-rna-sequencing-rna-seq.html"><a href="introduction-to-rna-sequencing-rna-seq.html#alignment"><i class="fa fa-check"></i><b>2.1</b> Alignment</a>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#using-tophat"><i class="fa fa-check"></i><b>1.3.1</b> Using Tophat</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#using-star"><i class="fa fa-check"></i><b>1.3.2</b> Using STAR</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#downloading-the-mus_musculus_ncbi_build37.2.tar.gz-file-my-way."><i class="fa fa-check"></i><b>1.3.3</b> Downloading the Mus_musculus_NCBI_build37.2.tar.gz file my way.</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#get-the-sample-files."><i class="fa fa-check"></i><b>1.3.4</b> Get the Sample files.</a></li>
+<li class="chapter" data-level="1.3.5" data-path="index.html"><a href="index.html#starting-to-analize-fastq.gz-files"><i class="fa fa-check"></i><b>1.3.5</b> Starting to analize fastq.gz files</a></li>
+<li class="chapter" data-level="1.3.6" data-path="index.html"><a href="index.html#trimming-with-trimmomatic"><i class="fa fa-check"></i><b>1.3.6</b> Trimming with Trimmomatic</a></li>
+<li class="chapter" data-level="1.3.7" data-path="index.html"><a href="index.html#using-star-to-map-genes"><i class="fa fa-check"></i><b>1.3.7</b> Using STAR to map genes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="WGCNA.html"><a href="WGCNA.html"><i class="fa fa-check"></i><b>2</b> Introduction to the WGCNA Rpackage</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="introduction-to-rna-sequencing-rna-seq.html"><a href="introduction-to-rna-sequencing-rna-seq.html#using-tophat"><i class="fa fa-check"></i><b>2.1.1</b> Using Tophat</a></li>
-<li class="chapter" data-level="2.1.2" data-path="introduction-to-rna-sequencing-rna-seq.html"><a href="introduction-to-rna-sequencing-rna-seq.html#using-star"><i class="fa fa-check"></i><b>2.1.2</b> Using STAR</a></li>
-<li class="chapter" data-level="2.1.3" data-path="introduction-to-rna-sequencing-rna-seq.html"><a href="introduction-to-rna-sequencing-rna-seq.html#downloading-the-mus_musculus_ncbi_build37.2.tar.gz-file-my-way."><i class="fa fa-check"></i><b>2.1.3</b> Downloading the Mus_musculus_NCBI_build37.2.tar.gz file my way.</a></li>
-<li class="chapter" data-level="2.1.4" data-path="introduction-to-rna-sequencing-rna-seq.html"><a href="introduction-to-rna-sequencing-rna-seq.html#get-the-sample-files."><i class="fa fa-check"></i><b>2.1.4</b> Get the Sample files.</a></li>
-<li class="chapter" data-level="2.1.5" data-path="introduction-to-rna-sequencing-rna-seq.html"><a href="introduction-to-rna-sequencing-rna-seq.html#starting-to-analize-fastq.gz-files"><i class="fa fa-check"></i><b>2.1.5</b> Starting to analize fastq.gz files</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="check-if-file-was-created-.html"><a href="check-if-file-was-created-.html"><i class="fa fa-check"></i><b>3</b> check if file was created.</a>
+<li class="chapter" data-level="2.1" data-path="WGCNA.html"><a href="WGCNA.html#wgcna-rpackage-installation-procedure."><i class="fa fa-check"></i><b>2.1</b> WGCNA Rpackage Installation procedure.</a></li>
+<li class="chapter" data-level="2.2" data-path="WGCNA.html"><a href="WGCNA.html#final-installation-workflow"><i class="fa fa-check"></i><b>2.2</b> Final installation workflow:</a></li>
+<li class="chapter" data-level="2.3" data-path="WGCNA.html"><a href="WGCNA.html#wgcna-tutorial."><i class="fa fa-check"></i><b>2.3</b> WGCNA tutorial.</a>
 <ul>
-<li class="chapter" data-level="3.0.1" data-path="check-if-file-was-created-.html"><a href="check-if-file-was-created-.html#using-star-to-map-genes"><i class="fa fa-check"></i><b>3.0.1</b> Using STAR to map genes</a></li>
+<li class="chapter" data-level="2.3.1" data-path="WGCNA.html"><a href="WGCNA.html#gene-expression-analysis"><i class="fa fa-check"></i><b>2.3.1</b> 3.4 Gene expression analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>4</b> Introduction</a></li>
-<li class="chapter" data-level="5" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>5</b> Literature</a></li>
-<li class="chapter" data-level="6" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>6</b> Methods</a></li>
-<li class="chapter" data-level="7" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>7</b> Applications</a>
+</ul></li>
+<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
+<li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
+<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>7.1</b> Example one</a></li>
-<li class="chapter" data-level="7.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>7.2</b> Example two</a></li>
+<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
+<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>8</b> Final Words</a></li>
+<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -217,12 +199,13 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Bioinformatics_RNA-seq</h1>
 <p class="author"><em>J. Marcelo Rosales R.</em></p>
-<p class="date" style="margin-top: 1.5em;"><em><strong>Created:</strong> 2021-08-10; <strong>Update:</strong> 2021-08-20; <strong>Date:</strong> 2021-08-20</em></p>
+<p class="date" style="margin-top: 1.5em;"><em><strong>Created:</strong> 2021-08-10; <strong>Update:</strong> 2021-08-20; <strong>Date:</strong> 2021-08-22</em></p>
 </div>
 <div id="downloading-and-setting-up-conda-environments." class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Downloading and setting up conda environments.</h1>
-<p><a href="https://marcelorosales.github.io/Bioinformatics_RNA-seq/">GitHub page</a>.<br />
-<a href="https://marcelorosales.github.io/Bioinformatics_RNA-seq/" class="uri">https://marcelorosales.github.io/Bioinformatics_RNA-seq/</a></p>
+<ul>
+<li></li>
+</ul>
 <p>Benefit: You can install all your tools in “Conda” and export as yml and you can share that environment or create a new one base on it, and by doing so, you can have all those tools automatically installed.</p>
 <div id="install-miniconda-or-anaconda." class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Install Miniconda, or Anaconda.</h2>
@@ -338,6 +321,144 @@ To access environment and open in terminal: anaconda app &gt; Environment &gt; S
 </iframe>
 </div>
 </div>
+<div id="introduction-to-rna-sequencing-rna_seq" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Introduction to RNA sequencing (RNA_seq)</h2>
+<p>An over simplification of the Process.</p>
+<p>Holds 4 main sections.</p>
+<ol style="list-style-type: decimal">
+<li>Sample and sample analysis. Samples are taken, prepared and send to a company for analysis. (Illumina !?).<br />
+</li>
+<li>Raw data (FASTQ) - Expression quantification.<br />
+</li>
+<li>Differential expression analysis.</li>
+<li>Pathway and Enrichment analysis.</li>
+</ol>
+<p>Each of this section are subdivided in other steps, that.</p>
+<p><strong>Download or acquire the files</strong><br />
+2021/07/02<br />
+Copy <strong>Trial data</strong> from MK/土橋 to <a href="file:///Volumes/HD-PCFSU3-A/Experiments%Data/Genewiz">folder HD-PCFSU3-A/Experiments Data/Genewiz</a> :<br />
+The Report <a href="file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_RNASeq_Report.html">file</a> is here.<br />
+The Summary <a href="file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_QC_Report.html">file</a> is here.</p>
+</div>
+<div id="alignment" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Alignment</h2>
+<p>We need something to map our reads against once we get to the results.<br />
+Files for mouse (Mus musculus) are available for download at Johns Hopkins University Center for Computational Biology (CCB) at <a href="https://ccb.jhu.edu/software/tophat/igenomes.shtml">TopHat. A spliced read mapper for RNA-Seq</a>.</p>
+<p>To download:<br />
+1. Look for the <strong>Mus musculus Build37.2</strong> from the NCBI.
+1. Right click the link and copy the <a href="ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Mus_musculus/NCBI/build37.2/Mus_musculus_NCBI_build37.2.tar.gz">link address</a>.<br />
+1. go back to the conda environment and type wget and the paste the link.</p>
+<pre><code>wget ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Mus_musculus/NCBI/build37.2/Mus_musculus_NCBI_build37.2.tar.gz</code></pre>
+<div id="using-tophat" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Using Tophat</h3>
+<blockquote>
+<p>Not Working!!!</p>
+</blockquote>
+<p>Tophat can be installed using the same <strong>conda install</strong></p>
+<pre><code>conda install \-c bioconda tophat</code></pre>
+<p>When this is finished installing, then we will need to get the mouse genome from the <a href="http://ccb.jhu.edu/software/tophat/igenomes.shtml">Johns Hopkins Univeristy Center for computational BIology</a>. The version of the mouse genome that I am using here is the <a href="ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Mus_musculus/NCBI/build37.2/Mus_musculus_NCBI_build37.2.tar.gz">NCBI build37.2</a>. Instead of downloading this from the website and having to move it to the cluser, I will just download it using wget into the folder that has the raw reads, trimmed reads, and the FastQC files.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="index.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Mus_musculus/NCBI/build37.2/Mus_musculus_NCBI_build37.2.tar.gz</span></code></pre></div>
+<p>This will take a long time to download because the file is a little less than 16GB zipped.</p>
+<blockquote>
+<p>Installation of TopHat failed.!!!!!!!!!!!!!!!!!!!!!!!</p>
+</blockquote>
+<p>Try STAR</p>
+</div>
+<div id="using-star" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Using STAR</h3>
+<blockquote>
+<p>Complicated!!!</p>
+</blockquote>
+<p>STAR can be installed the same way as the previous programs with <strong>conda install</strong> (<strong><em>conda install -c bioconda star</em></strong>). In order to run STAR, we need to creaate indices just like with tophat, but STAR has this built in. I’m going to be using the same genome and GTF file as previously downloaded, but Dr. Ge uses a different zipped genome from the <em>gencode</em> database.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="index.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/miniconda2/bin/STAR</span> <span class="dt">\</span></span>
+<span id="cb6-2"><a href="index.html#cb6-2" aria-hidden="true" tabindex="-1"></a>--runThreadN 80 <span class="dt">\</span></span>
+<span id="cb6-3"><a href="index.html#cb6-3" aria-hidden="true" tabindex="-1"></a>--runMode genomeGenerate <span class="dt">\</span></span>
+<span id="cb6-4"><a href="index.html#cb6-4" aria-hidden="true" tabindex="-1"></a>--genomeDir starIndex <span class="dt">\</span></span>
+<span id="cb6-5"><a href="index.html#cb6-5" aria-hidden="true" tabindex="-1"></a>--genomeFastaFiles Index/genome.fa <span class="dt">\ </span>#same when we made the bowtie indices </span>
+<span id="cb6-6"><a href="index.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">--sjdbGTFfile</span> Mus_musculus/NCBI/build37.2/Annotation/Archives/archive-2015-07-17-14-32-40/Genes/genes.gtf</span></code></pre></div>
+<p>With the index files made, we can start aligning with STAR. It’s important here than we only pick the paired end reads and not use all of the reads. Tophat is able to use all 4 reads but STAR doesn’t allow that, so we need to make sure that we feed in the large files from trimming.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="index.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/miniconda2/bin/STAR</span> <span class="at">--runThreadN</span> 80 <span class="at">--genomeDir</span> starIndex <span class="at">--readFilesIn</span> 770_fp.fq 770_rp.fq <span class="at">--outFilterIntronMotifs</span> RemoveNoncanonical <span class="at">--outFileNamePrefix</span> 2121770 <span class="at">--outSAMtype</span> BAM SortedByCoordinate</span>
+<span id="cb7-2"><a href="index.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[here]</span><span class="er">(</span><span class="kw">)</span></span></code></pre></div>
+<blockquote>
+<p>Complicated.!!!!!!!!!!!!!!!!!!!!!!!</p>
+</blockquote>
+</div>
+<div id="downloading-the-mus_musculus_ncbi_build37.2.tar.gz-file-my-way." class="section level3" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Downloading the Mus_musculus_NCBI_build37.2.tar.gz file my way.</h3>
+<blockquote>
+<p>Esaest so far.</p>
+</blockquote>
+<ol style="list-style-type: decimal">
+<li>Go to the iGenomes Ready-To-Use Reference Sequences and Annotations from <a href="https://support.illumina.com/sequencing/sequencing_software/igenome.html">illumina.</a>.<br />
+</li>
+<li>Copy the Mus musculus (Mouse) NCBI build37.2 <a href="https://support.illumina.com/sequencing/sequencing_software/igenome.html">link</a>.<br />
+</li>
+<li>Paste the link in a new tab/window on a web browser (chrome) and click enter.</li>
+<li>Popup window will ask where to save the file, choose folder and save.</li>
+<li>File is 23Gb so it will take about 3 to 4 hrs to download.</li>
+</ol>
+</div>
+<div id="get-the-sample-files." class="section level3" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> Get the Sample files.</h3>
+<p>Samples files come as “x_1.fastq.gz” or “x_2.fastq.gz,” where x is the name of the file, 1 is for forward and 2 for reverse pair reads. example: we will place them in a folder (00_Rawdata)
+mPDL_RNA7D_Ko1_S1_L001_R1_001.fastq.gz<br />
+mPDL_RNA7D_Ko1_S1_L001_R2_001.fastq.gz<br />
+mPDL_RNA7D_Ko2_S1_L001_R1_001.fastq.gz<br />
+mPDL_RNA7D_Ko2_S1_L001_R2_001.fastq.gz<br />
+mPDL_RNA7D_Ko3_S1_L001_R1_001.fastq.gz<br />
+mPDL_RNA7D_Ko3_S1_L001_R2_001.fastq.gz… etc….</p>
+<p>Download multiqc</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="index.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install multiqc</span></code></pre></div>
+</div>
+<div id="starting-to-analize-fastq.gz-files" class="section level3" number="1.3.5">
+<h3><span class="header-section-number">1.3.5</span> Starting to analize fastq.gz files</h3>
+<p>Initialize fastqc</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="index.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> </span></code></pre></div>
+<p>Make an output directory named rawFastQC</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="index.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> rawFastQC</span></code></pre></div>
+<p>Now we have to process all fastq files contained in the folder (00_Rawdata) and place the results in the directory we just made “rawFastQC.”</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="index.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> rawFastQC/<span class="pp">*</span>.fastq.gz <span class="at">-o</span> rawFastQC/</span></code></pre></div>
+<p>Once analysis is finished. Go to the results folder (rawFastQC)</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="index.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> rawFastQC</span></code></pre></div>
+<p>Create a report by read all the files contained in the results folder (rawFastQC) and combine them in one multiqc_report.html file.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="index.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rawFastQC</span> multiqc</span>
+<span id="cb13-2"><a href="index.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># check if file was created.</span></span>
+<span id="cb13-3"><a href="index.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+</div>
+<div id="trimming-with-trimmomatic" class="section level3" number="1.3.6">
+<h3><span class="header-section-number">1.3.6</span> Trimming with Trimmomatic</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="index.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install trimmomatic</span>
+<span id="cb14-2"><a href="index.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># parallel my also be required for task piping.</span></span>
+<span id="cb14-3"><a href="index.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install parallel</span></code></pre></div>
+<p>24:40
+Conda was used again to run Trimmomatic. This isn’t as easy as using the wildcard like with FastQC because each output has to be personalized for the read files that are input into Trimmomatic. Also, we have to make sure that the adapter sequences are in the same folder that we are running so we can refer to them easily when calling the Trimmomatic program. In this case, we are using the TruSeq3-PE-2.fa adapter sequences For example:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="index.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/miniconda2/bin/trimmomatic</span> PE SRR2121770_1.fastq.gz SRR2121770_2.fastq.gz 770_fp.fq.gz 770_fu.fq.gz 770_rp.fq.gz 770_ru.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRALING:3 MINLEN:36 <span class="kw">&amp;</span></span></code></pre></div>
+<p>This would be repeated for each of the pairs (12 in total). We are trimming paired-end reads with the TruSeq3-PE-2 adapters. We are chopping off the first and last 3 bases and if we end up with a sequence less than 36 bases, we get rid of it. We want to make sure that there are enough bases in a read to work with. These parameters can be tweaked for possibly better end results with less being discarded. When Trimmomatic is finished running, it will out put the total number of reads, the total number from both the forward and reverse reads that are kept, the number of only forward reads kept, the number of only reverse reads kept, and the number of discarded reads.</p>
+<p>The trimmed reads can be analyzed again with FastQC to see how well the trimming worked to make the file better quality. After running FastQC on the trimmed files we see that the quality of those that were really bad quality were improved. There were a few different metrics throughout all of the files that bounced from a warning before the failing, or from passing before to a warning, and so forth, overall creating better quality read files.</p>
+<blockquote>
+<p>Read Check Undrstantig Trimmomatic tutorial for this section !!!!!!</p>
+</blockquote>
+<p>after trimmomatic, files will be created, .gz and .log files. Use multiqc to merge all logs in one report file. Then check the timmomatic survival Reads. If all samples are over 55M (million) reads then samples are valid for further analysis.</p>
+<blockquote>
+<p>Check the order again.
+Trimmomatic &gt; alligment -&gt; w/ TopHap or STAR</p>
+</blockquote>
+</div>
+<div id="using-star-to-map-genes" class="section level3" number="1.3.7">
+<h3><span class="header-section-number">1.3.7</span> Using STAR to map genes</h3>
+<p>Using the Mus_musculus files we will compare our samples and find where in the genome our reads are.
+&gt; Build Genome Indexing and useful STAR Flags (quick).</p>
+<p>See also:
+<a href="http://www.novocraft.com/documentation/novoalign-2/novoalign-ngs-quick-start-tutorial/1040-2/">novocraft aling</a>. *Opens only on safari.<br />
+<a href="https://github.com/ACSoupir/SnakeMake">Analyzind RNA-Seq data using Python3 Snakemake</a>. File <a href="https://github.com/ACSoupir/SnakeMake/blob/master/Snakefile">Snake file</a>.</p>
+<blockquote>
+<p>Look for more information with rRNA and Microbial Contamination.<br />
+Bioinformatics - Contamination QC and FeatureCounts
+Quick Look at Counts and Setting Up R Project</p>
+</blockquote>
+
+</div>
+</div>
 </div>
             </section>
 
@@ -345,7 +466,7 @@ To access environment and open in terminal: anaconda app &gt; Environment &gt; S
         </div>
       </div>
 
-<a href="introduction-to-rna-sequencing-rna-seq.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="WGCNA.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

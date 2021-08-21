@@ -1,0 +1,199 @@
+# Introduction to the WGCNA Rpackage {#WGCNA}
+
+## WGCNA Rpackage Installation procedure.  
+
+**Installing and re-installing new versions or R and Studio.**  
+In Terminal (or Rstudio > Terminal).  
+```
+brew reinstall --cask r
+brew reinstall --cask rstudio
+```
+
+**Installing WGCNA: and R package for weighted correlation network analysis.**  
+
+To install the package, go to Tab: Packages > Install …[]… -Repository: (CRAN); -Packages: WGCNA; *Install.  In R code:  
+
+```{r, eval=FALSE}
+install.packages("WGCNA")
+```
+
+**Installation (Failed)**.  
+Unfortunately, it could not install correctly. **Error** was:   
+
+```{ruby, eval= FALSE} 
+install.packages("WGCNA")
+Warning in install.packages :
+dependencies ‘Biobase’, ‘impute’, ‘preprocessCore’, ‘GO.db’, ‘AnnotationDbi’ are not available
+Package which is only available in source form, and may need compilation of C/C++/Fortran: ‘WGCNA’
+Do you want to attempt to install these from sources? (Yes/no/cancel) y
+Warning in install.packages :
+installation of package ‘WGCNA’ had non-zero exit status
+```  
+
+Dependencies are old and require special installation.  
+
+1. From [this page]( http://pklab.med.harvard.edu/scw2014/WGCNA.html), installed several packages. **(Failed)**.   
+```{r, eval=FALSE}
+install.packages(c("dynamicTreeCut", "cluster", "flashClust", "Hmisc", "reshape", "foreach", "doParallel") ) 
+source("http://bioconductor.org/biocLite.R") 
+biocLite("impute")
+install.packages("WGCNA")
+```   
+Install most of the packages, but not “impute”, result: could not install WGCNA.  
+
+1. Tried to install dependencies independently from [here](https://support.bioconductor.org/p/120430/ ): **(Failed)**    
+```{eval=FALSE}
+You're using R-3.6.0, but trying to install Bioconductor version 3.8. Try using BiocManager::install("Biobase"). If that works, then try BiocManager::install("GO.db").
+If you have success, make sure your installation is valid with BiocManager::valid().
+BiocManager::install("Biobase")
+BiocManager::install("GO.db")
+BiocManager::valid()
+No resutl
+```    
+1. Decided to install the complete “BiocManager” pack. ** BiocManager: (OK); (WGCNA:(Failed)**   
+```{r, eval=FALSE}
+> install.packages("BiocManager") 
+ downloaded 315 KB
+> install.packages("WGCNA")
+ Warning in install.packages : dependencies ‘impute’, ‘preprocessCore’ are not available
+```
+
+1. Search ‘preprocessCore’, in this [page]( https://bioconductor.org/packages/release/bioc/html/preprocessCore.html). **PreprocessCore:(OK); (WGCNA:(Failed)**   
+To install this package, start R (version "4.1") and enter:  
+
+```{r, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+ install.packages("BiocManager")
+BiocManager::install("preprocessCore")
+```
+
+1. For ‘impute’, found install in this [page]( https://bioconductor.org/packages/release/bioc/html/impute.html ). **Impute:(OK); WGCNA:( OK)**  
+To install this package, start R (version "4.1") enter:   
+
+```{r, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+ install.packages("BiocManager")
+BiocManager::install("impute")
+ Then install WGCNA
+install.packages("WGCNA")
+```
+
+## Final installation workflow:   
+
+```{r, eval=FALSE}
+# Set working directory
+getwd()
+setwd("/Users/marcelorosales/Box Sync/Documents/R/Rmarkdown")  
+getwd()
+
+# Load list of packages and install.
+load("Rpackages")
+for (p in setdiff(packages, installed.packages()[,"Package"]))
+  install.packages(p)
+
+Check <- installed.packages()
+
+BiocManager::install("Biobase")
+BiocManager::install("GO.db")
+BiocManager::valid()
+> install.packages("BiocManager")
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("preprocessCore")
+BiocManager::install("WGCNA")
+
+
+install.packages(c("dynamicTreeCut", "cluster", "flashClust", "Hmisc", "reshape", "foreach", "doParallel") ) 
+source("http://bioconductor.org/biocLite.R") 
+biocLite("impute")
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("impute")
+
+install.packages("WGCNA")
+```
+
+**Checking the packages for WGCNA installed previously for OS Catalina**.   
+
+> Warning in install.packages :  package ‘anRichment’ is not available for this version of R  
+
+A version of this package for your version of R might be available elsewhere, see the ideas at
+https://cran.r-project.org/doc/manuals/r-patched/R-admin.htmlInstalling-packages
+
+Warning in install.packages :  
+  package ‘anRichment’ is not available for this version of R  
+  package ‘anRichmentMethods’ is not available for this version of R  
+  package ‘BiocFileCache’ is not available for this version of R  
+  package ‘BiocParallel’ is not available for this version of R  
+  package ‘biomaRt’ is not available for this version of R  
+  package ‘DelayedArray’ is not available for this version of R  
+  package ‘GenomicAlignments’ is not available for this version of R  
+  package ‘GenomicFeatures’ is not available for this version of R  
+  package ‘GenomicRanges’ is not available for this version of R  
+  package ‘inserttable’ is not available for this version of R  
+  package ‘lorem’ is not available for this version of R  
+  package ‘org.Hs.eg.db’ is not available for this version of R  
+  package ‘org.Mm.eg.db’ is not available for this version of R  
+  package ‘Rhtslib’ is not available for this version of R  
+  package ‘Rsamtools’ is not available for this version of R  
+  package ‘rtracklayer’ is not available for this version of R  
+  package ‘SummarizedExperiment’ is not available for this version of R  
+  package ‘TxDb.Hsapiens.UCSC.hg19.knownGene’ is not available for this version of R  
+  package ‘TxDb.Mmusculus.UCSC.mm10.knownGene’ is not available for this version of R  
+A version of this package for your version of R might be available elsewhere,  
+see the ideas at  
+https://cran.r-project.org/doc/manuals/r-patched/R-admin.htmlInstalling-packages
+
+
+## WGCNA tutorial.   
+
+This code has been adapted from the tutorials available at WGCNA website **(this page does no longer exist)**.  
+
+WGCNA: an R package for weighted correlation network analysis [site]( https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/WGCNAIntro ).   
+
+ Tutorials for the WGCNA package. [R tutorial]( https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/Tutorials/index.html )  
+Steps Required for this process are:  
+1. **Data input and cleaning**: [PDF document]( https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/Tutorials/FemaleLiver-01-dataInput.pdf ), [R script]( https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/Tutorials/FemaleLiver-01-dataInput.R ).  
+1. Network construction and module detection  
+a. Automatic, one-step network construction and module detection: PDF document, R script  
+b. Step-by-step network construction and module detection: PDF document, R script  
+c. Dealing with large datasets: block-wise network construction and module detection: PDF document, R script  
+1. Relating modules to external clinical traits and identifying important genes: PDF document, R script  
+1. Interfacing network analysis with other data such as functional annotation and gene ontology PDF document, R script  
+1. Network visualization using WGCNA functions: PDF document, R script  
+1. Export of networks to external software: PDF document, R script  
+
+```{r, eval=FALSE}
+
+```
+
+### 3.4 Gene expression analysis
+The level of gene expression is measured by read density, the higher the read density, the higher the level of gene expression.  
+Gene expression calculation was performed with the formula below, which calculates **FPKM (Fragments per kilo bases per million reads)** based on read counts from HT-seq (V 0.6.1) (Mortazavi, 2008).  
+
+The formula is:  
+
+
+Figure 3.4.1
+
+The ratio of (total exon fragments / mapped reads [millions]) is the read count mapped to the gene normalized to total read counts. The value is then normalized to gene length (exon length [KB]), so that the expression of genes with different sequencing depths and length are comparable.
+
+The numbers of genes with different expression levels are summarized in Table 3.7.1. In general, FPKM threshold for gene expression is set between 0.1-1, although there is no absolute standard and various thresholds have been used in the literature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

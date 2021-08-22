@@ -1,7 +1,7 @@
+introduction-to-rna-sequencing-rna_seq
 downloading-and-setting-up-conda-environments.
 install-miniconda-or-anaconda.
 summary-of-steps.
-introduction-to-rna-sequencing-rna_seq
 alignment
 using-tophat
 using-star
@@ -10,11 +10,14 @@ get-the-sample-files.
 starting-to-analize-fastq.gz-files
 trimming-with-trimmomatic
 using-star-to-map-genes
+rna-seq-blog
 WGCNA
 wgcna-rpackage-installation-procedure.
 final-installation-workflow
 wgcna-tutorial.
 gene-expression-analysis
+rna-seq-analisys-with-kakus-data-sample.
+data-analysis.
 literature
 methods
 applications

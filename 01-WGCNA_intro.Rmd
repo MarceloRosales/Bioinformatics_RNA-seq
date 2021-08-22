@@ -1,6 +1,8 @@
-# Introduction to the WGCNA Rpackage {#WGCNA}
+# RNA-seq Blog
 
-## WGCNA Rpackage Installation procedure.  
+## Introduction to the WGCNA Rpackage {#WGCNA}
+
+### WGCNA Rpackage Installation procedure.  
 
 **Installing and re-installing new versions or R and Studio.**  
 In Terminal (or Rstudio > Terminal).  
@@ -78,7 +80,7 @@ BiocManager::install("impute")
 install.packages("WGCNA")
 ```
 
-## Final installation workflow:   
+### Final installation workflow:   
 
 ```{r, eval=FALSE}
 # Set working directory
@@ -148,7 +150,7 @@ see the ideas at
 https://cran.r-project.org/doc/manuals/r-patched/R-admin.htmlInstalling-packages
 
 
-## WGCNA tutorial.   
+### WGCNA tutorial.   
 
 This code has been adapted from the tutorials available at WGCNA website **(this page does no longer exist)**.  
 
@@ -183,6 +185,138 @@ The ratio of (total exon fragments / mapped reads [millions]) is the read count 
 
 The numbers of genes with different expression levels are summarized in Table 3.7.1. In general, FPKM threshold for gene expression is set between 0.1-1, although there is no absolute standard and various thresholds have been used in the literature.
 
+## RNA-seq Analisys with Kaku's Data sample.
+
+2021/07/02  
+Copy **Trial data** from MK/土橋 to [folder](file:///Volumes/HD-PCFSU3-A/Experiments%Data/Genewiz) :  
+The Report [file]( file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_RNASeq_Report.html).  
+The Summary [file]( file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_QC_Report.html)  
+
+**Report**  
+### Experimental Workflow.  
+Transcriptome sequencing experiments include:  
+* RNA extraction and QC (Quality Control?),  
+* Library construction, 
+* Purification,   
+* Library QC and  
+* Quantitation, as well as  
+* Sequencing cluster generation and high through-put sequencing.  
+
+Each step is important for data quality and quantity, which in turn affect the data analysis. To ensure the accuracy and reliability of the analysis results, every step is under strict monitoring and quality control. After mixing libraries based on their effective concentration and the required sequencing data volume, Illumina platform is used for high through-put sequencing.  
+
+
+### Data Analysis.  
+
+First Data must be in the right format.  
+In the data received.  
+
+"GeneName”  
+"Chr”  
+"Start”  
+"End”  
+"Strand”  
+"Length”  
+"mPDL_RNA14D_Ko1"  
+"mPDL_RNA14D_Ko2"  
+"mPDL_RNA14D_Ko3"  
+"mPDL_RNA14D_Ko4"  
+"mPDL_RNA14D_WT1"  
+"mPDL_RNA14D_WT2"  
+"mPDL_RNA14D_WT3"  
+"mPDL_RNA14D_WT4"  
+"mPDL_RNA7D_Ko1"  
+"mPDL_RNA7D_Ko2"  
+"mPDL_RNA7D_Ko3"  
+"mPDL_RNA7D_Ko4"  
+"mPDL_RNA7D_WT1"  
+"mPDL_RNA7D_WT2"  
+"mPDL_RNA7D_WT3"  
+"mPDL_RNA7D_WT4"  
+
+Use [Markdown Table generator]( https://www.tablesgenerator.com/markdown_tables).  
+
+20210705  
+
+
+Problems with software*  
+** Regarding Rstudio Shortcut keys “not working” sometimes**  
+SOME shortcuts will work if not on the corresponding file type. **For example, MARKDOWN shortcuts will not work on R script files window or vice versa**.  
+
+
+Set working directory
+
+```{r eval=FALSE}
+getwd()
+setwd("/Users/marcelorosales/Box Sync/Documents/R/Rmarkdown")  "/Users/marcelorosales/Box Sync/Documents/R/Rmarkdown"
+# [1] "/Users/marcelorosales/Box Sync/Niigata Uni Box/Experiments/Photoconvertible FP/Experiment Notebooks"
+getwd()
+```
+
+Load list of packages and install.
+```{r eval=FALSE}
+
+load("Rpackages")
+for (p in setdiff(packages, installed.packages()[,"Package"]))
+  install.packages(p)
+
+Check <- installed.packages()
+
+BiocManager::install("Biobase")
+BiocManager::install("GO.db")
+BiocManager::valid()
+> install.packages("BiocManager")
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("preprocessCore")
+BiocManager::install("WGCNA")
+
+
+install.packages(c("dynamicTreeCut", "cluster", "flashClust", "Hmisc", "reshape", "foreach", "doParallel") ) 
+source("http://bioconductor.org/biocLite.R") 
+biocLite("impute")
+install.packages("WGCNA")
+
+
+source("https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/GeneAnnotation/installAnRichment.R");
+installAnRichment();
+
+install.packages("path/to/anRichmentMethods", repos = NULL, type = "source"); install.packages("path/to/anRichment", repos = NULL, type = "source");
+
+
+source("https://bioconductor.org/biocLite.R");
+biocLite(c("AnnotationDBI", "GO.db", "org.Hs.eg.db", "org.Mm.eg.db",
+  "XML", "WGCNA", "TxDb.Hsapiens.UCSC.hg19.knownGene",
+  "TxDb.Mmusculus.UCSC.mm10.knownGene"));
+
+install.packages("path/to/anRichmentMethods", repos = NULL, type = "source"); install.packages("path/to/anRichment", repos = NULL, type = "source");
+
+BiocManager::install()
+
+source("https://bioconductor.org/biocLite.R");
+biocLite(c("AnnotationDBI", "GO.db", "org.Hs.eg.db", "org.Mm.eg.db",
+  "XML", "WGCNA", "TxDb.Hsapiens.UCSC.hg19.knownGene",
+  "TxDb.Mmusculus.UCSC.mm10.knownGene"));
+
+
+
+
+
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("impute")
+
+
+str(all_fpkm)
+table(all_fpkm)
+names(all_fpkm)
+
+
+
+
+```
 
 
 

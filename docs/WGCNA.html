@@ -52,10 +52,6 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/clipboard-1.7.1/clipboard.min.js"></script>
-<link href="libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
-<link href="libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
-<script src="libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
 
 
 <style type="text/css">
@@ -206,24 +202,24 @@ In Terminal (or Rstudio &gt; Terminal).</p>
 brew reinstall --cask rstudio</code></pre>
 <p><strong>Installing WGCNA: and R package for weighted correlation network analysis.</strong></p>
 <p>To install the package, go to Tab: Packages &gt; Install …[]… -Repository: (CRAN); -Packages: WGCNA; *Install. In R code:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="WGCNA.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="WGCNA.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span></code></pre></div>
 <p><strong>Installation (Failed)</strong>.<br />
 Unfortunately, it could not install correctly. <strong>Error</strong> was:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb18-1"><a href="WGCNA.html#cb18-1" aria-hidden="true" tabindex="-1"></a>install<span class="at">.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span>
-<span id="cb18-2"><a href="WGCNA.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Warning</span> <span class="cf">in</span> install<span class="at">.packages</span> :</span>
-<span id="cb18-3"><a href="WGCNA.html#cb18-3" aria-hidden="true" tabindex="-1"></a>dependencies ‘<span class="dt">Biobase</span>’, ‘impute’, ‘preprocessCore’, ‘<span class="cn">GO</span><span class="at">.db</span>’, ‘<span class="dt">AnnotationDbi</span>’ are <span class="cf">not</span> available</span>
-<span id="cb18-4"><a href="WGCNA.html#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="dt">Package</span> which is only available <span class="cf">in</span> source form, <span class="cf">and</span> may need compilation of C<span class="kw">/</span>C<span class="kw">++</span><span class="ss">/Fortran: ‘WGCNA’</span></span>
-<span id="cb18-5"><a href="WGCNA.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="ss">Do you want to attempt to install these from sources? (Yes/no</span><span class="kw">/</span>cancel) y</span>
-<span id="cb18-6"><a href="WGCNA.html#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="dt">Warning</span> <span class="cf">in</span> install<span class="at">.packages</span> :</span>
-<span id="cb18-7"><a href="WGCNA.html#cb18-7" aria-hidden="true" tabindex="-1"></a>installation of package ‘<span class="cn">WGCNA</span>’ had non<span class="kw">-</span>zero <span class="fu">exit</span> status</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb3-1"><a href="WGCNA.html#cb3-1" aria-hidden="true" tabindex="-1"></a>install<span class="at">.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span>
+<span id="cb3-2"><a href="WGCNA.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Warning</span> <span class="cf">in</span> install<span class="at">.packages</span> :</span>
+<span id="cb3-3"><a href="WGCNA.html#cb3-3" aria-hidden="true" tabindex="-1"></a>dependencies ‘<span class="dt">Biobase</span>’, ‘impute’, ‘preprocessCore’, ‘<span class="cn">GO</span><span class="at">.db</span>’, ‘<span class="dt">AnnotationDbi</span>’ are <span class="cf">not</span> available</span>
+<span id="cb3-4"><a href="WGCNA.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">Package</span> which is only available <span class="cf">in</span> source form, <span class="cf">and</span> may need compilation of C<span class="kw">/</span>C<span class="kw">++</span><span class="ss">/Fortran: ‘WGCNA’</span></span>
+<span id="cb3-5"><a href="WGCNA.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ss">Do you want to attempt to install these from sources? (Yes/no</span><span class="kw">/</span>cancel) y</span>
+<span id="cb3-6"><a href="WGCNA.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="dt">Warning</span> <span class="cf">in</span> install<span class="at">.packages</span> :</span>
+<span id="cb3-7"><a href="WGCNA.html#cb3-7" aria-hidden="true" tabindex="-1"></a>installation of package ‘<span class="cn">WGCNA</span>’ had non<span class="kw">-</span>zero <span class="fu">exit</span> status</span></code></pre></div>
 <p>Dependencies are old and require special installation.</p>
 <ol style="list-style-type: decimal">
 <li>From <a href="http://pklab.med.harvard.edu/scw2014/WGCNA.html">this page</a>, installed several packages. <strong>(Failed)</strong>.</li>
 </ol>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="WGCNA.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;dynamicTreeCut&quot;</span>, <span class="st">&quot;cluster&quot;</span>, <span class="st">&quot;flashClust&quot;</span>, <span class="st">&quot;Hmisc&quot;</span>, <span class="st">&quot;reshape&quot;</span>, <span class="st">&quot;foreach&quot;</span>, <span class="st">&quot;doParallel&quot;</span>) ) </span>
-<span id="cb19-2"><a href="WGCNA.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;http://bioconductor.org/biocLite.R&quot;</span>) </span>
-<span id="cb19-3"><a href="WGCNA.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">biocLite</span>(<span class="st">&quot;impute&quot;</span>)</span>
-<span id="cb19-4"><a href="WGCNA.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="WGCNA.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;dynamicTreeCut&quot;</span>, <span class="st">&quot;cluster&quot;</span>, <span class="st">&quot;flashClust&quot;</span>, <span class="st">&quot;Hmisc&quot;</span>, <span class="st">&quot;reshape&quot;</span>, <span class="st">&quot;foreach&quot;</span>, <span class="st">&quot;doParallel&quot;</span>) ) </span>
+<span id="cb4-2"><a href="WGCNA.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;http://bioconductor.org/biocLite.R&quot;</span>) </span>
+<span id="cb4-3"><a href="WGCNA.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">biocLite</span>(<span class="st">&quot;impute&quot;</span>)</span>
+<span id="cb4-4"><a href="WGCNA.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span></code></pre></div>
 <p>Install most of the packages, but not “impute,” result: could not install WGCNA.</p>
 <ol style="list-style-type: decimal">
 <li>Tried to install dependencies independently from <a href="https://support.bioconductor.org/p/120430/">here</a>: <strong>(Failed)</strong><br />
@@ -238,62 +234,62 @@ No resutl</code></pre>
 <ol style="list-style-type: decimal">
 <li>Decided to install the complete “BiocManager” pack. ** BiocManager: (OK); (WGCNA:(Failed)**</li>
 </ol>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="WGCNA.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>) </span>
-<span id="cb21-2"><a href="WGCNA.html#cb21-2" aria-hidden="true" tabindex="-1"></a> downloaded <span class="dv">315</span> KB</span>
-<span id="cb21-3"><a href="WGCNA.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span>
-<span id="cb21-4"><a href="WGCNA.html#cb21-4" aria-hidden="true" tabindex="-1"></a> Warning <span class="cf">in</span> install.packages <span class="sc">:</span> dependencies ‘impute’, ‘preprocessCore’ are not available</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="WGCNA.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>) </span>
+<span id="cb6-2"><a href="WGCNA.html#cb6-2" aria-hidden="true" tabindex="-1"></a> downloaded <span class="dv">315</span> KB</span>
+<span id="cb6-3"><a href="WGCNA.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span>
+<span id="cb6-4"><a href="WGCNA.html#cb6-4" aria-hidden="true" tabindex="-1"></a> Warning <span class="cf">in</span> install.packages <span class="sc">:</span> dependencies ‘impute’, ‘preprocessCore’ are not available</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Search ‘preprocessCore,’ in this <a href="https://bioconductor.org/packages/release/bioc/html/preprocessCore.html">page</a>. <strong>PreprocessCore:(OK); (WGCNA:(Failed)</strong><br />
 To install this package, start R (version “4.1”) and enter:</li>
 </ol>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="WGCNA.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb22-2"><a href="WGCNA.html#cb22-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
-<span id="cb22-3"><a href="WGCNA.html#cb22-3" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;preprocessCore&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="WGCNA.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb7-2"><a href="WGCNA.html#cb7-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb7-3"><a href="WGCNA.html#cb7-3" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;preprocessCore&quot;</span>)</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>For ‘impute,’ found install in this <a href="https://bioconductor.org/packages/release/bioc/html/impute.html">page</a>. <strong>Impute:(OK); WGCNA:( OK)</strong><br />
 To install this package, start R (version “4.1”) enter:</li>
 </ol>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="WGCNA.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb23-2"><a href="WGCNA.html#cb23-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
-<span id="cb23-3"><a href="WGCNA.html#cb23-3" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;impute&quot;</span>)</span>
-<span id="cb23-4"><a href="WGCNA.html#cb23-4" aria-hidden="true" tabindex="-1"></a> Then install WGCNA</span>
-<span id="cb23-5"><a href="WGCNA.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="WGCNA.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb8-2"><a href="WGCNA.html#cb8-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb8-3"><a href="WGCNA.html#cb8-3" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;impute&quot;</span>)</span>
+<span id="cb8-4"><a href="WGCNA.html#cb8-4" aria-hidden="true" tabindex="-1"></a> Then install WGCNA</span>
+<span id="cb8-5"><a href="WGCNA.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span></code></pre></div>
 </div>
 <div id="final-installation-workflow" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Final installation workflow:</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="WGCNA.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set working directory</span></span>
-<span id="cb24-2"><a href="WGCNA.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
-<span id="cb24-3"><a href="WGCNA.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/Users/marcelorosales/Box Sync/Documents/R/Rmarkdown&quot;</span>)  </span>
-<span id="cb24-4"><a href="WGCNA.html#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
-<span id="cb24-5"><a href="WGCNA.html#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-6"><a href="WGCNA.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load list of packages and install.</span></span>
-<span id="cb24-7"><a href="WGCNA.html#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Rpackages&quot;</span>)</span>
-<span id="cb24-8"><a href="WGCNA.html#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (p <span class="cf">in</span> <span class="fu">setdiff</span>(packages, <span class="fu">installed.packages</span>()[,<span class="st">&quot;Package&quot;</span>]))</span>
-<span id="cb24-9"><a href="WGCNA.html#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(p)</span>
-<span id="cb24-10"><a href="WGCNA.html#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-11"><a href="WGCNA.html#cb24-11" aria-hidden="true" tabindex="-1"></a>Check <span class="ot">&lt;-</span> <span class="fu">installed.packages</span>()</span>
-<span id="cb24-12"><a href="WGCNA.html#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-13"><a href="WGCNA.html#cb24-13" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;Biobase&quot;</span>)</span>
-<span id="cb24-14"><a href="WGCNA.html#cb24-14" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;GO.db&quot;</span>)</span>
-<span id="cb24-15"><a href="WGCNA.html#cb24-15" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">valid</span>()</span>
-<span id="cb24-16"><a href="WGCNA.html#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
-<span id="cb24-17"><a href="WGCNA.html#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb24-18"><a href="WGCNA.html#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
-<span id="cb24-19"><a href="WGCNA.html#cb24-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-20"><a href="WGCNA.html#cb24-20" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;preprocessCore&quot;</span>)</span>
-<span id="cb24-21"><a href="WGCNA.html#cb24-21" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;WGCNA&quot;</span>)</span>
-<span id="cb24-22"><a href="WGCNA.html#cb24-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-23"><a href="WGCNA.html#cb24-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-24"><a href="WGCNA.html#cb24-24" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;dynamicTreeCut&quot;</span>, <span class="st">&quot;cluster&quot;</span>, <span class="st">&quot;flashClust&quot;</span>, <span class="st">&quot;Hmisc&quot;</span>, <span class="st">&quot;reshape&quot;</span>, <span class="st">&quot;foreach&quot;</span>, <span class="st">&quot;doParallel&quot;</span>) ) </span>
-<span id="cb24-25"><a href="WGCNA.html#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;http://bioconductor.org/biocLite.R&quot;</span>) </span>
-<span id="cb24-26"><a href="WGCNA.html#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="fu">biocLite</span>(<span class="st">&quot;impute&quot;</span>)</span>
-<span id="cb24-27"><a href="WGCNA.html#cb24-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-28"><a href="WGCNA.html#cb24-28" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb24-29"><a href="WGCNA.html#cb24-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
-<span id="cb24-30"><a href="WGCNA.html#cb24-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-31"><a href="WGCNA.html#cb24-31" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;impute&quot;</span>)</span>
-<span id="cb24-32"><a href="WGCNA.html#cb24-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-33"><a href="WGCNA.html#cb24-33" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="WGCNA.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set working directory</span></span>
+<span id="cb9-2"><a href="WGCNA.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb9-3"><a href="WGCNA.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/Users/marcelorosales/Box Sync/Documents/R/Rmarkdown&quot;</span>)  </span>
+<span id="cb9-4"><a href="WGCNA.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb9-5"><a href="WGCNA.html#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="WGCNA.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load list of packages and install.</span></span>
+<span id="cb9-7"><a href="WGCNA.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Rpackages&quot;</span>)</span>
+<span id="cb9-8"><a href="WGCNA.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (p <span class="cf">in</span> <span class="fu">setdiff</span>(packages, <span class="fu">installed.packages</span>()[,<span class="st">&quot;Package&quot;</span>]))</span>
+<span id="cb9-9"><a href="WGCNA.html#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(p)</span>
+<span id="cb9-10"><a href="WGCNA.html#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="WGCNA.html#cb9-11" aria-hidden="true" tabindex="-1"></a>Check <span class="ot">&lt;-</span> <span class="fu">installed.packages</span>()</span>
+<span id="cb9-12"><a href="WGCNA.html#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="WGCNA.html#cb9-13" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;Biobase&quot;</span>)</span>
+<span id="cb9-14"><a href="WGCNA.html#cb9-14" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;GO.db&quot;</span>)</span>
+<span id="cb9-15"><a href="WGCNA.html#cb9-15" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">valid</span>()</span>
+<span id="cb9-16"><a href="WGCNA.html#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb9-17"><a href="WGCNA.html#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb9-18"><a href="WGCNA.html#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb9-19"><a href="WGCNA.html#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="WGCNA.html#cb9-20" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;preprocessCore&quot;</span>)</span>
+<span id="cb9-21"><a href="WGCNA.html#cb9-21" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;WGCNA&quot;</span>)</span>
+<span id="cb9-22"><a href="WGCNA.html#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="WGCNA.html#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="WGCNA.html#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;dynamicTreeCut&quot;</span>, <span class="st">&quot;cluster&quot;</span>, <span class="st">&quot;flashClust&quot;</span>, <span class="st">&quot;Hmisc&quot;</span>, <span class="st">&quot;reshape&quot;</span>, <span class="st">&quot;foreach&quot;</span>, <span class="st">&quot;doParallel&quot;</span>) ) </span>
+<span id="cb9-25"><a href="WGCNA.html#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;http://bioconductor.org/biocLite.R&quot;</span>) </span>
+<span id="cb9-26"><a href="WGCNA.html#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="fu">biocLite</span>(<span class="st">&quot;impute&quot;</span>)</span>
+<span id="cb9-27"><a href="WGCNA.html#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="WGCNA.html#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb9-29"><a href="WGCNA.html#cb9-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb9-30"><a href="WGCNA.html#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="WGCNA.html#cb9-31" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;impute&quot;</span>)</span>
+<span id="cb9-32"><a href="WGCNA.html#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="WGCNA.html#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span></code></pre></div>
 <p><strong>Checking the packages for WGCNA installed previously for OS Catalina</strong>.</p>
 <blockquote>
 <p>Warning in install.packages : package ‘anRichment’ is not available for this version of R</p>
@@ -347,6 +343,46 @@ Gene expression calculation was performed with the formula below, which calculat
 <p>Figure 3.4.1</p>
 <p>The ratio of (total exon fragments / mapped reads [millions]) is the read count mapped to the gene normalized to total read counts. The value is then normalized to gene length (exon length [KB]), so that the expression of genes with different sequencing depths and length are comparable.</p>
 <p>The numbers of genes with different expression levels are summarized in Table 3.7.1. In general, FPKM threshold for gene expression is set between 0.1-1, although there is no absolute standard and various thresholds have been used in the literature.</p>
+<p>2021/07/02<br />
+Copy <strong>Trial data</strong> from MK/土橋 to <a href="file:///Volumes/HD-PCFSU3-A/Experiments%Data/Genewiz">folder</a> :<br />
+The Report <a href="file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_RNASeq_Report.html">file</a>.<br />
+The Summary <a href="file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_QC_Report.html">file</a></p>
+<p><strong>Report</strong><br />
+Experimental Workflow.<br />
+Transcriptome sequencing experiments include:<br />
+* RNA extraction and QC (Quality Control?),<br />
+* Library construction,
+* Purification,<br />
+* Library QC and<br />
+* Quantitation, as well as<br />
+* Sequencing cluster generation and high through-put sequencing.</p>
+<p>Each step is important for data quality and quantity, which in turn affect the data analysis. To ensure the accuracy and reliability of the analysis results, every step is under strict monitoring and quality control. After mixing libraries based on their effective concentration and the required sequencing data volume, Illumina platform is used for high through-put sequencing.</p>
+<p>Data Analysis.</p>
+<p>First Data must be in the right format.<br />
+In the data received.</p>
+<p>“GeneName”<br />
+“Chr”<br />
+“Start”<br />
+“End”<br />
+“Strand”<br />
+“Length”<br />
+“mPDL_RNA14D_Ko1”<br />
+“mPDL_RNA14D_Ko2”<br />
+“mPDL_RNA14D_Ko3”<br />
+“mPDL_RNA14D_Ko4”<br />
+“mPDL_RNA14D_WT1”<br />
+“mPDL_RNA14D_WT2”<br />
+“mPDL_RNA14D_WT3”<br />
+“mPDL_RNA14D_WT4”<br />
+“mPDL_RNA7D_Ko1”<br />
+“mPDL_RNA7D_Ko2”<br />
+“mPDL_RNA7D_Ko3”<br />
+“mPDL_RNA7D_Ko4”<br />
+“mPDL_RNA7D_WT1”<br />
+“mPDL_RNA7D_WT2”<br />
+“mPDL_RNA7D_WT3”<br />
+“mPDL_RNA7D_WT4”</p>
+<p>Use <a href="https://www.tablesgenerator.com/markdown_tables">Markdown Table generator</a>.</p>
 
 </div>
 </div>

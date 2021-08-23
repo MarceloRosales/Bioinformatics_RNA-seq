@@ -40,17 +40,34 @@ Holds 4 main sections.
 1. Differential expression analysis. 
 1. Pathway and Enrichment analysis.   
 
-Each of this section are subdivided in other steps, that. 
+Each of these sections are subdivided in other steps.   
 
 **Download or acquire the files**   
 2021/07/02  
-Copy **Trial data** from MK/土橋 to [folder HD-PCFSU3-A/Experiments Data/Genewiz](file:///Volumes/HD-PCFSU3-A/Experiments%Data/Genewiz) :  
+Copy **Trial data** from:  
+MK/土橋 to [folder HD-PCFSU3-A/Experiments Data/Genewiz](file:///Volumes/HD-PCFSU3-A/Experiments%Data/Genewiz) :  
 The Report [file]( file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_RNASeq_Report.html) is here.  
-The Summary [file]( file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_QC_Report.html) is here.   
+The Summary [file]( file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_QC_Report.html) is here. 
 
-To open folder in Finder with r code, is similar to terminal commands.:  
 
-```{}
+Raw Data
+```{bash eval=FALSE}
+open "Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/03_GeneExpression"
+```
+
+Report file
+```{bash eval=FALSE}
+open "/Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_RNASeq_Report.html"
+```
+
+Summary report file
+```{bash eval=FALSE}
+open "/Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_QC_Report.html"
+```
+
+
+ To open folder in Finder with r code, is similar to terminal commands.:  
+```{bash eval=FALSE}
 open . # To open the current working folder within Finder
 open ~ # To open the Home folder 
 open / # To open the Root directory
@@ -58,21 +75,19 @@ open Desktop/
 open Music/
 open /Library/
 open /path/to/Directory/
+# If folder have spaces, replace with %20% or other similar, or use "".
+open "/path/to/Directory/"
 ```
 
 You can also launch (and update) applications from the Terminal without using Finder. For example, to open Safari, type: **(But seem like it only works in terminal and can not do it with r/rstudio)**    
 
-```{}
-open /Applications/Safari.app.
+```{bash eval=FALSE, include=FALSE}
+open /Applications/Safari.app
 ```
 
 
 
-
-
 ## Downloading and setting up conda environments.  
-
--
 
 Benefit: You can install all your tools in "Conda" and export as yml and you can share that environment or create a new one base on it, and by doing so, you can have all those tools automatically installed.    
 
@@ -112,13 +127,26 @@ Quick video tutorial on how to use conda.
 **The easy way:** Open the anaconda app > Environment > New > Name... Ok
 To access environment and open in terminal: anaconda app > Environment > Select environment > rna-seq_test ^ > »Open in Terminal. 
 
-**In Terminal**
+### Conda terminal commands.   
+
+Conda [cheat sheet](https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf) 
+
+**In Terminal**   
 ```{bash, eval=FALSE}
+# To open conda app
+open /Applications/Anaconda-Navigator.app
+# Or, if any of the container folders have a space character.
+open "/Applications/Anaconda-Navigator.app"
+
+# To open (activate) conda environment. 
+. /usr/local/anaconda3/bin/activate && conda activate /usr/local/anaconda3/envs/rna-seq_test
+
+
 # To see all the environment created.  
 conda env list  
 
-# To create a new environment in conda in terminal:  
-conda create --name rna-seq_test
+# To create a new environment called "rna-seq_test" in conda in terminal:  
+conda create --rna-seq_test
 
 # To activate environment.    
 conda activate rna-seq_test
@@ -131,6 +159,9 @@ conda deactivate
 
 # To see packages installed in env.:  
 conda config --show channels 
+
+# List all packages and versions installed in active environment
+conda list
 
 # To see the url location of packages (repository):
 conda info
@@ -167,13 +198,16 @@ jupyter notebook
 # To Keep Anaconda updated.  
 conda update conda
 
+# Delete an environment and everything in it called rna-seq_test.
+conda env remove --rna-seq_test
+
 # To Uninstall Anaconda.  
-[Uninstall page]()
+# [Uninstall page]()
 
 
 ```   
 
-### Summary of Steps.   
+### Anaconda/Miniconda install Summary of Steps.   
 1. Install anaconda/miniconda for your OS from the website.  
 1. Prevent the base environment from automatically activating.  `conda config --set auto_activate_base false`   
 1. Create an empty environment.  `conda create -n rna-seq_test`.   
@@ -185,21 +219,75 @@ conda update conda
 1. Verify Jupyter Notebooks in correct environment ...!?... In jupyter: `sys.executable`    
 
 Video reference:    
-`![](https://youtu.be/ePS6lII4SEg){width="500" height="300"}` does not really work. 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ePS6lII4SEg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Bioinformatics - Downloading and Setting Up Conda Environments.   
-`![](https://youtu.be/ef_-BtMtDG0?list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k){width="40%"}` neither.   
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ef_-BtMtDG0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+### Conda activate error   
+
+When trying to initialize environment in terminal with the `conda activate rna-seq_test`command, the following message pops up.    
+
+```{}
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+```
+
+I tried:
+```{}
+conda init powershell
+conda init zsh
+```
+
+So far the only way to enter environment is though anaconda app. 
+```{bash eval=FALSE}
+open "/Applications/Anaconda-Navigator.app"
+```
+Then Environment > rna-seq_test» > Open in terminal... [Terminal]   
+
+Another temporary solution is using the code:
+```{bash eval=FALSE}
+# For the rna-seq_test environment. 
+. /usr/local/anaconda3/bin/activate && conda activate /usr/local/anaconda3/envs/rna-seq_test
+
+# For anaconda3 base environment. 
+. /usr/local/anaconda3/bin/activate && conda activate /usr/local/anaconda3;
+```
 
 
-## Alignment
+## Alignment Procedures and files.
+
+This section was created based in [this reference](https://www.youtube.com/watch?v=UkrUTgAKFiE&list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k&index=2). 
+
+After installing "conda", and to gain time, download the genome of the species to be study. In this case, download the mouse (mus muslculus) genome file. This file contains the list of all the mouse genes and their codes.  
 
 We need something to map our reads against once we get to the results.  
 Files for mouse (Mus musculus) are available for download at Johns Hopkins University Center for Computational Biology (CCB) at [TopHat. A spliced read mapper for RNA-Seq](https://ccb.jhu.edu/software/tophat/igenomes.shtml).  
+
+There are different ways:   
+
+1. Using tophat   
+1. Using Star   
+1. Custom/personal code.   
+
+### Using Tophat (early version)   
+> Not Working!!!  
 
 To download:   
 1. Look for the **Mus musculus Build37.2** from the NCBI.
@@ -254,7 +342,7 @@ With the index files made, we can start aligning with STAR. It's important here 
 > Complicated.!!!!!!!!!!!!!!!!!!!!!!!   
 
 
-### Downloading the Mus_musculus_NCBI_build37.2.tar.gz file my way.  
+### Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file.  
 > Esaest so far.
 
 1. Go to the iGenomes Ready-To-Use Reference Sequences and Annotations from [illumina.](https://support.illumina.com/sequencing/sequencing_software/igenome.html).  

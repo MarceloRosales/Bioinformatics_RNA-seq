@@ -284,68 +284,67 @@ To access environment and open in terminal: anaconda app &gt; Environment &gt; S
 <span id="cb6-6"><a href="index.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># To open (activate) conda environment. </span></span>
 <span id="cb6-7"><a href="index.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> /usr/local/anaconda3/bin/activate <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
 <span id="cb6-8"><a href="index.html#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="index.html#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="index.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># To see all the environment created.  </span></span>
-<span id="cb6-11"><a href="index.html#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list  </span>
-<span id="cb6-12"><a href="index.html#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="index.html#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># To create a new environment called &quot;rna-seq_test&quot; in conda in terminal:  </span></span>
-<span id="cb6-14"><a href="index.html#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--rna-seq_test</span></span>
-<span id="cb6-15"><a href="index.html#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="index.html#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># To activate environment.    </span></span>
-<span id="cb6-17"><a href="index.html#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate rna-seq_test</span>
-<span id="cb6-18"><a href="index.html#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="index.html#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># To see if we activated the environment and where (path) we are.  </span></span>
-<span id="cb6-20"><a href="index.html#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$path</span></span>
-<span id="cb6-21"><a href="index.html#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="index.html#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># To exit the environment and return to base/root. Check with echo $path. </span></span>
-<span id="cb6-23"><a href="index.html#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
-<span id="cb6-24"><a href="index.html#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="index.html#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co"># To see packages installed in env.:  </span></span>
-<span id="cb6-26"><a href="index.html#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--show</span> channels </span>
-<span id="cb6-27"><a href="index.html#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="index.html#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co"># List all packages and versions installed in active environment</span></span>
-<span id="cb6-29"><a href="index.html#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list</span>
-<span id="cb6-30"><a href="index.html#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-31"><a href="index.html#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co"># To see the url location of packages (repository):</span></span>
-<span id="cb6-32"><a href="index.html#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> info</span>
-<span id="cb6-33"><a href="index.html#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-34"><a href="index.html#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="co"># To add packages to the environment. (only to this environment: --env).  </span></span>
-<span id="cb6-35"><a href="index.html#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--env</span> <span class="at">--add</span> channels conda-forge</span>
-<span id="cb6-36"><a href="index.html#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--env</span> <span class="at">--add</span> channels bioconda </span>
-<span id="cb6-37"><a href="index.html#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-38"><a href="index.html#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="co"># If a package is repeated in the environment, Conda will always install the package of higher version. If you dont want that, and specifically need a version originally configured at creation of the environment.. type:   </span></span>
-<span id="cb6-39"><a href="index.html#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--env</span> <span class="at">--set</span> channel_priority strict.  </span>
-<span id="cb6-40"><a href="index.html#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-41"><a href="index.html#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="co"># To install fastqc</span></span>
-<span id="cb6-42"><a href="index.html#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install fastqc </span>
-<span id="cb6-43"><a href="index.html#cb6-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-44"><a href="index.html#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="co">#To make and export a list of the required environment/</span></span>
-<span id="cb6-45"><a href="index.html#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list <span class="at">--export</span> <span class="op">&gt;</span> requirements.txt  </span>
-<span id="cb6-46"><a href="index.html#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-47"><a href="index.html#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="co">#To make and export an yml file to share with others.</span></span>
-<span id="cb6-48"><a href="index.html#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="op">&gt;</span> rna-seq_test.yml  </span>
-<span id="cb6-49"><a href="index.html#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--file</span>  rna-seq_test.yml </span>
-<span id="cb6-50"><a href="index.html#cb6-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-51"><a href="index.html#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="co"># To quickly check the yml file. </span></span>
-<span id="cb6-52"><a href="index.html#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> rna-seq_test.yml </span>
-<span id="cb6-53"><a href="index.html#cb6-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-54"><a href="index.html#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="co">#To see the content of a .yml file.</span></span>
-<span id="cb6-55"><a href="index.html#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> rna-seq_test.yml</span>
-<span id="cb6-56"><a href="index.html#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-57"><a href="index.html#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="co">#To clear the terminal screen. </span></span>
-<span id="cb6-58"><a href="index.html#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="fu">clear</span> </span>
-<span id="cb6-59"><a href="index.html#cb6-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-60"><a href="index.html#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="co"># To run a Jupyter Notebook.  </span></span>
-<span id="cb6-61"><a href="index.html#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook   </span>
-<span id="cb6-62"><a href="index.html#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-63"><a href="index.html#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="co"># To Keep Anaconda updated.  </span></span>
-<span id="cb6-64"><a href="index.html#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> update conda</span>
-<span id="cb6-65"><a href="index.html#cb6-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-66"><a href="index.html#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete an environment and everything in it called rna-seq_test.</span></span>
-<span id="cb6-67"><a href="index.html#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env remove <span class="at">--rna-seq_test</span></span>
-<span id="cb6-68"><a href="index.html#cb6-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-69"><a href="index.html#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="co"># To Uninstall Anaconda.  </span></span>
-<span id="cb6-70"><a href="index.html#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="co"># [Uninstall page]()</span></span></code></pre></div>
+<span id="cb6-9"><a href="index.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># To see all the environment created.  </span></span>
+<span id="cb6-10"><a href="index.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list  </span>
+<span id="cb6-11"><a href="index.html#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="index.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># To create a new environment called &quot;rna-seq_test&quot; in conda in terminal:  </span></span>
+<span id="cb6-13"><a href="index.html#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--rna-seq_test</span></span>
+<span id="cb6-14"><a href="index.html#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="index.html#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># To activate environment.    </span></span>
+<span id="cb6-16"><a href="index.html#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate rna-seq_test</span>
+<span id="cb6-17"><a href="index.html#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="index.html#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># To see if we activated the environment and where (path) we are.  </span></span>
+<span id="cb6-19"><a href="index.html#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$path</span></span>
+<span id="cb6-20"><a href="index.html#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="index.html#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co"># To exit the environment and return to base/root. Check with echo $path. </span></span>
+<span id="cb6-22"><a href="index.html#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
+<span id="cb6-23"><a href="index.html#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="index.html#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># To see packages installed in env.:  </span></span>
+<span id="cb6-25"><a href="index.html#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--show</span> channels </span>
+<span id="cb6-26"><a href="index.html#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="index.html#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co"># List all packages and versions installed in active environment</span></span>
+<span id="cb6-28"><a href="index.html#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list</span>
+<span id="cb6-29"><a href="index.html#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="index.html#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co"># To see the url location of packages (repository):</span></span>
+<span id="cb6-31"><a href="index.html#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> info</span>
+<span id="cb6-32"><a href="index.html#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="index.html#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co"># To add packages to the environment. (only to this environment: --env).  </span></span>
+<span id="cb6-34"><a href="index.html#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--env</span> <span class="at">--add</span> channels conda-forge</span>
+<span id="cb6-35"><a href="index.html#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--env</span> <span class="at">--add</span> channels bioconda </span>
+<span id="cb6-36"><a href="index.html#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-37"><a href="index.html#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co"># If a package is repeated in the environment, Conda will always install the package of higher version. If you dont want that, and specifically need a version originally configured at creation of the environment.. type:   </span></span>
+<span id="cb6-38"><a href="index.html#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--env</span> <span class="at">--set</span> channel_priority strict.  </span>
+<span id="cb6-39"><a href="index.html#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-40"><a href="index.html#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="co"># To install fastqc</span></span>
+<span id="cb6-41"><a href="index.html#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install fastqc </span>
+<span id="cb6-42"><a href="index.html#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-43"><a href="index.html#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="co">#To make and export a list of the required environment/</span></span>
+<span id="cb6-44"><a href="index.html#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list <span class="at">--export</span> <span class="op">&gt;</span> requirements.txt  </span>
+<span id="cb6-45"><a href="index.html#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-46"><a href="index.html#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="co">#To make and export an yml file to share with others.</span></span>
+<span id="cb6-47"><a href="index.html#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="op">&gt;</span> rna-seq_test.yml  </span>
+<span id="cb6-48"><a href="index.html#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--file</span>  rna-seq_test.yml </span>
+<span id="cb6-49"><a href="index.html#cb6-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-50"><a href="index.html#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="co"># To quickly check the yml file. </span></span>
+<span id="cb6-51"><a href="index.html#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> rna-seq_test.yml </span>
+<span id="cb6-52"><a href="index.html#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-53"><a href="index.html#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="co">#To see the content of a .yml file.</span></span>
+<span id="cb6-54"><a href="index.html#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> rna-seq_test.yml</span>
+<span id="cb6-55"><a href="index.html#cb6-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-56"><a href="index.html#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="co">#To clear the terminal screen. </span></span>
+<span id="cb6-57"><a href="index.html#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="fu">clear</span> </span>
+<span id="cb6-58"><a href="index.html#cb6-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-59"><a href="index.html#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="co"># To run a Jupyter Notebook.  </span></span>
+<span id="cb6-60"><a href="index.html#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook   </span>
+<span id="cb6-61"><a href="index.html#cb6-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-62"><a href="index.html#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="co"># To Keep Anaconda updated.  </span></span>
+<span id="cb6-63"><a href="index.html#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> update conda</span>
+<span id="cb6-64"><a href="index.html#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-65"><a href="index.html#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete an environment and everything in it called rna-seq_test.</span></span>
+<span id="cb6-66"><a href="index.html#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env remove <span class="at">--rna-seq_test</span></span>
+<span id="cb6-67"><a href="index.html#cb6-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-68"><a href="index.html#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="co"># To Uninstall Anaconda.  </span></span>
+<span id="cb6-69"><a href="index.html#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="co"># [Uninstall page]()</span></span></code></pre></div>
 </div>
 <div id="anacondaminiconda-install-summary-of-steps." class="section level3" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> Anaconda/Miniconda install Summary of Steps.</h3>

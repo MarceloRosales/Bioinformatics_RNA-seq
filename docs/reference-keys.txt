@@ -25,4 +25,3 @@ sra-download-qc-and-trimming
 methods
 youtube-references.
 final-words
-experimental-workflow.

@@ -61,6 +61,7 @@
 Full path is: /usr/local/anaconda3/envs/rna-seq_test/share/trimmomatic-0.39-2/adapters/TruSeq3-PE-2.fa
 `cp /usr/local/anaconda3/envs/rna-seq_test/share/trimmomatic-0.39-2/adapters/TruSeq3-PE-2.fa .`
 
-
-4.  Now run the trimmomatic.  
+4. Install Parallel, `Conda install paralell`    
+5.  Now run the trimmomatic.  
+`timmomatic PE -threads 5 rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001.fastq.gz`
 

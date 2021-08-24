@@ -141,7 +141,6 @@ open "/Applications/Anaconda-Navigator.app"
 # To open (activate) conda environment. 
 . /usr/local/anaconda3/bin/activate && conda activate /usr/local/anaconda3/envs/rna-seq_test
 
-
 # To see all the environment created.  
 conda env list  
 
@@ -203,7 +202,6 @@ conda env remove --rna-seq_test
 
 # To Uninstall Anaconda.  
 # [Uninstall page]()
-
 
 ```   
 

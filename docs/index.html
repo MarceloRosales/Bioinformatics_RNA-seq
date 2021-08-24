@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Bioinformatics_RNA-seq</title>
   <meta name="description" content="RNA-seq notes and trials" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Bioinformatics_RNA-seq" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
 
 <link rel="next" href="rna-seq-blog.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -62,7 +62,6 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -177,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="sra-download-qc-and-trimming.html"><a href="sra-download-qc-and-trimming.html"><i class="fa fa-check"></i><b>3</b> SRA Download, QC, and Trimming</a></li>
 <li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
-<li class="chapter" data-level="5" data-path="youtube-references-.html"><a href="youtube-references-.html"><i class="fa fa-check"></i><b>5</b> Youtube references.</a></li>
+<li class="chapter" data-level="5" data-path="youtube-references..html"><a href="youtube-references..html"><i class="fa fa-check"></i><b>5</b> Youtube references.</a></li>
 <li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -203,7 +202,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Bioinformatics_RNA-seq</h1>
 <p class="author"><em>J. Marcelo Rosales R.</em></p>
-<p class="date" style="margin-top: 1.5em;"><em><strong>Created:</strong> 2021-08-10; <strong>Update:</strong> 2021-08-20; <strong>Date:</strong> 2021-08-24</em></p>
+<p class="date"><em><strong>Created:</strong> 2021-08-10; <strong>Update:</strong> 2021-08-20; <strong>Date:</strong> 2021-08-24</em></p>
 </div>
 <div id="introduction-to-rna-sequencing-rna_seq" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction to RNA sequencing (RNA_seq)</h1>
@@ -225,21 +224,21 @@ MK/土橋 to <a href="file:///Volumes/HD-PCFSU3-A/Experiments%Data/Genewiz">fold
 The Report <a href="file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_RNASeq_Report.html">file</a> is here.<br />
 The Summary <a href="file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_QC_Report.html">file</a> is here.</p>
 <p>Raw Data</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> <span class="st">&quot;Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/03_GeneExpression&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true"></a><span class="ex">open</span> <span class="st">&quot;Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/03_GeneExpression&quot;</span></span></code></pre></div>
 <p>Report file</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_RNASeq_Report.html&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true"></a><span class="ex">open</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_RNASeq_Report.html&quot;</span></span></code></pre></div>
 <p>Summary report file</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="index.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_QC_Report.html&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="index.html#cb3-1" aria-hidden="true"></a><span class="ex">open</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_QC_Report.html&quot;</span></span></code></pre></div>
 <p>To open folder in Finder with r code, is similar to terminal commands.:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="index.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> . <span class="co"># To open the current working folder within Finder</span></span>
-<span id="cb4-2"><a href="index.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~ <span class="co"># To open the Home folder </span></span>
-<span id="cb4-3"><a href="index.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> / <span class="co"># To open the Root directory</span></span>
-<span id="cb4-4"><a href="index.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> Desktop/</span>
-<span id="cb4-5"><a href="index.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> Music/</span>
-<span id="cb4-6"><a href="index.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> /Library/</span>
-<span id="cb4-7"><a href="index.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> /path/to/Directory/</span>
-<span id="cb4-8"><a href="index.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># If folder have spaces, replace with %20% or other similar, or use &quot;&quot;.</span></span>
-<span id="cb4-9"><a href="index.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> <span class="st">&quot;/path/to/Directory/&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="index.html#cb4-1" aria-hidden="true"></a><span class="ex">open</span> . # To open the current working folder within Finder</span>
+<span id="cb4-2"><a href="index.html#cb4-2" aria-hidden="true"></a><span class="ex">open</span> ~ # To open the Home folder </span>
+<span id="cb4-3"><a href="index.html#cb4-3" aria-hidden="true"></a><span class="ex">open</span> / # To open the Root directory</span>
+<span id="cb4-4"><a href="index.html#cb4-4" aria-hidden="true"></a><span class="ex">open</span> Desktop/</span>
+<span id="cb4-5"><a href="index.html#cb4-5" aria-hidden="true"></a><span class="ex">open</span> Music/</span>
+<span id="cb4-6"><a href="index.html#cb4-6" aria-hidden="true"></a><span class="ex">open</span> /Library/</span>
+<span id="cb4-7"><a href="index.html#cb4-7" aria-hidden="true"></a><span class="ex">open</span> /path/to/Directory/</span>
+<span id="cb4-8"><a href="index.html#cb4-8" aria-hidden="true"></a><span class="co"># If folder have spaces, replace with %20% or other similar, or use &quot;&quot;.</span></span>
+<span id="cb4-9"><a href="index.html#cb4-9" aria-hidden="true"></a><span class="ex">open</span> <span class="st">&quot;/path/to/Directory/&quot;</span></span></code></pre></div>
 <p>You can also launch (and update) applications from the Terminal without using Finder. For example, to open Safari, type: <strong>(But seem like it only works in terminal and can not do it with r/rstudio)</strong></p>
 <div id="downloading-and-setting-up-conda-environments." class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Downloading and setting up conda environments.</h2>
@@ -261,11 +260,11 @@ The Summary <a href="file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-4
 </blockquote>
 <p><em>Does Windows need Linux to be intalled?</em> Yes, a version of Linux kernell for window is available for download.</p>
 <p>Install <a href="https://www.anaconda.com/">Anaconda</a> or <a href="https://conda.io/miniconda.html">Miniconda</a>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="index.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install <span class="at">--cask</span> anaconda</span>
-<span id="cb5-2"><a href="index.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install <span class="at">--cask</span> miniconda</span>
-<span id="cb5-3"><a href="index.html#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="index.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># To check the version of conda installed.  </span></span>
-<span id="cb5-5"><a href="index.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> <span class="at">--version</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="index.html#cb5-1" aria-hidden="true"></a><span class="ex">brew</span> install --cask anaconda</span>
+<span id="cb5-2"><a href="index.html#cb5-2" aria-hidden="true"></a><span class="ex">brew</span> install --cask miniconda</span>
+<span id="cb5-3"><a href="index.html#cb5-3" aria-hidden="true"></a></span>
+<span id="cb5-4"><a href="index.html#cb5-4" aria-hidden="true"></a><span class="co"># To check the version of conda installed.  </span></span>
+<span id="cb5-5"><a href="index.html#cb5-5" aria-hidden="true"></a><span class="ex">conda</span> --version</span></code></pre></div>
 <p>Quick video tutorial on how to use conda.<br />
 * <a href="https://youtu.be/1VVCd0eSkYc">(Master) Conda environment</a>.<br />
 * <a href="https://youtu.be/ePS6lII4SEg">Set up a data Science environment with Conda-Forge</a>.</p>
@@ -276,75 +275,75 @@ To access environment and open in terminal: anaconda app &gt; Environment &gt; S
 <h3><span class="header-section-number">1.2.1</span> Conda terminal commands.</h3>
 <p>Conda <a href="https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf">cheat sheet</a></p>
 <p><strong>In Terminal</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="index.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To open conda app</span></span>
-<span id="cb6-2"><a href="index.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> /Applications/Anaconda-Navigator.app</span>
-<span id="cb6-3"><a href="index.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Or, if any of the container folders have a space character.</span></span>
-<span id="cb6-4"><a href="index.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> <span class="st">&quot;/Applications/Anaconda-Navigator.app&quot;</span></span>
-<span id="cb6-5"><a href="index.html#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="index.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># To open (activate) conda environment. </span></span>
-<span id="cb6-7"><a href="index.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> /usr/local/anaconda3/bin/activate <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
-<span id="cb6-8"><a href="index.html#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="index.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># To see all the environment created.  </span></span>
-<span id="cb6-10"><a href="index.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list  </span>
-<span id="cb6-11"><a href="index.html#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="index.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># To create a new environment called &quot;rna-seq_test&quot; in conda in terminal:  </span></span>
-<span id="cb6-13"><a href="index.html#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--rna-seq_test</span></span>
-<span id="cb6-14"><a href="index.html#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="index.html#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># To activate environment.    </span></span>
-<span id="cb6-16"><a href="index.html#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate rna-seq_test</span>
-<span id="cb6-17"><a href="index.html#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="index.html#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># To see if we activated the environment and where (path) we are.  </span></span>
-<span id="cb6-19"><a href="index.html#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$path</span></span>
-<span id="cb6-20"><a href="index.html#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="index.html#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co"># To exit the environment and return to base/root. Check with echo $path. </span></span>
-<span id="cb6-22"><a href="index.html#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
-<span id="cb6-23"><a href="index.html#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-24"><a href="index.html#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># To see packages installed in env.:  </span></span>
-<span id="cb6-25"><a href="index.html#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--show</span> channels </span>
-<span id="cb6-26"><a href="index.html#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-27"><a href="index.html#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co"># List all packages and versions installed in active environment</span></span>
-<span id="cb6-28"><a href="index.html#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list</span>
-<span id="cb6-29"><a href="index.html#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-30"><a href="index.html#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co"># To see the url location of packages (repository):</span></span>
-<span id="cb6-31"><a href="index.html#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> info</span>
-<span id="cb6-32"><a href="index.html#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-33"><a href="index.html#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co"># To add packages to the environment. (only to this environment: --env).  </span></span>
-<span id="cb6-34"><a href="index.html#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--env</span> <span class="at">--add</span> channels conda-forge</span>
-<span id="cb6-35"><a href="index.html#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--env</span> <span class="at">--add</span> channels bioconda </span>
-<span id="cb6-36"><a href="index.html#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-37"><a href="index.html#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co"># If a package is repeated in the environment, Conda will always install the package of higher version. If you dont want that, and specifically need a version originally configured at creation of the environment.. type:   </span></span>
-<span id="cb6-38"><a href="index.html#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--env</span> <span class="at">--set</span> channel_priority strict.  </span>
-<span id="cb6-39"><a href="index.html#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-40"><a href="index.html#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="co"># To install fastqc</span></span>
-<span id="cb6-41"><a href="index.html#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install fastqc </span>
-<span id="cb6-42"><a href="index.html#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-43"><a href="index.html#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="co">#To make and export a list of the required environment/</span></span>
-<span id="cb6-44"><a href="index.html#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list <span class="at">--export</span> <span class="op">&gt;</span> requirements.txt  </span>
-<span id="cb6-45"><a href="index.html#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-46"><a href="index.html#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="co">#To make and export an yml file to share with others.</span></span>
-<span id="cb6-47"><a href="index.html#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="op">&gt;</span> rna-seq_test.yml  </span>
-<span id="cb6-48"><a href="index.html#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--file</span>  rna-seq_test.yml </span>
-<span id="cb6-49"><a href="index.html#cb6-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-50"><a href="index.html#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="co"># To quickly check the yml file. </span></span>
-<span id="cb6-51"><a href="index.html#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> rna-seq_test.yml </span>
-<span id="cb6-52"><a href="index.html#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-53"><a href="index.html#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="co">#To see the content of a .yml file.</span></span>
-<span id="cb6-54"><a href="index.html#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> rna-seq_test.yml</span>
-<span id="cb6-55"><a href="index.html#cb6-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-56"><a href="index.html#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="co">#To clear the terminal screen. </span></span>
-<span id="cb6-57"><a href="index.html#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="fu">clear</span> </span>
-<span id="cb6-58"><a href="index.html#cb6-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-59"><a href="index.html#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="co"># To run a Jupyter Notebook.  </span></span>
-<span id="cb6-60"><a href="index.html#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook   </span>
-<span id="cb6-61"><a href="index.html#cb6-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-62"><a href="index.html#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="co"># To Keep Anaconda updated.  </span></span>
-<span id="cb6-63"><a href="index.html#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> update conda</span>
-<span id="cb6-64"><a href="index.html#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-65"><a href="index.html#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete an environment and everything in it called rna-seq_test.</span></span>
-<span id="cb6-66"><a href="index.html#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env remove <span class="at">--rna-seq_test</span></span>
-<span id="cb6-67"><a href="index.html#cb6-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-68"><a href="index.html#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="co"># To Uninstall Anaconda.  </span></span>
-<span id="cb6-69"><a href="index.html#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="co"># [Uninstall page]()</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="index.html#cb6-1" aria-hidden="true"></a><span class="co"># To open conda app</span></span>
+<span id="cb6-2"><a href="index.html#cb6-2" aria-hidden="true"></a><span class="ex">open</span> /Applications/Anaconda-Navigator.app</span>
+<span id="cb6-3"><a href="index.html#cb6-3" aria-hidden="true"></a><span class="co"># Or, if any of the container folders have a space character.</span></span>
+<span id="cb6-4"><a href="index.html#cb6-4" aria-hidden="true"></a><span class="ex">open</span> <span class="st">&quot;/Applications/Anaconda-Navigator.app&quot;</span></span>
+<span id="cb6-5"><a href="index.html#cb6-5" aria-hidden="true"></a></span>
+<span id="cb6-6"><a href="index.html#cb6-6" aria-hidden="true"></a><span class="co"># To open (activate) conda environment. </span></span>
+<span id="cb6-7"><a href="index.html#cb6-7" aria-hidden="true"></a><span class="bu">.</span> <span class="ex">/usr/local/anaconda3/bin/activate</span> <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
+<span id="cb6-8"><a href="index.html#cb6-8" aria-hidden="true"></a></span>
+<span id="cb6-9"><a href="index.html#cb6-9" aria-hidden="true"></a><span class="co"># To see all the environment created.  </span></span>
+<span id="cb6-10"><a href="index.html#cb6-10" aria-hidden="true"></a><span class="ex">conda</span> env list  </span>
+<span id="cb6-11"><a href="index.html#cb6-11" aria-hidden="true"></a></span>
+<span id="cb6-12"><a href="index.html#cb6-12" aria-hidden="true"></a><span class="co"># To create a new environment called &quot;rna-seq_test&quot; in conda in terminal:  </span></span>
+<span id="cb6-13"><a href="index.html#cb6-13" aria-hidden="true"></a><span class="ex">conda</span> create --rna-seq_test</span>
+<span id="cb6-14"><a href="index.html#cb6-14" aria-hidden="true"></a></span>
+<span id="cb6-15"><a href="index.html#cb6-15" aria-hidden="true"></a><span class="co"># To activate environment.    </span></span>
+<span id="cb6-16"><a href="index.html#cb6-16" aria-hidden="true"></a><span class="ex">conda</span> activate rna-seq_test</span>
+<span id="cb6-17"><a href="index.html#cb6-17" aria-hidden="true"></a></span>
+<span id="cb6-18"><a href="index.html#cb6-18" aria-hidden="true"></a><span class="co"># To see if we activated the environment and where (path) we are.  </span></span>
+<span id="cb6-19"><a href="index.html#cb6-19" aria-hidden="true"></a><span class="bu">echo</span> <span class="va">$path</span></span>
+<span id="cb6-20"><a href="index.html#cb6-20" aria-hidden="true"></a></span>
+<span id="cb6-21"><a href="index.html#cb6-21" aria-hidden="true"></a><span class="co"># To exit the environment and return to base/root. Check with echo $path. </span></span>
+<span id="cb6-22"><a href="index.html#cb6-22" aria-hidden="true"></a><span class="ex">conda</span> deactivate</span>
+<span id="cb6-23"><a href="index.html#cb6-23" aria-hidden="true"></a></span>
+<span id="cb6-24"><a href="index.html#cb6-24" aria-hidden="true"></a><span class="co"># To see packages installed in env.:  </span></span>
+<span id="cb6-25"><a href="index.html#cb6-25" aria-hidden="true"></a><span class="ex">conda</span> config --show channels </span>
+<span id="cb6-26"><a href="index.html#cb6-26" aria-hidden="true"></a></span>
+<span id="cb6-27"><a href="index.html#cb6-27" aria-hidden="true"></a><span class="co"># List all packages and versions installed in active environment</span></span>
+<span id="cb6-28"><a href="index.html#cb6-28" aria-hidden="true"></a><span class="ex">conda</span> list</span>
+<span id="cb6-29"><a href="index.html#cb6-29" aria-hidden="true"></a></span>
+<span id="cb6-30"><a href="index.html#cb6-30" aria-hidden="true"></a><span class="co"># To see the url location of packages (repository):</span></span>
+<span id="cb6-31"><a href="index.html#cb6-31" aria-hidden="true"></a><span class="ex">conda</span> info</span>
+<span id="cb6-32"><a href="index.html#cb6-32" aria-hidden="true"></a></span>
+<span id="cb6-33"><a href="index.html#cb6-33" aria-hidden="true"></a><span class="co"># To add packages to the environment. (only to this environment: --env).  </span></span>
+<span id="cb6-34"><a href="index.html#cb6-34" aria-hidden="true"></a><span class="ex">conda</span> config --env --add channels conda-forge</span>
+<span id="cb6-35"><a href="index.html#cb6-35" aria-hidden="true"></a><span class="ex">conda</span> config --env --add channels bioconda </span>
+<span id="cb6-36"><a href="index.html#cb6-36" aria-hidden="true"></a></span>
+<span id="cb6-37"><a href="index.html#cb6-37" aria-hidden="true"></a><span class="co"># If a package is repeated in the environment, Conda will always install the package of higher version. If you dont want that, and specifically need a version originally configured at creation of the environment.. type:   </span></span>
+<span id="cb6-38"><a href="index.html#cb6-38" aria-hidden="true"></a><span class="ex">conda</span> config --env --set channel_priority strict.  </span>
+<span id="cb6-39"><a href="index.html#cb6-39" aria-hidden="true"></a></span>
+<span id="cb6-40"><a href="index.html#cb6-40" aria-hidden="true"></a><span class="co"># To install fastqc</span></span>
+<span id="cb6-41"><a href="index.html#cb6-41" aria-hidden="true"></a><span class="ex">conda</span> install fastqc </span>
+<span id="cb6-42"><a href="index.html#cb6-42" aria-hidden="true"></a></span>
+<span id="cb6-43"><a href="index.html#cb6-43" aria-hidden="true"></a><span class="co">#To make and export a list of the required environment/</span></span>
+<span id="cb6-44"><a href="index.html#cb6-44" aria-hidden="true"></a><span class="ex">conda</span> list --export <span class="op">&gt;</span> requirements.txt  </span>
+<span id="cb6-45"><a href="index.html#cb6-45" aria-hidden="true"></a></span>
+<span id="cb6-46"><a href="index.html#cb6-46" aria-hidden="true"></a><span class="co">#To make and export an yml file to share with others.</span></span>
+<span id="cb6-47"><a href="index.html#cb6-47" aria-hidden="true"></a><span class="ex">conda</span> env export <span class="op">&gt;</span> rna-seq_test.yml  </span>
+<span id="cb6-48"><a href="index.html#cb6-48" aria-hidden="true"></a><span class="ex">conda</span> env export --file  rna-seq_test.yml </span>
+<span id="cb6-49"><a href="index.html#cb6-49" aria-hidden="true"></a></span>
+<span id="cb6-50"><a href="index.html#cb6-50" aria-hidden="true"></a><span class="co"># To quickly check the yml file. </span></span>
+<span id="cb6-51"><a href="index.html#cb6-51" aria-hidden="true"></a><span class="fu">less</span> rna-seq_test.yml </span>
+<span id="cb6-52"><a href="index.html#cb6-52" aria-hidden="true"></a></span>
+<span id="cb6-53"><a href="index.html#cb6-53" aria-hidden="true"></a><span class="co">#To see the content of a .yml file.</span></span>
+<span id="cb6-54"><a href="index.html#cb6-54" aria-hidden="true"></a><span class="fu">head</span> rna-seq_test.yml</span>
+<span id="cb6-55"><a href="index.html#cb6-55" aria-hidden="true"></a></span>
+<span id="cb6-56"><a href="index.html#cb6-56" aria-hidden="true"></a><span class="co">#To clear the terminal screen. </span></span>
+<span id="cb6-57"><a href="index.html#cb6-57" aria-hidden="true"></a><span class="fu">clear</span> </span>
+<span id="cb6-58"><a href="index.html#cb6-58" aria-hidden="true"></a></span>
+<span id="cb6-59"><a href="index.html#cb6-59" aria-hidden="true"></a><span class="co"># To run a Jupyter Notebook.  </span></span>
+<span id="cb6-60"><a href="index.html#cb6-60" aria-hidden="true"></a><span class="ex">jupyter</span> notebook   </span>
+<span id="cb6-61"><a href="index.html#cb6-61" aria-hidden="true"></a></span>
+<span id="cb6-62"><a href="index.html#cb6-62" aria-hidden="true"></a><span class="co"># To Keep Anaconda updated.  </span></span>
+<span id="cb6-63"><a href="index.html#cb6-63" aria-hidden="true"></a><span class="ex">conda</span> update conda</span>
+<span id="cb6-64"><a href="index.html#cb6-64" aria-hidden="true"></a></span>
+<span id="cb6-65"><a href="index.html#cb6-65" aria-hidden="true"></a><span class="co"># Delete an environment and everything in it called rna-seq_test.</span></span>
+<span id="cb6-66"><a href="index.html#cb6-66" aria-hidden="true"></a><span class="ex">conda</span> env remove --rna-seq_test</span>
+<span id="cb6-67"><a href="index.html#cb6-67" aria-hidden="true"></a></span>
+<span id="cb6-68"><a href="index.html#cb6-68" aria-hidden="true"></a><span class="co"># To Uninstall Anaconda.  </span></span>
+<span id="cb6-69"><a href="index.html#cb6-69" aria-hidden="true"></a><span class="co"># [Uninstall page]()</span></span></code></pre></div>
 </div>
 <div id="anacondaminiconda-install-summary-of-steps." class="section level3" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> Anaconda/Miniconda install Summary of Steps.</h3>
@@ -397,20 +396,20 @@ IMPORTANT: You may need to close and restart your shell after running &#39;conda
 <pre><code>conda init powershell
 conda init zsh</code></pre>
 <p>So far the only way to enter environment is though anaconda app.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="index.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> <span class="st">&quot;/Applications/Anaconda-Navigator.app&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="index.html#cb9-1" aria-hidden="true"></a><span class="ex">open</span> <span class="st">&quot;/Applications/Anaconda-Navigator.app&quot;</span></span></code></pre></div>
 <p>Then Environment &gt; rna-seq_test» &gt; Open in terminal… [Terminal]</p>
 <p>Another temporary solution is using the code:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="index.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For the rna-seq_test environment. </span></span>
-<span id="cb10-2"><a href="index.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> /usr/local/anaconda3/bin/activate <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
-<span id="cb10-3"><a href="index.html#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="index.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># For anaconda3 base environment. </span></span>
-<span id="cb10-5"><a href="index.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> /usr/local/anaconda3/bin/activate <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3<span class="kw">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="index.html#cb10-1" aria-hidden="true"></a><span class="co"># For the rna-seq_test environment. </span></span>
+<span id="cb10-2"><a href="index.html#cb10-2" aria-hidden="true"></a><span class="bu">.</span> <span class="ex">/usr/local/anaconda3/bin/activate</span> <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
+<span id="cb10-3"><a href="index.html#cb10-3" aria-hidden="true"></a></span>
+<span id="cb10-4"><a href="index.html#cb10-4" aria-hidden="true"></a><span class="co"># For anaconda3 base environment. </span></span>
+<span id="cb10-5"><a href="index.html#cb10-5" aria-hidden="true"></a><span class="bu">.</span> <span class="ex">/usr/local/anaconda3/bin/activate</span> <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3<span class="kw">;</span></span></code></pre></div>
 </div>
 </div>
 <div id="alignment-procedures-and-files." class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Alignment Procedures and files.</h2>
 <p>This section was created based in <a href="https://www.youtube.com/watch?v=UkrUTgAKFiE&amp;list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k&amp;index=2">this reference</a>.</p>
-<p>After installing “conda,” and to gain time, download the genome of the species to be study. In this case, download the mouse (mus muslculus) genome file. This file contains the list of all the mouse genes and their codes.</p>
+<p>After installing “conda”, and to gain time, download the genome of the species to be study. In this case, download the mouse (mus muslculus) genome file. This file contains the list of all the mouse genes and their codes.</p>
 <p>We need something to map our reads against once we get to the results.<br />
 Files for mouse (Mus musculus) are available for download at Johns Hopkins University Center for Computational Biology (CCB) at <a href="https://ccb.jhu.edu/software/tophat/igenomes.shtml">TopHat. A spliced read mapper for RNA-Seq</a>.</p>
 <p>There are different ways:</p>
@@ -440,7 +439,7 @@ Files for mouse (Mus musculus) are available for download at Johns Hopkins Unive
 <p>Tophat can be installed using the same <strong>conda install</strong></p>
 <pre><code>conda install \-c bioconda tophat</code></pre>
 <p>When this is finished installing, then we will need to get the mouse genome from the <a href="http://ccb.jhu.edu/software/tophat/igenomes.shtml">Johns Hopkins Univeristy Center for computational BIology</a>. The version of the mouse genome that I am using here is the <a href="ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Mus_musculus/NCBI/build37.2/Mus_musculus_NCBI_build37.2.tar.gz">NCBI build37.2</a>. Instead of downloading this from the website and having to move it to the cluser, I will just download it using wget into the folder that has the raw reads, trimmed reads, and the FastQC files.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="index.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Mus_musculus/NCBI/build37.2/Mus_musculus_NCBI_build37.2.tar.gz</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="index.html#cb13-1" aria-hidden="true"></a><span class="fu">wget</span> ftp://igenome:G3nom3s4u@ussd-ftp.illumina.com/Mus_musculus/NCBI/build37.2/Mus_musculus_NCBI_build37.2.tar.gz</span></code></pre></div>
 <p>This will take a long time to download because the file is a little less than 16GB zipped.</p>
 <blockquote>
 <p>Installation of TopHat failed.!!!!!!!!!!!!!!!!!!!!!!!</p>
@@ -453,15 +452,15 @@ Files for mouse (Mus musculus) are available for download at Johns Hopkins Unive
 <p>Complicated!!!</p>
 </blockquote>
 <p>STAR can be installed the same way as the previous programs with <strong>conda install</strong> (<strong><em>conda install -c bioconda star</em></strong>). In order to run STAR, we need to creaate indices just like with tophat, but STAR has this built in. I’m going to be using the same genome and GTF file as previously downloaded, but Dr. Ge uses a different zipped genome from the <em>gencode</em> database.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="index.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/miniconda2/bin/STAR</span> <span class="dt">\</span></span>
-<span id="cb14-2"><a href="index.html#cb14-2" aria-hidden="true" tabindex="-1"></a>--runThreadN 80 <span class="dt">\</span></span>
-<span id="cb14-3"><a href="index.html#cb14-3" aria-hidden="true" tabindex="-1"></a>--runMode genomeGenerate <span class="dt">\</span></span>
-<span id="cb14-4"><a href="index.html#cb14-4" aria-hidden="true" tabindex="-1"></a>--genomeDir starIndex <span class="dt">\</span></span>
-<span id="cb14-5"><a href="index.html#cb14-5" aria-hidden="true" tabindex="-1"></a>--genomeFastaFiles Index/genome.fa <span class="dt">\ </span>#same when we made the bowtie indices </span>
-<span id="cb14-6"><a href="index.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="ex">--sjdbGTFfile</span> Mus_musculus/NCBI/build37.2/Annotation/Archives/archive-2015-07-17-14-32-40/Genes/genes.gtf</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="index.html#cb14-1" aria-hidden="true"></a><span class="ex">~/miniconda2/bin/STAR</span> <span class="kw">\</span></span>
+<span id="cb14-2"><a href="index.html#cb14-2" aria-hidden="true"></a><span class="ex">--runThreadN</span> 80 <span class="kw">\</span></span>
+<span id="cb14-3"><a href="index.html#cb14-3" aria-hidden="true"></a><span class="ex">--runMode</span> genomeGenerate <span class="kw">\</span></span>
+<span id="cb14-4"><a href="index.html#cb14-4" aria-hidden="true"></a><span class="ex">--genomeDir</span> starIndex <span class="kw">\</span></span>
+<span id="cb14-5"><a href="index.html#cb14-5" aria-hidden="true"></a><span class="ex">--genomeFastaFiles</span> Index/genome.fa <span class="dt">\ </span>#same when we made the bowtie indices </span>
+<span id="cb14-6"><a href="index.html#cb14-6" aria-hidden="true"></a><span class="ex">--sjdbGTFfile</span> Mus_musculus/NCBI/build37.2/Annotation/Archives/archive-2015-07-17-14-32-40/Genes/genes.gtf</span></code></pre></div>
 <p>With the index files made, we can start aligning with STAR. It’s important here than we only pick the paired end reads and not use all of the reads. Tophat is able to use all 4 reads but STAR doesn’t allow that, so we need to make sure that we feed in the large files from trimming.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="index.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/miniconda2/bin/STAR</span> <span class="at">--runThreadN</span> 80 <span class="at">--genomeDir</span> starIndex <span class="at">--readFilesIn</span> 770_fp.fq 770_rp.fq <span class="at">--outFilterIntronMotifs</span> RemoveNoncanonical <span class="at">--outFileNamePrefix</span> 2121770 <span class="at">--outSAMtype</span> BAM SortedByCoordinate</span>
-<span id="cb15-2"><a href="index.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[here]</span><span class="er">(</span><span class="kw">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="index.html#cb15-1" aria-hidden="true"></a><span class="ex">~/miniconda2/bin/STAR</span> --runThreadN 80 --genomeDir starIndex --readFilesIn 770_fp.fq 770_rp.fq --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix 2121770 --outSAMtype BAM SortedByCoordinate</span>
+<span id="cb15-2"><a href="index.html#cb15-2" aria-hidden="true"></a>[<span class="ex">here</span>]()</span></code></pre></div>
 <blockquote>
 <p>Complicated.!!!!!!!!!!!!!!!!!!!!!!!</p>
 </blockquote>
@@ -483,7 +482,7 @@ Files for mouse (Mus musculus) are available for download at Johns Hopkins Unive
 </div>
 <div id="get-the-sample-files." class="section level3" number="1.3.5">
 <h3><span class="header-section-number">1.3.5</span> Get the Sample files.</h3>
-<p>Samples files come as “x_1.fastq.gz” or “x_2.fastq.gz,” where x is the name of the file, 1 is for forward and 2 for reverse pair reads. example: we will place them in a folder (00_Rawdata)
+<p>Samples files come as “x_1.fastq.gz” or “x_2.fastq.gz”, where x is the name of the file, 1 is for forward and 2 for reverse pair reads. example: we will place them in a folder (00_Rawdata)
 mPDL_RNA7D_Ko1_S1_L001_R1_001.fastq.gz<br />
 mPDL_RNA7D_Ko1_S1_L001_R2_001.fastq.gz<br />
 mPDL_RNA7D_Ko2_S1_L001_R1_001.fastq.gz<br />
@@ -491,31 +490,31 @@ mPDL_RNA7D_Ko2_S1_L001_R2_001.fastq.gz<br />
 mPDL_RNA7D_Ko3_S1_L001_R1_001.fastq.gz<br />
 mPDL_RNA7D_Ko3_S1_L001_R2_001.fastq.gz… etc….</p>
 <p>Download multiqc</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="index.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install multiqc</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="index.html#cb16-1" aria-hidden="true"></a><span class="ex">conda</span> install multiqc</span></code></pre></div>
 </div>
 <div id="starting-to-analize-fastq.gz-files" class="section level3" number="1.3.6">
 <h3><span class="header-section-number">1.3.6</span> Starting to analize fastq.gz files</h3>
 <p>Initialize fastqc</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="index.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> </span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="index.html#cb17-1" aria-hidden="true"></a><span class="ex">fastqc</span> </span></code></pre></div>
 <p>Make an output directory named rawFastQC</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="index.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> rawFastQC</span></code></pre></div>
-<p>Now we have to process all fastq files contained in the folder (00_Rawdata) and place the results in the directory we just made “rawFastQC.”</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="index.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> rawFastQC/<span class="pp">*</span>.fastq.gz <span class="at">-o</span> rawFastQC/</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="index.html#cb18-1" aria-hidden="true"></a><span class="fu">mkdir</span> rawFastQC</span></code></pre></div>
+<p>Now we have to process all fastq files contained in the folder (00_Rawdata) and place the results in the directory we just made “rawFastQC”.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="index.html#cb19-1" aria-hidden="true"></a><span class="ex">fastqc</span> rawFastQC/*.fastq.gz -o rawFastQC/</span></code></pre></div>
 <p>Once analysis is finished. Go to the results folder (rawFastQC)</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="index.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> rawFastQC</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="index.html#cb20-1" aria-hidden="true"></a><span class="bu">cd</span> rawFastQC</span></code></pre></div>
 <p>Create a report by read all the files contained in the results folder (rawFastQC) and combine them in one multiqc_report.html file.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="index.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rawFastQC</span> multiqc</span>
-<span id="cb21-2"><a href="index.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># check if file was created.</span></span>
-<span id="cb21-3"><a href="index.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="index.html#cb21-1" aria-hidden="true"></a><span class="ex">rawFastQC</span> multiqc</span>
+<span id="cb21-2"><a href="index.html#cb21-2" aria-hidden="true"></a><span class="co"># check if file was created.</span></span>
+<span id="cb21-3"><a href="index.html#cb21-3" aria-hidden="true"></a><span class="fu">ls</span></span></code></pre></div>
 </div>
 <div id="trimming-with-trimmomatic" class="section level3" number="1.3.7">
 <h3><span class="header-section-number">1.3.7</span> Trimming with Trimmomatic</h3>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="index.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install trimmomatic</span>
-<span id="cb22-2"><a href="index.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># parallel my also be required for task piping.</span></span>
-<span id="cb22-3"><a href="index.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install parallel</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="index.html#cb22-1" aria-hidden="true"></a><span class="ex">conda</span> install trimmomatic</span>
+<span id="cb22-2"><a href="index.html#cb22-2" aria-hidden="true"></a><span class="co"># parallel my also be required for task piping.</span></span>
+<span id="cb22-3"><a href="index.html#cb22-3" aria-hidden="true"></a><span class="ex">conda</span> install parallel</span></code></pre></div>
 <p>24:40
 Conda was used again to run Trimmomatic. This isn’t as easy as using the wildcard like with FastQC because each output has to be personalized for the read files that are input into Trimmomatic. Also, we have to make sure that the adapter sequences are in the same folder that we are running so we can refer to them easily when calling the Trimmomatic program. In this case, we are using the TruSeq3-PE-2.fa adapter sequences For example:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="index.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/miniconda2/bin/trimmomatic</span> PE SRR2121770_1.fastq.gz SRR2121770_2.fastq.gz 770_fp.fq.gz 770_fu.fq.gz 770_rp.fq.gz 770_ru.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRALING:3 MINLEN:36 <span class="kw">&amp;</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="index.html#cb23-1" aria-hidden="true"></a><span class="ex">~/miniconda2/bin/trimmomatic</span> PE SRR2121770_1.fastq.gz SRR2121770_2.fastq.gz 770_fp.fq.gz 770_fu.fq.gz 770_rp.fq.gz 770_ru.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRALING:3 MINLEN:36 <span class="kw">&amp;</span></span></code></pre></div>
 <p>This would be repeated for each of the pairs (12 in total). We are trimming paired-end reads with the TruSeq3-PE-2 adapters. We are chopping off the first and last 3 bases and if we end up with a sequence less than 36 bases, we get rid of it. We want to make sure that there are enough bases in a read to work with. These parameters can be tweaked for possibly better end results with less being discarded. When Trimmomatic is finished running, it will out put the total number of reads, the total number from both the forward and reverse reads that are kept, the number of only forward reads kept, the number of only reverse reads kept, and the number of discarded reads.</p>
 <p>The trimmed reads can be analyzed again with FastQC to see how well the trimming worked to make the file better quality. After running FastQC on the trimmed files we see that the quality of those that were really bad quality were improved. There were a few different metrics throughout all of the files that bounced from a warning before the failing, or from passing before to a warning, and so forth, overall creating better quality read files.</p>
 <blockquote>
@@ -593,6 +592,10 @@ gitbook.start({
 "text": null
 },
 "download": ["Bioinformatics_RNA-seq.pdf", "Bioinformatics_RNA-seq.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

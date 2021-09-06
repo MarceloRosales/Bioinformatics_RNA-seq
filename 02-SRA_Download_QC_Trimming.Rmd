@@ -63,10 +63,19 @@ conda install parallel
 ```
 
 2.  If we are going to trim the files, we need to make a new folder, so exit rawFastQC folder.   `cd..` and `mkdir trimmedReads`, we are going to point trimmomatic the this folder.  
+```{bash, eval=FALSE}
+# exit rawFastQC folder (remember there is a space between cd and .)
+cd .. 
+# Create new folder for trimmed files
+mkdir trimmedReads
+```
+
 3.  We are going to pull our true adapter sequencer to our working directory. Then it will be a lot easier to point trimmomatic to that vs having to type in the really long path. `cp ~/miniconda3/envs/name_of_environment/share/trimmomatic-0.39-1/adapters/TrueSeq3-PE-2.fa .` (the last point is important, it means that the command will the done in this folder). This command copy the file TruSeq3-PE-2.fa file to our current folder, why? so the process will be done directly in our folder, instead of the need to type the path to the folder (if not, in the code, instead of the point, type the path to the directory.)   
 `cp ~/miniconda3/envs/rna-seq_test/share/trimmomatic-0.39-1/adapters/TrueSeq3-PE-2.fa .`  This gives error.  Sometimes, due to updates in conda and trimmomatic, folder names might change or there is a space in a folders name. Check if this is the case by `open "/usr/local/anaconda3/envs/rna-seq_test/share/"`.  Seems like the version of timmomatic is "0.39-2" and not "0.39-1, and I installed anaconda3 and not miniconda3. Correct code and try again.   
-Full path is: /usr/local/anaconda3/envs/rna-seq_test/share/trimmomatic-0.39-2/adapters/TruSeq3-PE-2.fa
+Full path is: /usr/local/anaconda3/envs/rna-seq_test/share/trimmomatic-0.39-2/adapters/TruSeq3-PE-2.fa, then the code would be:
+```{bash, eval=FALSE}
 `cp /usr/local/anaconda3/envs/rna-seq_test/share/trimmomatic-0.39-2/adapters/TruSeq3-PE-2.fa .`
+```
 
 4. Install Parallel, `Conda install paralell`    
 5. Create new directory for the trimmed files. `mkdir trimmedReads`.   
@@ -74,9 +83,19 @@ Full path is: /usr/local/anaconda3/envs/rna-seq_test/share/trimmomatic-0.39-2/ad
 For my samples it would be...
 
 ```{bash, eval=FALSE}
+# Try 01 FAILED
 trimmomatic PE -threads 5 rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRALING:3 MINLEN:36 2> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log
 ```
 
+```{bash, eval=FALSE}
+# Try 02 FAILED
+trimmomatic PE -threads 5 rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRALING:3 MINLEN:36 2> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log
+```
+
+```{bash, eval=FALSE}
+# Try 03 SUCCESS!!!?
+trimmomatic PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log
+```
 
 The **PE** means **"Pair end Read"**, because we have both forward and reverse ends (1 and 2); If we would have only one end read (1 or 2) then it would be only single read, for single reads we type SE (instead of the PE).
 

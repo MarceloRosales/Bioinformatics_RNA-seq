@@ -5,6 +5,12 @@ Alex Soupir Tutorial
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+[ACSoupir/Bioinformatics_RNASeq/Mouse_RNA_Seq_p53_genotoxic.Rmd](https://github.com/ACSoupir/Bioinformatics_RNASeq/blob/master/Mouse_RNA_Seq_p53_genotoxic.Rmd) (Raw md file.)
+
+
+See here for full view:  
+[Mouse_RNA_Seq_p53_genotoxic.md.](https://github.com/ACSoupir/Bioinformatics_RNASeq/blob/master/Mouse_RNA_Seq_p53_genotoxic.md)
+
 ## **Background**
 
 For STAT736-Fall-2019, we are analyzing the RNA-Seq from the publication [Genome-wide analysis of p53 transcriptional programs in B cells upon exposure to genotoxic stress in vivo.](https://www.ncbi.nlm.nih.gov/pubmed/26372730?dopt=Abstract) We are only using the [sequences](https://trace.ncbi.nlm.nih.gov/Traces/study/?acc=SRP061386) *B cells from spleen* and not the *non-B cells from spleen* from the SRA Run Selector on NCBI.

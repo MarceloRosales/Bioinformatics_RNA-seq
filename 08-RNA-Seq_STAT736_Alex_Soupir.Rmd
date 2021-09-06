@@ -1,4 +1,5 @@
-# RNA Seq for STAT736 Alex Soupir
+# RNA Seq for STAT736 
+Alex Soupir Tutorial
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

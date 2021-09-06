@@ -25,7 +25,7 @@ sra-download-qc-and-trimming
 methods
 youtube-references.
 final-words
-rna-seq-for-stat736-alex-soupir
+rna-seq-for-stat736
 background
 cleaning-data
 programs-used

@@ -1,4 +1,4 @@
-# RNA-seq Blog
+# WGCNA RNA-seq Blog
 
 ## Introduction to the WGCNA Rpackage {#WGCNA}
 

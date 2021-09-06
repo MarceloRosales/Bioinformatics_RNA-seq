@@ -391,10 +391,17 @@ Once analysis is finished. Go to the results folder (rawFastQC)
 cd rawFastQC
 ```
 
-Create a report by read all the files contained in the results folder (rawFastQC) and combine them in one multiqc_report.html file.   
+"fastqc" created .zip files and a .html file report for each sample.
+To see them individually may be difficult and take time. For a more convenient way to visualize results, merge all sample reports (html file) in one file. 
+Create the report by reading all the files contained in the results folder (rawFastQC) and combine them in one multiqc_report.html file using "multiqc".   
 
 ```{bash, eval=FALSE}
-rawFastQC multiqc
+# go to the results folder where the html report files are.
+cd rawFastQC 
+# Check if the files are there. 
+ls
+# Create the multiqc report. Type (the dot is important!)
+multiqc .
 # check if file was created.
 ls
 ```

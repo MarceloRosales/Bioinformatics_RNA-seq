@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 WGCNA RNA-seq Blog | Bioinformatics_RNA-seq</title>
+  <meta name="description" content="RNA-seq notes and trials" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 WGCNA RNA-seq Blog | Bioinformatics_RNA-seq" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="RNA-seq notes and trials" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 WGCNA RNA-seq Blog | Bioinformatics_RNA-seq" />
+  
+  <meta name="twitter:description" content="RNA-seq notes and trials" />
+  
+
+<meta name="author" content="J. Marcelo Rosales R." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="sra-download-qc-and-trimming.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Bioinformatics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction to RNA sequencing (RNA_seq)</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#downloading-and-setting-up-conda-environments."><i class="fa fa-check"></i><b>1.1</b> Downloading and setting up conda environments.</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#install-miniconda-or-anaconda."><i class="fa fa-check"></i><b>1.2</b> Install Miniconda, or Anaconda.</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#conda-terminal-commands."><i class="fa fa-check"></i><b>1.2.1</b> Conda terminal commands.</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#anacondaminiconda-install-summary-of-steps."><i class="fa fa-check"></i><b>1.2.2</b> Anaconda/Miniconda install Summary of Steps.</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#conda-activate-error"><i class="fa fa-check"></i><b>1.2.3</b> Conda activate error</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#alignment-procedures-and-files."><i class="fa fa-check"></i><b>1.3</b> Alignment Procedures and files.</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#using-tophat-early-version"><i class="fa fa-check"></i><b>1.3.1</b> Using Tophat (early version)</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#using-tophat"><i class="fa fa-check"></i><b>1.3.2</b> Using Tophat</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#using-star"><i class="fa fa-check"></i><b>1.3.3</b> Using STAR</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#custompersonal-way-to-download-the-mus_musculus_ncbi_build37.2.tar.gz-file."><i class="fa fa-check"></i><b>1.3.4</b> Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file.</a></li>
+<li class="chapter" data-level="1.3.5" data-path="index.html"><a href="index.html#get-the-sample-files."><i class="fa fa-check"></i><b>1.3.5</b> Get the Sample files.</a></li>
+<li class="chapter" data-level="1.3.6" data-path="index.html"><a href="index.html#starting-to-analize-fastq.gz-files"><i class="fa fa-check"></i><b>1.3.6</b> Starting to analize fastq.gz files</a></li>
+<li class="chapter" data-level="1.3.7" data-path="index.html"><a href="index.html#trimming-with-trimmomatic"><i class="fa fa-check"></i><b>1.3.7</b> Trimming with Trimmomatic</a></li>
+<li class="chapter" data-level="1.3.8" data-path="index.html"><a href="index.html#using-star-to-map-genes"><i class="fa fa-check"></i><b>1.3.8</b> Using STAR to map genes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html"><i class="fa fa-check"></i><b>2</b> WGCNA RNA-seq Blog</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#WGCNA"><i class="fa fa-check"></i><b>2.1</b> Introduction to the WGCNA Rpackage</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#wgcna-rpackage-installation-procedure."><i class="fa fa-check"></i><b>2.1.1</b> WGCNA Rpackage Installation procedure.</a></li>
+<li class="chapter" data-level="2.1.2" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#final-installation-workflow"><i class="fa fa-check"></i><b>2.1.2</b> Final installation workflow:</a></li>
+<li class="chapter" data-level="2.1.3" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#wgcna-tutorial."><i class="fa fa-check"></i><b>2.1.3</b> WGCNA tutorial.</a></li>
+<li class="chapter" data-level="2.1.4" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#gene-expression-analysis"><i class="fa fa-check"></i><b>2.1.4</b> 3.4 Gene expression analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#rna-seq-analisys-with-kakus-data-sample."><i class="fa fa-check"></i><b>2.2</b> RNA-seq Analisys with Kaku’s Data sample.</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#data-analysis."><i class="fa fa-check"></i><b>2.2.1</b> Data Analysis.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sra-download-qc-and-trimming.html"><a href="sra-download-qc-and-trimming.html"><i class="fa fa-check"></i><b>3</b> SRA Download, QC, and Trimming</a></li>
+<li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
+<li class="chapter" data-level="5" data-path="youtube-references-.html"><a href="youtube-references-.html"><i class="fa fa-check"></i><b>5</b> Youtube references.</a></li>
+<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="7" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html"><i class="fa fa-check"></i><b>7</b> RNA Seq for STAT736 Alex Soupir</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#background"><i class="fa fa-check"></i><b>7.1</b> <strong>Background</strong></a></li>
+<li class="chapter" data-level="7.2" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#cleaning-data"><i class="fa fa-check"></i><b>7.2</b> <strong>Cleaning Data</strong></a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#programs-used"><i class="fa fa-check"></i><b>7.2.1</b> Programs used?</a></li>
+<li class="chapter" data-level="7.2.2" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#acquiring-sequences"><i class="fa fa-check"></i><b>7.2.2</b> Acquiring sequences</a></li>
+<li class="chapter" data-level="7.2.3" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#fastqc"><i class="fa fa-check"></i><b>7.2.3</b> FastQC</a></li>
+<li class="chapter" data-level="7.2.4" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#trimming-with-trimmomatic-1"><i class="fa fa-check"></i><b>7.2.4</b> Trimming with Trimmomatic</a></li>
+<li class="chapter" data-level="7.2.5" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#alignment"><i class="fa fa-check"></i><b>7.2.5</b> Alignment</a></li>
+<li class="chapter" data-level="7.2.6" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#assembling-transcripts-with-cufflinks"><i class="fa fa-check"></i><b>7.2.6</b> Assembling transcripts with Cufflinks</a></li>
+<li class="chapter" data-level="7.2.7" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#checking-for-contamination"><i class="fa fa-check"></i><b>7.2.7</b> Checking for Contamination</a></li>
+<li class="chapter" data-level="7.2.8" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#counting-transcripts"><i class="fa fa-check"></i><b>7.2.8</b> Counting Transcripts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#differentially-expressed-sequence-identification"><i class="fa fa-check"></i><b>7.3</b> <strong>Differentially Expressed Sequence Identification</strong></a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#analyzing-reads-counts"><i class="fa fa-check"></i><b>7.3.1</b> Analyzing Reads Counts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#interactions-cause-a-difference-between-the-lfc-betwen-pooled-data-e.g.-p53-control-and-ir-and-p53---control-and-ir"><i class="fa fa-check"></i><b>7.4</b> Interactions cause a difference between the lfc betwen pooled data, e.g. p53+/+ (control and IR) and p53-/- (control and IR)</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>7.4.1</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="7.4.2" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#identification-of-differentially-expressed-genes"><i class="fa fa-check"></i><b>7.4.2</b> Identification of Differentially Expressed Genes</a></li>
+<li class="chapter" data-level="7.4.3" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#gene-annotations"><i class="fa fa-check"></i><b>7.4.3</b> Gene Annotations</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#go-enrichment-analysis-using-gostats"><i class="fa fa-check"></i><b>7.5</b> 7. GO Enrichment analysis using GOstats</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#go-enrichment-analysis-of-downregulated-genes"><i class="fa fa-check"></i><b>7.5.1</b> GO Enrichment analysis of downregulated genes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#pathway-analysis-using-expression-data"><i class="fa fa-check"></i><b>7.6</b> 8. Pathway analysis using expression data</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#prepare-data"><i class="fa fa-check"></i><b>7.6.1</b> Prepare data</a></li>
+<li class="chapter" data-level="7.6.2" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#kegg-pathways"><i class="fa fa-check"></i><b>7.6.2</b> KEGG pathways</a></li>
+<li class="chapter" data-level="7.6.3" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#pathway-and-regulation-of-genes-for-oxidative-phosphorylation."><i class="fa fa-check"></i><b>7.6.3</b> Pathway and regulation of genes for Oxidative phosphorylation.</a></li>
+<li class="chapter" data-level="7.6.4" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#pathway-and-regulation-of-genes-for-glycosylphosphatidylinositolgpi-anchor-biosynthesis."><i class="fa fa-check"></i><b>7.6.4</b> Pathway and regulation of genes for Glycosylphosphatidylinositol(GPI)-anchor biosynthesis.</a></li>
+<li class="chapter" data-level="7.6.5" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#pathway-and-regulation-of-genes-for-rna-polymerase."><i class="fa fa-check"></i><b>7.6.5</b> Pathway and regulation of genes for RNA polymerase.</a></li>
+<li class="chapter" data-level="7.6.6" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#pathway-and-regulation-of-genes-for-nucleotide-excision-repair."><i class="fa fa-check"></i><b>7.6.6</b> Pathway and regulation of genes for Nucleotide excision repair.</a></li>
+<li class="chapter" data-level="7.6.7" data-path="rna-seq-for-stat736-alex-soupir.html"><a href="rna-seq-for-stat736-alex-soupir.html#pathway-and-regulation-of-genes-for-non-homologous-end-joining."><i class="fa fa-check"></i><b>7.6.7</b> Pathway and regulation of genes for Non-homologous end-joining.</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bioinformatics_RNA-seq</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="wgcna-rna-seq-blog" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> WGCNA RNA-seq Blog</h1>
+<div id="WGCNA" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Introduction to the WGCNA Rpackage</h2>
+<div id="wgcna-rpackage-installation-procedure." class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> WGCNA Rpackage Installation procedure.</h3>
+<p><strong>Installing and re-installing new versions or R and Studio.</strong><br />
+In Terminal (or Rstudio &gt; Terminal).</p>
+<pre><code>brew reinstall --cask r
+brew reinstall --cask rstudio</code></pre>
+<p><strong>Installing WGCNA: and R package for weighted correlation network analysis.</strong></p>
+<p>To install the package, go to Tab: Packages &gt; Install …[]… -Repository: (CRAN); -Packages: WGCNA; *Install. In R code:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="wgcna-rna-seq-blog.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span></code></pre></div>
+<p><strong>Installation (Failed)</strong>.<br />
+Unfortunately, it could not install correctly. <strong>Error</strong> was:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb26-1"><a href="wgcna-rna-seq-blog.html#cb26-1" aria-hidden="true" tabindex="-1"></a>install<span class="at">.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span>
+<span id="cb26-2"><a href="wgcna-rna-seq-blog.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Warning</span> <span class="cf">in</span> install<span class="at">.packages</span> :</span>
+<span id="cb26-3"><a href="wgcna-rna-seq-blog.html#cb26-3" aria-hidden="true" tabindex="-1"></a>dependencies ‘<span class="dt">Biobase</span>’, ‘impute’, ‘preprocessCore’, ‘<span class="cn">GO</span><span class="at">.db</span>’, ‘<span class="dt">AnnotationDbi</span>’ are <span class="cf">not</span> available</span>
+<span id="cb26-4"><a href="wgcna-rna-seq-blog.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="dt">Package</span> which is only available <span class="cf">in</span> source form, <span class="cf">and</span> may need compilation of C<span class="kw">/</span>C<span class="kw">++</span><span class="ss">/Fortran: ‘WGCNA’</span></span>
+<span id="cb26-5"><a href="wgcna-rna-seq-blog.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="ss">Do you want to attempt to install these from sources? (Yes/no</span><span class="kw">/</span>cancel) y</span>
+<span id="cb26-6"><a href="wgcna-rna-seq-blog.html#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="dt">Warning</span> <span class="cf">in</span> install<span class="at">.packages</span> :</span>
+<span id="cb26-7"><a href="wgcna-rna-seq-blog.html#cb26-7" aria-hidden="true" tabindex="-1"></a>installation of package ‘<span class="cn">WGCNA</span>’ had non<span class="kw">-</span>zero <span class="fu">exit</span> status</span></code></pre></div>
+<p>Dependencies are old and require special installation.</p>
+<ol style="list-style-type: decimal">
+<li>From <a href="http://pklab.med.harvard.edu/scw2014/WGCNA.html">this page</a>, installed several packages. <strong>(Failed)</strong>.</li>
+</ol>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="wgcna-rna-seq-blog.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;dynamicTreeCut&quot;</span>, <span class="st">&quot;cluster&quot;</span>, <span class="st">&quot;flashClust&quot;</span>, <span class="st">&quot;Hmisc&quot;</span>, <span class="st">&quot;reshape&quot;</span>, <span class="st">&quot;foreach&quot;</span>, <span class="st">&quot;doParallel&quot;</span>) ) </span>
+<span id="cb27-2"><a href="wgcna-rna-seq-blog.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;http://bioconductor.org/biocLite.R&quot;</span>) </span>
+<span id="cb27-3"><a href="wgcna-rna-seq-blog.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">biocLite</span>(<span class="st">&quot;impute&quot;</span>)</span>
+<span id="cb27-4"><a href="wgcna-rna-seq-blog.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span></code></pre></div>
+<p>Install most of the packages, but not “impute,” result: could not install WGCNA.</p>
+<ol style="list-style-type: decimal">
+<li>Tried to install dependencies independently from <a href="https://support.bioconductor.org/p/120430/">here</a>: <strong>(Failed)</strong><br />
+</li>
+</ol>
+<pre eval="FALSE"><code>You&#39;re using R-3.6.0, but trying to install Bioconductor version 3.8. Try using BiocManager::install(&quot;Biobase&quot;). If that works, then try BiocManager::install(&quot;GO.db&quot;).
+If you have success, make sure your installation is valid with BiocManager::valid().
+BiocManager::install(&quot;Biobase&quot;)
+BiocManager::install(&quot;GO.db&quot;)
+BiocManager::valid()
+No resutl</code></pre>
+<ol style="list-style-type: decimal">
+<li>Decided to install the complete “BiocManager” pack. ** BiocManager: (OK); (WGCNA:(Failed)**</li>
+</ol>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="wgcna-rna-seq-blog.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>) </span>
+<span id="cb29-2"><a href="wgcna-rna-seq-blog.html#cb29-2" aria-hidden="true" tabindex="-1"></a> downloaded <span class="dv">315</span> KB</span>
+<span id="cb29-3"><a href="wgcna-rna-seq-blog.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span>
+<span id="cb29-4"><a href="wgcna-rna-seq-blog.html#cb29-4" aria-hidden="true" tabindex="-1"></a> Warning <span class="cf">in</span> install.packages <span class="sc">:</span> dependencies ‘impute’, ‘preprocessCore’ are not available</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Search ‘preprocessCore,’ in this <a href="https://bioconductor.org/packages/release/bioc/html/preprocessCore.html">page</a>. <strong>PreprocessCore:(OK); (WGCNA:(Failed)</strong><br />
+To install this package, start R (version “4.1”) and enter:</li>
+</ol>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="wgcna-rna-seq-blog.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb30-2"><a href="wgcna-rna-seq-blog.html#cb30-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb30-3"><a href="wgcna-rna-seq-blog.html#cb30-3" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;preprocessCore&quot;</span>)</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>For ‘impute,’ found install in this <a href="https://bioconductor.org/packages/release/bioc/html/impute.html">page</a>. <strong>Impute:(OK); WGCNA:( OK)</strong><br />
+To install this package, start R (version “4.1”) enter:</li>
+</ol>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="wgcna-rna-seq-blog.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb31-2"><a href="wgcna-rna-seq-blog.html#cb31-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb31-3"><a href="wgcna-rna-seq-blog.html#cb31-3" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;impute&quot;</span>)</span>
+<span id="cb31-4"><a href="wgcna-rna-seq-blog.html#cb31-4" aria-hidden="true" tabindex="-1"></a> Then install WGCNA</span>
+<span id="cb31-5"><a href="wgcna-rna-seq-blog.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span></code></pre></div>
+</div>
+<div id="final-installation-workflow" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Final installation workflow:</h3>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="wgcna-rna-seq-blog.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set working directory</span></span>
+<span id="cb32-2"><a href="wgcna-rna-seq-blog.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb32-3"><a href="wgcna-rna-seq-blog.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/Users/marcelorosales/Box Sync/Documents/R/Rmarkdown&quot;</span>)  </span>
+<span id="cb32-4"><a href="wgcna-rna-seq-blog.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb32-5"><a href="wgcna-rna-seq-blog.html#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="wgcna-rna-seq-blog.html#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load list of packages and install.</span></span>
+<span id="cb32-7"><a href="wgcna-rna-seq-blog.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Rpackages&quot;</span>)</span>
+<span id="cb32-8"><a href="wgcna-rna-seq-blog.html#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (p <span class="cf">in</span> <span class="fu">setdiff</span>(packages, <span class="fu">installed.packages</span>()[,<span class="st">&quot;Package&quot;</span>]))</span>
+<span id="cb32-9"><a href="wgcna-rna-seq-blog.html#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(p)</span>
+<span id="cb32-10"><a href="wgcna-rna-seq-blog.html#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="wgcna-rna-seq-blog.html#cb32-11" aria-hidden="true" tabindex="-1"></a>Check <span class="ot">&lt;-</span> <span class="fu">installed.packages</span>()</span>
+<span id="cb32-12"><a href="wgcna-rna-seq-blog.html#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="wgcna-rna-seq-blog.html#cb32-13" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;Biobase&quot;</span>)</span>
+<span id="cb32-14"><a href="wgcna-rna-seq-blog.html#cb32-14" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;GO.db&quot;</span>)</span>
+<span id="cb32-15"><a href="wgcna-rna-seq-blog.html#cb32-15" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">valid</span>()</span>
+<span id="cb32-16"><a href="wgcna-rna-seq-blog.html#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb32-17"><a href="wgcna-rna-seq-blog.html#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb32-18"><a href="wgcna-rna-seq-blog.html#cb32-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb32-19"><a href="wgcna-rna-seq-blog.html#cb32-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-20"><a href="wgcna-rna-seq-blog.html#cb32-20" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;preprocessCore&quot;</span>)</span>
+<span id="cb32-21"><a href="wgcna-rna-seq-blog.html#cb32-21" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;WGCNA&quot;</span>)</span>
+<span id="cb32-22"><a href="wgcna-rna-seq-blog.html#cb32-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-23"><a href="wgcna-rna-seq-blog.html#cb32-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-24"><a href="wgcna-rna-seq-blog.html#cb32-24" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;dynamicTreeCut&quot;</span>, <span class="st">&quot;cluster&quot;</span>, <span class="st">&quot;flashClust&quot;</span>, <span class="st">&quot;Hmisc&quot;</span>, <span class="st">&quot;reshape&quot;</span>, <span class="st">&quot;foreach&quot;</span>, <span class="st">&quot;doParallel&quot;</span>) ) </span>
+<span id="cb32-25"><a href="wgcna-rna-seq-blog.html#cb32-25" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;http://bioconductor.org/biocLite.R&quot;</span>) </span>
+<span id="cb32-26"><a href="wgcna-rna-seq-blog.html#cb32-26" aria-hidden="true" tabindex="-1"></a><span class="fu">biocLite</span>(<span class="st">&quot;impute&quot;</span>)</span>
+<span id="cb32-27"><a href="wgcna-rna-seq-blog.html#cb32-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-28"><a href="wgcna-rna-seq-blog.html#cb32-28" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb32-29"><a href="wgcna-rna-seq-blog.html#cb32-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb32-30"><a href="wgcna-rna-seq-blog.html#cb32-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-31"><a href="wgcna-rna-seq-blog.html#cb32-31" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;impute&quot;</span>)</span>
+<span id="cb32-32"><a href="wgcna-rna-seq-blog.html#cb32-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-33"><a href="wgcna-rna-seq-blog.html#cb32-33" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span></code></pre></div>
+<p><strong>Checking the packages for WGCNA installed previously for OS Catalina</strong>.</p>
+<blockquote>
+<p>Warning in install.packages : package ‘anRichment’ is not available for this version of R</p>
+</blockquote>
+<p>A version of this package for your version of R might be available elsewhere, see the ideas at
+<a href="https://cran.r-project.org/doc/manuals/r-patched/R-admin.htmlInstalling-packages" class="uri">https://cran.r-project.org/doc/manuals/r-patched/R-admin.htmlInstalling-packages</a></p>
+<p>Warning in install.packages :<br />
+package ‘anRichment’ is not available for this version of R<br />
+package ‘anRichmentMethods’ is not available for this version of R<br />
+package ‘BiocFileCache’ is not available for this version of R<br />
+package ‘BiocParallel’ is not available for this version of R<br />
+package ‘biomaRt’ is not available for this version of R<br />
+package ‘DelayedArray’ is not available for this version of R<br />
+package ‘GenomicAlignments’ is not available for this version of R<br />
+package ‘GenomicFeatures’ is not available for this version of R<br />
+package ‘GenomicRanges’ is not available for this version of R<br />
+package ‘inserttable’ is not available for this version of R<br />
+package ‘lorem’ is not available for this version of R<br />
+package ‘org.Hs.eg.db’ is not available for this version of R<br />
+package ‘org.Mm.eg.db’ is not available for this version of R<br />
+package ‘Rhtslib’ is not available for this version of R<br />
+package ‘Rsamtools’ is not available for this version of R<br />
+package ‘rtracklayer’ is not available for this version of R<br />
+package ‘SummarizedExperiment’ is not available for this version of R<br />
+package ‘TxDb.Hsapiens.UCSC.hg19.knownGene’ is not available for this version of R<br />
+package ‘TxDb.Mmusculus.UCSC.mm10.knownGene’ is not available for this version of R<br />
+A version of this package for your version of R might be available elsewhere,<br />
+see the ideas at<br />
+<a href="https://cran.r-project.org/doc/manuals/r-patched/R-admin.htmlInstalling-packages" class="uri">https://cran.r-project.org/doc/manuals/r-patched/R-admin.htmlInstalling-packages</a></p>
+</div>
+<div id="wgcna-tutorial." class="section level3" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> WGCNA tutorial.</h3>
+<p>This code has been adapted from the tutorials available at WGCNA website <strong>(this page does no longer exist)</strong>.</p>
+<p>WGCNA: an R package for weighted correlation network analysis <a href="https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/WGCNAIntro">site</a>.</p>
+<p>Tutorials for the WGCNA package. <a href="https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/Tutorials/index.html">R tutorial</a><br />
+Steps Required for this process are:<br />
+1. <strong>Data input and cleaning</strong>: <a href="https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/Tutorials/FemaleLiver-01-dataInput.pdf">PDF document</a>, <a href="https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/Tutorials/FemaleLiver-01-dataInput.R">R script</a>.<br />
+1. Network construction and module detection<br />
+a. Automatic, one-step network construction and module detection: PDF document, R script<br />
+b. Step-by-step network construction and module detection: PDF document, R script<br />
+c. Dealing with large datasets: block-wise network construction and module detection: PDF document, R script<br />
+1. Relating modules to external clinical traits and identifying important genes: PDF document, R script<br />
+1. Interfacing network analysis with other data such as functional annotation and gene ontology PDF document, R script<br />
+1. Network visualization using WGCNA functions: PDF document, R script<br />
+1. Export of networks to external software: PDF document, R script</p>
+</div>
+<div id="gene-expression-analysis" class="section level3" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> 3.4 Gene expression analysis</h3>
+<p>The level of gene expression is measured by read density, the higher the read density, the higher the level of gene expression.<br />
+Gene expression calculation was performed with the formula below, which calculates <strong>FPKM (Fragments per kilo bases per million reads)</strong> based on read counts from HT-seq (V 0.6.1) (Mortazavi, 2008).</p>
+<p>The formula is:</p>
+<p>Figure 3.4.1</p>
+<p>The ratio of (total exon fragments / mapped reads [millions]) is the read count mapped to the gene normalized to total read counts. The value is then normalized to gene length (exon length [KB]), so that the expression of genes with different sequencing depths and length are comparable.</p>
+<p>The numbers of genes with different expression levels are summarized in Table 3.7.1. In general, FPKM threshold for gene expression is set between 0.1-1, although there is no absolute standard and various thresholds have been used in the literature.</p>
+</div>
+</div>
+<div id="rna-seq-analisys-with-kakus-data-sample." class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> RNA-seq Analisys with Kaku’s Data sample.</h2>
+<p>2021/07/02<br />
+Copy <strong>Trial data</strong> from MK/土橋 to <a href="file:///Volumes/HD-PCFSU3-A/Experiments%Data/Genewiz">folder</a> :<br />
+The Report <a href="file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_RNASeq_Report.html">file</a>.<br />
+The Summary <a href="file:///Volumes/HD-PCFSU3-A/Experiments%20Data/Genewiz/60-499583816_60-501009934/60-499583816_60-501009934_GENEWIZ_QC_Report.html">file</a></p>
+<p><strong>Report</strong><br />
+### Experimental Workflow.<br />
+Transcriptome sequencing experiments include:<br />
+* RNA extraction and QC (Quality Control?),<br />
+* Library construction,
+* Purification,<br />
+* Library QC and<br />
+* Quantitation, as well as<br />
+* Sequencing cluster generation and high through-put sequencing.</p>
+<p>Each step is important for data quality and quantity, which in turn affect the data analysis. To ensure the accuracy and reliability of the analysis results, every step is under strict monitoring and quality control. After mixing libraries based on their effective concentration and the required sequencing data volume, Illumina platform is used for high through-put sequencing.</p>
+<div id="data-analysis." class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Data Analysis.</h3>
+<p>First Data must be in the right format.<br />
+In the data received.</p>
+<p>“GeneName”<br />
+“Chr”<br />
+“Start”<br />
+“End”<br />
+“Strand”<br />
+“Length”<br />
+“mPDL_RNA14D_Ko1”<br />
+“mPDL_RNA14D_Ko2”<br />
+“mPDL_RNA14D_Ko3”<br />
+“mPDL_RNA14D_Ko4”<br />
+“mPDL_RNA14D_WT1”<br />
+“mPDL_RNA14D_WT2”<br />
+“mPDL_RNA14D_WT3”<br />
+“mPDL_RNA14D_WT4”<br />
+“mPDL_RNA7D_Ko1”<br />
+“mPDL_RNA7D_Ko2”<br />
+“mPDL_RNA7D_Ko3”<br />
+“mPDL_RNA7D_Ko4”<br />
+“mPDL_RNA7D_WT1”<br />
+“mPDL_RNA7D_WT2”<br />
+“mPDL_RNA7D_WT3”<br />
+“mPDL_RNA7D_WT4”</p>
+<p>Use <a href="https://www.tablesgenerator.com/markdown_tables">Markdown Table generator</a>.</p>
+<p>20210705</p>
+<p>Problems with software*<br />
+** Regarding Rstudio Shortcut keys “not working” sometimes**<br />
+SOME shortcuts will work if not on the corresponding file type. <strong>For example, MARKDOWN shortcuts will not work on R script files window or vice versa</strong>.</p>
+<p>Set working directory</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="wgcna-rna-seq-blog.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span>
+<span id="cb33-2"><a href="wgcna-rna-seq-blog.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/Users/marcelorosales/Box Sync/Documents/R/Rmarkdown&quot;</span>)  <span class="st">&quot;/Users/marcelorosales/Box Sync/Documents/R/Rmarkdown&quot;</span></span>
+<span id="cb33-3"><a href="wgcna-rna-seq-blog.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;/Users/marcelorosales/Box Sync/Niigata Uni Box/Experiments/Photoconvertible FP/Experiment Notebooks&quot;</span></span>
+<span id="cb33-4"><a href="wgcna-rna-seq-blog.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<p>Load list of packages and install.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="wgcna-rna-seq-blog.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Rpackages&quot;</span>)</span>
+<span id="cb34-2"><a href="wgcna-rna-seq-blog.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (p <span class="cf">in</span> <span class="fu">setdiff</span>(packages, <span class="fu">installed.packages</span>()[,<span class="st">&quot;Package&quot;</span>]))</span>
+<span id="cb34-3"><a href="wgcna-rna-seq-blog.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(p)</span>
+<span id="cb34-4"><a href="wgcna-rna-seq-blog.html#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="wgcna-rna-seq-blog.html#cb34-5" aria-hidden="true" tabindex="-1"></a>Check <span class="ot">&lt;-</span> <span class="fu">installed.packages</span>()</span>
+<span id="cb34-6"><a href="wgcna-rna-seq-blog.html#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="wgcna-rna-seq-blog.html#cb34-7" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;Biobase&quot;</span>)</span>
+<span id="cb34-8"><a href="wgcna-rna-seq-blog.html#cb34-8" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;GO.db&quot;</span>)</span>
+<span id="cb34-9"><a href="wgcna-rna-seq-blog.html#cb34-9" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">valid</span>()</span>
+<span id="cb34-10"><a href="wgcna-rna-seq-blog.html#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb34-11"><a href="wgcna-rna-seq-blog.html#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb34-12"><a href="wgcna-rna-seq-blog.html#cb34-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb34-13"><a href="wgcna-rna-seq-blog.html#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="wgcna-rna-seq-blog.html#cb34-14" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;preprocessCore&quot;</span>)</span>
+<span id="cb34-15"><a href="wgcna-rna-seq-blog.html#cb34-15" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;WGCNA&quot;</span>)</span>
+<span id="cb34-16"><a href="wgcna-rna-seq-blog.html#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-17"><a href="wgcna-rna-seq-blog.html#cb34-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-18"><a href="wgcna-rna-seq-blog.html#cb34-18" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;dynamicTreeCut&quot;</span>, <span class="st">&quot;cluster&quot;</span>, <span class="st">&quot;flashClust&quot;</span>, <span class="st">&quot;Hmisc&quot;</span>, <span class="st">&quot;reshape&quot;</span>, <span class="st">&quot;foreach&quot;</span>, <span class="st">&quot;doParallel&quot;</span>) ) </span>
+<span id="cb34-19"><a href="wgcna-rna-seq-blog.html#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;http://bioconductor.org/biocLite.R&quot;</span>) </span>
+<span id="cb34-20"><a href="wgcna-rna-seq-blog.html#cb34-20" aria-hidden="true" tabindex="-1"></a><span class="fu">biocLite</span>(<span class="st">&quot;impute&quot;</span>)</span>
+<span id="cb34-21"><a href="wgcna-rna-seq-blog.html#cb34-21" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;WGCNA&quot;</span>)</span>
+<span id="cb34-22"><a href="wgcna-rna-seq-blog.html#cb34-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-23"><a href="wgcna-rna-seq-blog.html#cb34-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-24"><a href="wgcna-rna-seq-blog.html#cb34-24" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/GeneAnnotation/installAnRichment.R&quot;</span>);</span>
+<span id="cb34-25"><a href="wgcna-rna-seq-blog.html#cb34-25" aria-hidden="true" tabindex="-1"></a><span class="fu">installAnRichment</span>();</span>
+<span id="cb34-26"><a href="wgcna-rna-seq-blog.html#cb34-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-27"><a href="wgcna-rna-seq-blog.html#cb34-27" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;path/to/anRichmentMethods&quot;</span>, <span class="at">repos =</span> <span class="cn">NULL</span>, <span class="at">type =</span> <span class="st">&quot;source&quot;</span>); <span class="fu">install.packages</span>(<span class="st">&quot;path/to/anRichment&quot;</span>, <span class="at">repos =</span> <span class="cn">NULL</span>, <span class="at">type =</span> <span class="st">&quot;source&quot;</span>);</span>
+<span id="cb34-28"><a href="wgcna-rna-seq-blog.html#cb34-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-29"><a href="wgcna-rna-seq-blog.html#cb34-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-30"><a href="wgcna-rna-seq-blog.html#cb34-30" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;https://bioconductor.org/biocLite.R&quot;</span>);</span>
+<span id="cb34-31"><a href="wgcna-rna-seq-blog.html#cb34-31" aria-hidden="true" tabindex="-1"></a><span class="fu">biocLite</span>(<span class="fu">c</span>(<span class="st">&quot;AnnotationDBI&quot;</span>, <span class="st">&quot;GO.db&quot;</span>, <span class="st">&quot;org.Hs.eg.db&quot;</span>, <span class="st">&quot;org.Mm.eg.db&quot;</span>,</span>
+<span id="cb34-32"><a href="wgcna-rna-seq-blog.html#cb34-32" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;XML&quot;</span>, <span class="st">&quot;WGCNA&quot;</span>, <span class="st">&quot;TxDb.Hsapiens.UCSC.hg19.knownGene&quot;</span>,</span>
+<span id="cb34-33"><a href="wgcna-rna-seq-blog.html#cb34-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;TxDb.Mmusculus.UCSC.mm10.knownGene&quot;</span>));</span>
+<span id="cb34-34"><a href="wgcna-rna-seq-blog.html#cb34-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-35"><a href="wgcna-rna-seq-blog.html#cb34-35" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;path/to/anRichmentMethods&quot;</span>, <span class="at">repos =</span> <span class="cn">NULL</span>, <span class="at">type =</span> <span class="st">&quot;source&quot;</span>); <span class="fu">install.packages</span>(<span class="st">&quot;path/to/anRichment&quot;</span>, <span class="at">repos =</span> <span class="cn">NULL</span>, <span class="at">type =</span> <span class="st">&quot;source&quot;</span>);</span>
+<span id="cb34-36"><a href="wgcna-rna-seq-blog.html#cb34-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-37"><a href="wgcna-rna-seq-blog.html#cb34-37" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>()</span>
+<span id="cb34-38"><a href="wgcna-rna-seq-blog.html#cb34-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-39"><a href="wgcna-rna-seq-blog.html#cb34-39" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;https://bioconductor.org/biocLite.R&quot;</span>);</span>
+<span id="cb34-40"><a href="wgcna-rna-seq-blog.html#cb34-40" aria-hidden="true" tabindex="-1"></a><span class="fu">biocLite</span>(<span class="fu">c</span>(<span class="st">&quot;AnnotationDBI&quot;</span>, <span class="st">&quot;GO.db&quot;</span>, <span class="st">&quot;org.Hs.eg.db&quot;</span>, <span class="st">&quot;org.Mm.eg.db&quot;</span>,</span>
+<span id="cb34-41"><a href="wgcna-rna-seq-blog.html#cb34-41" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;XML&quot;</span>, <span class="st">&quot;WGCNA&quot;</span>, <span class="st">&quot;TxDb.Hsapiens.UCSC.hg19.knownGene&quot;</span>,</span>
+<span id="cb34-42"><a href="wgcna-rna-seq-blog.html#cb34-42" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;TxDb.Mmusculus.UCSC.mm10.knownGene&quot;</span>));</span>
+<span id="cb34-43"><a href="wgcna-rna-seq-blog.html#cb34-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-44"><a href="wgcna-rna-seq-blog.html#cb34-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-45"><a href="wgcna-rna-seq-blog.html#cb34-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-46"><a href="wgcna-rna-seq-blog.html#cb34-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-47"><a href="wgcna-rna-seq-blog.html#cb34-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-48"><a href="wgcna-rna-seq-blog.html#cb34-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-49"><a href="wgcna-rna-seq-blog.html#cb34-49" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb34-50"><a href="wgcna-rna-seq-blog.html#cb34-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb34-51"><a href="wgcna-rna-seq-blog.html#cb34-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-52"><a href="wgcna-rna-seq-blog.html#cb34-52" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;impute&quot;</span>)</span>
+<span id="cb34-53"><a href="wgcna-rna-seq-blog.html#cb34-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-54"><a href="wgcna-rna-seq-blog.html#cb34-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-55"><a href="wgcna-rna-seq-blog.html#cb34-55" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(all_fpkm)</span>
+<span id="cb34-56"><a href="wgcna-rna-seq-blog.html#cb34-56" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(all_fpkm)</span>
+<span id="cb34-57"><a href="wgcna-rna-seq-blog.html#cb34-57" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(all_fpkm)</span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sra-download-qc-and-trimming.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Bioinformatics_RNA-seq.pdf", "Bioinformatics_RNA-seq.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

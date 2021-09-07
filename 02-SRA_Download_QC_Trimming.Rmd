@@ -54,6 +54,9 @@
 22:29    
 **Once this quality control is finished we can pass to the trimming of the samples.**  
 
+## Trimmomatic
+[Trimmomatic web page](http://www.usadellab.org/cms/?page=trimmomatic).  
+
 1.  Install trimmomatic, `conda install trimmomatic` (if not installed).  
 
 ```{bash, eval=FALSE}

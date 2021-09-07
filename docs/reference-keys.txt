@@ -22,8 +22,10 @@ gene-expression-analysis
 rna-seq-analisys-with-kakus-data-sample.
 data-analysis.
 sra-download-qc-and-trimming
+trimmomatic
 methods
 youtube-references.
+trimmomatic.
 final-words
 rna-seq-for-stat736
 background

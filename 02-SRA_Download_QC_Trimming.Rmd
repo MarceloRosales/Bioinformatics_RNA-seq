@@ -56,6 +56,21 @@
 
 ## Trimmomatic
 [Trimmomatic web page](http://www.usadellab.org/cms/?page=trimmomatic).  
+Quick start
+Paired End:
+```{bash, eval=FALSE}
+java -jar trimmomatic-0.39.jar PE input_forward.fq.gz input_reverse.fq.gz output_forward_paired.fq.gz output_forward_unpaired.fq.gz output_reverse_paired.fq.gz output_reverse_unpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36
+```
+
+[Trimming and Filtering](https://datacarpentry.org/wrangling-genomics/03-trimming/index.html) full parameters description and example:  
+
+```{bash, eval=FALSE}
+$ trimmomatic PE -threads 4 SRR_1056_1.fastq SRR_1056_2.fastq  \
+              SRR_1056_1.trimmed.fastq SRR_1056_1un.trimmed.fastq \
+              SRR_1056_2.trimmed.fastq SRR_1056_2un.trimmed.fastq \
+              ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
+```
+
 
 1.  Install trimmomatic, `conda install trimmomatic` (if not installed).  
 
@@ -96,9 +111,33 @@ trimmomatic PE -threads 5 rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawR
 ```
 
 ```{bash, eval=FALSE}
-# Try 03 SUCCESS!!!?
+# Try 03 SUCCESS!!!???
 trimmomatic PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log
 ```
+
+```{bash, eval=FALSE}
+# Try 04
+$ trimmomatic PE -threads 4 rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz  \
+-baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.trimmed.fastq.gz trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1un.trimmed.fastq.gz
+              SRR_1056_1.trimmed.fastq SRR_1056_1un.trimmed.fastq \
+              SRR_1056_2.trimmed.fastq SRR_1056_2un.trimmed.fastq \
+              ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
+              
+              ??????????
+```
+
+```{bash, eval=FALSE}
+# Try 04
+$ trimmomatic PE -threads 4 SRR_1056_1.fastq SRR_1056_2.fastq  \
+              SRR_1056_1.trimmed.fastq SRR_1056_1un.trimmed.fastq \
+              SRR_1056_2.trimmed.fastq SRR_1056_2un.trimmed.fastq \
+              ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
+```
+
+```{bash, eval=FALSE}
+java -jar trimmomatic-0.39.jar PE input_forward.fq.gz input_reverse.fq.gz output_forward_paired.fq.gz output_forward_unpaired.fq.gz output_reverse_paired.fq.gz output_reverse_unpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36
+```
+
 
 The **PE** means **"Pair end Read"**, because we have both forward and reverse ends (1 and 2); If we would have only one end read (1 or 2) then it would be only single read, for single reads we type SE (instead of the PE).
 

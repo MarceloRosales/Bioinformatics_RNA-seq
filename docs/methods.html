@@ -177,9 +177,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.1" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#data-analysis."><i class="fa fa-check"></i><b>2.2.1</b> Data Analysis.</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="sra-download-qc-and-trimming.html"><a href="sra-download-qc-and-trimming.html"><i class="fa fa-check"></i><b>3</b> SRA Download, QC, and Trimming</a></li>
+<li class="chapter" data-level="3" data-path="sra-download-qc-and-trimming.html"><a href="sra-download-qc-and-trimming.html"><i class="fa fa-check"></i><b>3</b> SRA Download, QC, and Trimming</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="sra-download-qc-and-trimming.html"><a href="sra-download-qc-and-trimming.html#trimmomatic"><i class="fa fa-check"></i><b>3.1</b> Trimmomatic</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
-<li class="chapter" data-level="5" data-path="youtube-references-.html"><a href="youtube-references-.html"><i class="fa fa-check"></i><b>5</b> Youtube references.</a></li>
+<li class="chapter" data-level="5" data-path="youtube-references-.html"><a href="youtube-references-.html"><i class="fa fa-check"></i><b>5</b> Youtube references.</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="youtube-references-.html"><a href="youtube-references-.html#trimmomatic."><i class="fa fa-check"></i><b>5.1</b> Trimmomatic.</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
 <li class="chapter" data-level="7" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html"><i class="fa fa-check"></i><b>7</b> RNA Seq for STAT736</a>
 <ul>
@@ -244,6 +250,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="methods" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Methods</h1>
 <p>We describe our methods in this chapter.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="methods.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For the rna-seq_test environment. </span></span>
+<span id="cb51-2"><a href="methods.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> /usr/local/anaconda3/bin/activate <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
+<span id="cb51-3"><a href="methods.html#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="methods.html#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="methods.html#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02&quot;</span></span>
+<span id="cb51-6"><a href="methods.html#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-7"><a href="methods.html#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> rawFastQC </span>
+<span id="cb51-8"><a href="methods.html#cb51-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-9"><a href="methods.html#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">-t</span> 64 rawReads/<span class="pp">*</span>fastq.gz <span class="at">-o</span> rawFastQC</span>
+<span id="cb51-10"><a href="methods.html#cb51-10" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> rawReads/<span class="pp">*</span>fastq.gz <span class="at">-o</span> rawFastQC</span>
+<span id="cb51-11"><a href="methods.html#cb51-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-12"><a href="methods.html#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> rawFastQC</span>
+<span id="cb51-13"><a href="methods.html#cb51-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
+<span id="cb51-14"><a href="methods.html#cb51-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-15"><a href="methods.html#cb51-15" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> .</span>
+<span id="cb51-16"><a href="methods.html#cb51-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> </span>
+<span id="cb51-17"><a href="methods.html#cb51-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-18"><a href="methods.html#cb51-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-19"><a href="methods.html#cb51-19" aria-hidden="true" tabindex="-1"></a><span class="ex">cd..</span></span>
+<span id="cb51-20"><a href="methods.html#cb51-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-21"><a href="methods.html#cb51-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> trimmedReads</span>
+<span id="cb51-22"><a href="methods.html#cb51-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-23"><a href="methods.html#cb51-23" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /usr/local/anaconda3/envs/rna-seq_test/share/trimmomatic-0.39-2/adapters/TruSeq3-PE-2.fa .</span>
+<span id="cb51-24"><a href="methods.html#cb51-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-25"><a href="methods.html#cb51-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Try 03 SUCCESS!!!?</span></span>
+<span id="cb51-26"><a href="methods.html#cb51-26" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz <span class="at">-baseout</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="dv">2</span><span class="op">&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span>
+<span id="cb51-27"><a href="methods.html#cb51-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-28"><a href="methods.html#cb51-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-29"><a href="methods.html#cb51-29" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames.txt <span class="kw">|</span> <span class="ex">parallel</span> <span class="at">-j</span> 4 <span class="st">&quot;trimmomatic PE rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2&gt; trimmedReads/{}trimming.log&quot;</span></span>
+<span id="cb51-30"><a href="methods.html#cb51-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-31"><a href="methods.html#cb51-31" aria-hidden="true" tabindex="-1"></a><span class="co"># The generic trimmomatic command:</span></span>
+<span id="cb51-32"><a href="methods.html#cb51-32" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> trimmomatic-0.39.jar PE inputforward.fq.gz inputreverse.fq.gz outputforwardpaired.fq.gz outputforwardunpaired.fq.gz outputreversepaired.fq.gz outputreverseunpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36</span></code></pre></div>
 
 </div>
             </section>

@@ -3,33 +3,36 @@
 ## Anaconda set up,  Robust Data Science Environment with Miniconda and Conda-Forge.  
 
 **Anaconda set up**
-<iframe width="560" height="315" src="https://youtu.be/ePS6lII4SEg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ePS6lII4SEg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 **Bioinformatics - Downloading and Setting Up Conda Environments**.  
-<iframe width="560" height="315" src="https://youtu.be/ef_-BtMtDG0?list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ef_-BtMtDG0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/LV8s7bBgjAk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Quality control & preprocessing of raw reads
 
-**RNA-seq course: Quality control & preprocessing of raw reads**
+**Bioinformatics - SRA Download, QC, and Trimming.**  
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UkrUTgAKFiE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-https://youtu.be/DIik4Xw52iI
-https://youtu.be/DIik4Xw52iI
-https://www.youtube.com/watch?v=DIik4Xw52iI
+**RNA-seq course: Quality control & preprocessing of raw reads**
+`Good explanation of the fastQC html plots`. 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/DIik4Xw52iI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
+
+## Trimmomatic.   
 
 **RNA Sequencing 3: Trimmomatic**  
 `Good explanation of the fastQC html plots`. 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=d3SRyPfj6sY&list=PL010YiUqY7JSvmEPsQmKLuSQyDy-SYuLO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/d3SRyPfj6sY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
-**Bioinformatics - SRA Download, QC, and Trimming.**  
-<iframe width="560" height="315" src="https://youtu.be/UkrUTgAKFiE?list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-## Trimmomatic.   
+**Topic: Metagenomics Lesson 2 Demo 2.2 - Trimmomatic**
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Q4UU6k13090" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
+
 
 ## Building Genome Index and Aligning with STAR  
 

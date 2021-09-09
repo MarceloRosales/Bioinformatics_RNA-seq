@@ -13,6 +13,7 @@ get-the-sample-files.
 starting-to-analize-fastq.gz-files
 trimming-with-trimmomatic
 using-star-to-map-genes
+using-star-1
 wgcna-rna-seq-blog
 WGCNA
 wgcna-rpackage-installation-procedure.
@@ -40,7 +41,7 @@ multiqc
 trimming-with-trimmomatic-1
 alignment
 using-tophat-1
-using-star-1
+using-star-2
 assembling-transcripts-with-cufflinks
 checking-for-contamination
 phix-contamination

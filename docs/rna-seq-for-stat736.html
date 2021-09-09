@@ -162,6 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3.7" data-path="index.html"><a href="index.html#trimming-with-trimmomatic"><i class="fa fa-check"></i><b>1.3.7</b> Trimming with Trimmomatic</a></li>
 <li class="chapter" data-level="1.3.8" data-path="index.html"><a href="index.html#using-star-to-map-genes"><i class="fa fa-check"></i><b>1.3.8</b> Using STAR to map genes</a></li>
 </ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#using-star-1"><i class="fa fa-check"></i><b>1.4</b> Using Star</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html"><i class="fa fa-check"></i><b>2</b> WGCNA RNA-seq Blog</a>
 <ul>
@@ -444,7 +445,7 @@ IR
 <div class="sourceCode" id="cb73"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb73-1"><a href="rna-seq-for-stat736.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/miniconda2/bin/tophat</span> <span class="at">--no-converage-search</span> <span class="at">-p</span> 20 <span class="at">-G</span> Mus_musculus/NCBI/build37.2/Annotation/Archives/archive-2015-07-17-14-32-40/Genes/genes.gtf <span class="at">-0</span> 770_thout ./Index/genome 770_fp.fq.gz 770_rp.fq.gz 770_fu.fq 770_ru.fq</span></code></pre></div>
 <p>This run took almost 3 hours to complete.. Running with 80 cores rather than 20 cores took just 4 minutes less, so the whole process must be limited by a single core and the core clock speed. The process does use close to 8,000% at its peak so there is a benefit to multicore, just isn’t very scalable.</p>
 </div>
-<div id="using-star-1" class="section level4" number="7.2.5.2">
+<div id="using-star-2" class="section level4" number="7.2.5.2">
 <h4><span class="header-section-number">7.2.5.2</span> Using STAR</h4>
 <p>STAR can be installed the same way as the previous programs with <strong>conda install</strong> (<strong><em>conda install -c bioconda star</em></strong>). In order to run STAR, we need to creaate indices just like with tophat, but STAR has this built in. I’m going to be using the same genome and GTF file as previously downloaded, but Dr. Ge uses a different zipped genome from the <em>gencode</em> database.</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb74-1"><a href="rna-seq-for-stat736.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/miniconda2/bin/STAR</span> <span class="dt">\</span></span>

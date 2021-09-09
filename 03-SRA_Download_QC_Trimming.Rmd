@@ -174,7 +174,8 @@ From all the code typed, there will be 5 outputs to be loged, ....
 Since this takes really long time, and option will be to do a cat with the reads and do 4 jobs at a time. 
 
 For my files..??
-```{bash, eval=FALSE}
+```{bash, eval=FALSE} 
+# Not working
 cat Filename.txt | parallel -j 4 "trimmomatic PE -threads 5 rawReads/{}_R1_001.fastq.gz rawReads/{}_R2_001.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRALING:3 MINLEN:36 2> trimmedReads/{}trimming.log"
 ```
 
@@ -191,4 +192,36 @@ Conda was used again to run Trimmomatic. This isn't as easy as using the wildcar
 
 ```{bash, eval=FALSE}
 ~/miniconda2/bin/trimmomatic PE SRR2121770_1.fastq.gz SRR2121770_2.fastq.gz 770_fp.fq.gz 770_fu.fq.gz 770_rp.fq.gz 770_ru.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRALING:3 MINLEN:36 &
+```
+
+
+Finally for this trial I used:   
+```{bash, eval=FALSE}
+# Sample 1 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)
+
+trimmomatic PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log
+
+# Sample 2 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)
+trimmomatic PE rawReads/mPDL_RNA7D_Ko2_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko2_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko2_S1_L001_R2_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2> trimmedReads/mPDL_RNA7D_Ko2_S1_L001trimming.log
+```
+
+
+Pipe line code for automatic file loading to trimmomatic still not successfully tested.  
+Come back to this later.  
+```{bash, eval=FALSE}
+# Pipe and loop for all files.
+cat filenames.txt | parallel -j 4 "trimmomatic PE rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2> trimmedReads/{}trimming.log" #Not successful.
+```
+
+Finally Performe the 
+
+
+
+
+
+```{bash, eval=FALSE}
+```
+
+
+```{bash, eval=FALSE}
 ```

@@ -26,6 +26,7 @@ trimmomatic
 methods
 youtube-references.
 trimmomatic.
+building-genome-index-and-aligning-with-star
 final-words
 rna-seq-for-stat736
 background

@@ -1,6 +1,13 @@
 # Methods
 
 We describe our methods in this chapter.
+
+Set Environment
+QC/multiqc of raw Reads
+Trimming with Trimmomatic
+QC/multiqc of trimmed Reads
+Genome Index and Aligning with STAR
+
 ```{bash, eval=FALSE}
 # For the rna-seq_test environment. 
 . /usr/local/anaconda3/bin/activate && conda activate /usr/local/anaconda3/envs/rna-seq_test
@@ -47,7 +54,25 @@ trimmomatic PE rawReads/mPDL_RNA7D_Ko2_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_R
 cat filenames.txt | parallel -j 4 "trimmomatic PE rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2> trimmedReads/{}trimming.log" #Not successful. 
 
 
-mkdir trimmedReadsQC
+# In TrimmedRead run multiqc
+
+ls
+
+ multiqc .
+
+# fastQC of trimmed files again?
+mkdir trimmedFastQC
+
+# rm -d trimmedFastQC # Make sure folder is in main folder, if not delete
+
+# Run fastqc... Trimmed files have no file extension. Why???
+fastqc trimmedReads/* -o trimmedFastQC
+
+# .zip and qc html files will be created. Run multiqc
+cd trimmedFastQC
+
+multiqc .
+
 
 
 

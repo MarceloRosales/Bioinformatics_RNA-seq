@@ -185,8 +185,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
 <li class="chapter" data-level="5" data-path="youtube-references-.html"><a href="youtube-references-.html"><i class="fa fa-check"></i><b>5</b> Youtube references.</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="youtube-references-.html"><a href="youtube-references-.html#trimmomatic."><i class="fa fa-check"></i><b>5.1</b> Trimmomatic.</a></li>
-<li class="chapter" data-level="5.2" data-path="youtube-references-.html"><a href="youtube-references-.html#building-genome-index-and-aligning-with-star"><i class="fa fa-check"></i><b>5.2</b> Building Genome Index and Aligning with STAR</a></li>
+<li class="chapter" data-level="5.1" data-path="youtube-references-.html"><a href="youtube-references-.html#anaconda-set-up-robust-data-science-environment-with-miniconda-and-conda-forge."><i class="fa fa-check"></i><b>5.1</b> Anaconda set up, Robust Data Science Environment with Miniconda and Conda-Forge.</a></li>
+<li class="chapter" data-level="5.2" data-path="youtube-references-.html"><a href="youtube-references-.html#quality-control-preprocessing-of-raw-reads"><i class="fa fa-check"></i><b>5.2</b> Quality control &amp; preprocessing of raw reads</a></li>
+<li class="chapter" data-level="5.3" data-path="youtube-references-.html"><a href="youtube-references-.html#trimmomatic."><i class="fa fa-check"></i><b>5.3</b> Trimmomatic.</a></li>
+<li class="chapter" data-level="5.4" data-path="youtube-references-.html"><a href="youtube-references-.html#building-genome-index-and-aligning-with-star"><i class="fa fa-check"></i><b>5.4</b> Building Genome Index and Aligning with STAR</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
 <li class="chapter" data-level="7" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html"><i class="fa fa-check"></i><b>7</b> RNA Seq for STAT736</a>
@@ -410,9 +412,24 @@ Conda was used again to run Trimmomatic. This isn’t as easy as using the wildc
 Come back to this later.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="sra-download-qc-and-trimming.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pipe and loop for all files.</span></span>
 <span id="cb54-2"><a href="sra-download-qc-and-trimming.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames.txt <span class="kw">|</span> <span class="ex">parallel</span> <span class="at">-j</span> 4 <span class="st">&quot;trimmomatic PE rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2&gt; trimmedReads/{}trimming.log&quot;</span> <span class="co">#Not successful.</span></span></code></pre></div>
-<p>Finally Performe the</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
-<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
+<p>Finally re-run the fastqc and multiqc of the trimmed data.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="sra-download-qc-and-trimming.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In TrimmedRead folder</span></span>
+<span id="cb55-2"><a href="sra-download-qc-and-trimming.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
+<span id="cb55-3"><a href="sra-download-qc-and-trimming.html#cb55-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">multiqc</span> .</span></code></pre></div>
+<p>This will take all the .log files created in by the the TruSeq3-PE-2.fa trimmed data.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="sra-download-qc-and-trimming.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fastQC of trimmed files again?</span></span>
+<span id="cb56-2"><a href="sra-download-qc-and-trimming.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> trimmedFastQC</span>
+<span id="cb56-3"><a href="sra-download-qc-and-trimming.html#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="sra-download-qc-and-trimming.html#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co"># rm -d trimmedFastQC # Make sure folder is in main folder, if not delete</span></span>
+<span id="cb56-5"><a href="sra-download-qc-and-trimming.html#cb56-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-6"><a href="sra-download-qc-and-trimming.html#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Run fastqc... Trimmed files have no file extension. Why???</span></span>
+<span id="cb56-7"><a href="sra-download-qc-and-trimming.html#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> trimmedReads/<span class="pp">*</span> <span class="at">-o</span> trimmedFastQC</span>
+<span id="cb56-8"><a href="sra-download-qc-and-trimming.html#cb56-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-9"><a href="sra-download-qc-and-trimming.html#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="co"># .zip and qc html files will be created. Run multiqc</span></span>
+<span id="cb56-10"><a href="sra-download-qc-and-trimming.html#cb56-10" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> trimmedFastQC</span>
+<span id="cb56-11"><a href="sra-download-qc-and-trimming.html#cb56-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-12"><a href="sra-download-qc-and-trimming.html#cb56-12" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> .</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
 
 </div>
 </div>

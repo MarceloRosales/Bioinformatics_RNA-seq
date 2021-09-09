@@ -26,6 +26,8 @@ sra-download-qc-and-trimming
 trimmomatic
 methods
 youtube-references.
+anaconda-set-up-robust-data-science-environment-with-miniconda-and-conda-forge.
+quality-control-preprocessing-of-raw-reads
 trimmomatic.
 building-genome-index-and-aligning-with-star
 final-words

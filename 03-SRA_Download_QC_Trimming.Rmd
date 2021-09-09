@@ -213,13 +213,30 @@ Come back to this later.
 cat filenames.txt | parallel -j 4 "trimmomatic PE rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2> trimmedReads/{}trimming.log" #Not successful.
 ```
 
-Finally Performe the 
-
-
-
-
+Finally re-run the fastqc and multiqc of the trimmed data.  
 
 ```{bash, eval=FALSE}
+# In TrimmedRead folder
+ls
+ multiqc .
+```
+
+This will take all the .log files created in by the the TruSeq3-PE-2.fa trimmed data.
+
+```{bash, eval=FALSE}
+# fastQC of trimmed files again?
+mkdir trimmedFastQC
+
+# rm -d trimmedFastQC # Make sure folder is in main folder, if not delete
+
+# Run fastqc... Trimmed files have no file extension. Why???
+fastqc trimmedReads/* -o trimmedFastQC
+
+# .zip and qc html files will be created. Run multiqc
+cd trimmedFastQC
+
+multiqc .
+
 ```
 
 

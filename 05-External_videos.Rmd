@@ -2,7 +2,7 @@
 
 ## Anaconda set up,  Robust Data Science Environment with Miniconda and Conda-Forge.  
 
-**Anaconda set up**
+**Anaconda set up**   
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ePS6lII4SEg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
@@ -16,8 +16,8 @@
 **Bioinformatics - SRA Download, QC, and Trimming.**  
 <iframe width="560" height="315" src="https://www.youtube.com/embed/UkrUTgAKFiE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-**RNA-seq course: Quality control & preprocessing of raw reads**
-`Good explanation of the fastQC html plots`. 
+**RNA-seq course: Quality control & preprocessing of raw reads**  
+`Good explanation of the fastQC html plots`.   
 <iframe width="560" height="315" src="https://www.youtube.com/embed/DIik4Xw52iI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
@@ -26,11 +26,11 @@
 ## Trimmomatic.   
 
 **RNA Sequencing 3: Trimmomatic**  
-`Good explanation of the fastQC html plots`. 
+`Good explanation of the fastQC html plots`.   
 <iframe width="560" height="315" src="https://www.youtube.com/embed/d3SRyPfj6sY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
-**Topic: Metagenomics Lesson 2 Demo 2.2 - Trimmomatic**
+**Topic: Metagenomics Lesson 2 Demo 2.2 - Trimmomatic**   
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Q4UU6k13090" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
 
 

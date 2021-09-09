@@ -1,0 +1,54 @@
+# Methods
+
+We describe our methods in this chapter.
+```{bash, eval=FALSE}
+# For the rna-seq_test environment. 
+. /usr/local/anaconda3/bin/activate && conda activate /usr/local/anaconda3/envs/rna-seq_test
+
+
+cd "/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02"
+
+mkdir rawFastQC 
+
+fastqc -t 64 rawReads/*fastq.gz -o rawFastQC
+fastqc rawReads/*fastq.gz -o rawFastQC
+
+cd rawFastQC
+ls
+
+multiqc .
+ls 
+
+
+cd..
+
+mkdir trimmedReads
+
+cp /usr/local/anaconda3/envs/rna-seq_test/share/trimmomatic-0.39-2/adapters/TruSeq3-PE-2.fa .
+
+
+# Run Trimmomatic 
+
+# The generic trimmomatic command:
+java -jar trimmomatic-0.39.jar PE inputforward.fq.gz inputreverse.fq.gz outputforwardpaired.fq.gz outputforwardunpaired.fq.gz outputreversepaired.fq.gz outputreverseunpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36
+
+# Try 03 SUCCESS!!!?
+trimmomatic PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log
+
+
+# Sample 1 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)
+
+trimmomatic PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log
+
+# Sample 2 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)
+trimmomatic PE rawReads/mPDL_RNA7D_Ko2_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko2_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko2_S1_L001_R2_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2> trimmedReads/mPDL_RNA7D_Ko2_S1_L001trimming.log
+
+# Pipe and loop for all files.
+cat filenames.txt | parallel -j 4 "trimmomatic PE rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2> trimmedReads/{}trimming.log" #Not successful. 
+
+
+mkdir trimmedReadsQC
+
+
+
+```

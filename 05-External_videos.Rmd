@@ -36,4 +36,5 @@
 
 ## Building Genome Index and Aligning with STAR  
 
+**Bioinformatics - Building Genome Index and Aligning with STAR**   
 <iframe width="560" height="315" src="https://www.youtube.com/embed/7LK-FtX6Qbo?list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

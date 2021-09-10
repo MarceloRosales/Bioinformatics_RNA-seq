@@ -181,6 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="sra-download-qc-and-trimming.html"><a href="sra-download-qc-and-trimming.html"><i class="fa fa-check"></i><b>3</b> SRA Download, QC, and Trimming</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="sra-download-qc-and-trimming.html"><a href="sra-download-qc-and-trimming.html#trimmomatic"><i class="fa fa-check"></i><b>3.1</b> Trimmomatic</a></li>
+<li class="chapter" data-level="3.2" data-path="sra-download-qc-and-trimming.html"><a href="sra-download-qc-and-trimming.html#indexing-with-star"><i class="fa fa-check"></i><b>3.2</b> Indexing with STAR</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
 <li class="chapter" data-level="5" data-path="youtube-references-.html"><a href="youtube-references-.html"><i class="fa fa-check"></i><b>5</b> Youtube references.</a>
@@ -259,79 +260,79 @@ QC/multiqc of raw Reads
 Trimming with Trimmomatic
 QC/multiqc of trimmed Reads
 Genome Index and Aligning with STAR</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="methods.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some git preferences fof git contributions.  </span></span>
-<span id="cb58-2"><a href="methods.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
-<span id="cb58-3"><a href="methods.html#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--list</span></span>
-<span id="cb58-4"><a href="methods.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co"># set git email</span></span>
-<span id="cb58-5"><a href="methods.html#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config user.email <span class="st">&quot;email@example.com&quot;</span></span>
-<span id="cb58-6"><a href="methods.html#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="co"># confirm emal</span></span>
-<span id="cb58-7"><a href="methods.html#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email</span>
-<span id="cb58-8"><a href="methods.html#cb58-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-9"><a href="methods.html#cb58-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-10"><a href="methods.html#cb58-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-11"><a href="methods.html#cb58-11" aria-hidden="true" tabindex="-1"></a><span class="co"># For the rna-seq_test environment. </span></span>
-<span id="cb58-12"><a href="methods.html#cb58-12" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> /usr/local/anaconda3/bin/activate <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
-<span id="cb58-13"><a href="methods.html#cb58-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-14"><a href="methods.html#cb58-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-15"><a href="methods.html#cb58-15" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02&quot;</span></span>
-<span id="cb58-16"><a href="methods.html#cb58-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-17"><a href="methods.html#cb58-17" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> rawFastQC </span>
-<span id="cb58-18"><a href="methods.html#cb58-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-19"><a href="methods.html#cb58-19" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">-t</span> 64 rawReads/<span class="pp">*</span>fastq.gz <span class="at">-o</span> rawFastQC</span>
-<span id="cb58-20"><a href="methods.html#cb58-20" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> rawReads/<span class="pp">*</span>fastq.gz <span class="at">-o</span> rawFastQC</span>
-<span id="cb58-21"><a href="methods.html#cb58-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-22"><a href="methods.html#cb58-22" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> rawFastQC</span>
-<span id="cb58-23"><a href="methods.html#cb58-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
-<span id="cb58-24"><a href="methods.html#cb58-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-25"><a href="methods.html#cb58-25" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> .</span>
-<span id="cb58-26"><a href="methods.html#cb58-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> </span>
-<span id="cb58-27"><a href="methods.html#cb58-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-28"><a href="methods.html#cb58-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-29"><a href="methods.html#cb58-29" aria-hidden="true" tabindex="-1"></a><span class="ex">cd..</span></span>
-<span id="cb58-30"><a href="methods.html#cb58-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-31"><a href="methods.html#cb58-31" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> trimmedReads</span>
-<span id="cb58-32"><a href="methods.html#cb58-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-33"><a href="methods.html#cb58-33" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /usr/local/anaconda3/envs/rna-seq_test/share/trimmomatic-0.39-2/adapters/TruSeq3-PE-2.fa .</span>
-<span id="cb58-34"><a href="methods.html#cb58-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-35"><a href="methods.html#cb58-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-36"><a href="methods.html#cb58-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Trimmomatic </span></span>
-<span id="cb58-37"><a href="methods.html#cb58-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-38"><a href="methods.html#cb58-38" aria-hidden="true" tabindex="-1"></a><span class="co"># The generic trimmomatic command:</span></span>
-<span id="cb58-39"><a href="methods.html#cb58-39" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> trimmomatic-0.39.jar PE inputforward.fq.gz inputreverse.fq.gz outputforwardpaired.fq.gz outputforwardunpaired.fq.gz outputreversepaired.fq.gz outputreverseunpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36</span>
-<span id="cb58-40"><a href="methods.html#cb58-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-41"><a href="methods.html#cb58-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Try 03 SUCCESS!!!?</span></span>
-<span id="cb58-42"><a href="methods.html#cb58-42" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz <span class="at">-baseout</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="dv">2</span><span class="op">&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span>
-<span id="cb58-43"><a href="methods.html#cb58-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-44"><a href="methods.html#cb58-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-45"><a href="methods.html#cb58-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample 1 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)</span></span>
-<span id="cb58-46"><a href="methods.html#cb58-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-47"><a href="methods.html#cb58-47" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz <span class="at">-baseout</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="dv">2</span><span class="op">&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span>
-<span id="cb58-48"><a href="methods.html#cb58-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-49"><a href="methods.html#cb58-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample 2 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)</span></span>
-<span id="cb58-50"><a href="methods.html#cb58-50" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko2_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko2_S1_L001_R2_001_2.fastq.gz <span class="at">-baseout</span> trimmedReads/mPDL_RNA7D_Ko2_S1_L001_R2_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="dv">2</span><span class="op">&gt;</span> trimmedReads/mPDL_RNA7D_Ko2_S1_L001trimming.log</span>
-<span id="cb58-51"><a href="methods.html#cb58-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-52"><a href="methods.html#cb58-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Pipe and loop for all files.</span></span>
-<span id="cb58-53"><a href="methods.html#cb58-53" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames.txt <span class="kw">|</span> <span class="ex">parallel</span> <span class="at">-j</span> 4 <span class="st">&quot;trimmomatic PE rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2&gt; trimmedReads/{}trimming.log&quot;</span> <span class="co">#Not successful. </span></span>
-<span id="cb58-54"><a href="methods.html#cb58-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-55"><a href="methods.html#cb58-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-56"><a href="methods.html#cb58-56" aria-hidden="true" tabindex="-1"></a><span class="co"># In TrimmedRead run multiqc</span></span>
-<span id="cb58-57"><a href="methods.html#cb58-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-58"><a href="methods.html#cb58-58" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
-<span id="cb58-59"><a href="methods.html#cb58-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-60"><a href="methods.html#cb58-60" aria-hidden="true" tabindex="-1"></a> <span class="ex">multiqc</span> .</span>
-<span id="cb58-61"><a href="methods.html#cb58-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-62"><a href="methods.html#cb58-62" aria-hidden="true" tabindex="-1"></a><span class="co"># fastQC of trimmed files again?</span></span>
-<span id="cb58-63"><a href="methods.html#cb58-63" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> trimmedFastQC</span>
-<span id="cb58-64"><a href="methods.html#cb58-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-65"><a href="methods.html#cb58-65" aria-hidden="true" tabindex="-1"></a><span class="co"># rm -d trimmedFastQC # Make sure folder is in main folder, if not delete</span></span>
-<span id="cb58-66"><a href="methods.html#cb58-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-67"><a href="methods.html#cb58-67" aria-hidden="true" tabindex="-1"></a><span class="co"># Run fastqc... Trimmed files have no file extension. Why???</span></span>
-<span id="cb58-68"><a href="methods.html#cb58-68" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> trimmedReads/<span class="pp">*</span> <span class="at">-o</span> trimmedFastQC</span>
-<span id="cb58-69"><a href="methods.html#cb58-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-70"><a href="methods.html#cb58-70" aria-hidden="true" tabindex="-1"></a><span class="co"># .zip and qc html files will be created. Run multiqc</span></span>
-<span id="cb58-71"><a href="methods.html#cb58-71" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> trimmedFastQC</span>
-<span id="cb58-72"><a href="methods.html#cb58-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-73"><a href="methods.html#cb58-73" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> .</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="methods.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some git preferences fof git contributions.  </span></span>
+<span id="cb59-2"><a href="methods.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<span id="cb59-3"><a href="methods.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--list</span></span>
+<span id="cb59-4"><a href="methods.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># set git email</span></span>
+<span id="cb59-5"><a href="methods.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config user.email <span class="st">&quot;email@example.com&quot;</span></span>
+<span id="cb59-6"><a href="methods.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co"># confirm emal</span></span>
+<span id="cb59-7"><a href="methods.html#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email</span>
+<span id="cb59-8"><a href="methods.html#cb59-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-9"><a href="methods.html#cb59-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-10"><a href="methods.html#cb59-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-11"><a href="methods.html#cb59-11" aria-hidden="true" tabindex="-1"></a><span class="co"># For the rna-seq_test environment. </span></span>
+<span id="cb59-12"><a href="methods.html#cb59-12" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> /usr/local/anaconda3/bin/activate <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
+<span id="cb59-13"><a href="methods.html#cb59-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-14"><a href="methods.html#cb59-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-15"><a href="methods.html#cb59-15" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02&quot;</span></span>
+<span id="cb59-16"><a href="methods.html#cb59-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-17"><a href="methods.html#cb59-17" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> rawFastQC </span>
+<span id="cb59-18"><a href="methods.html#cb59-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-19"><a href="methods.html#cb59-19" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">-t</span> 64 rawReads/<span class="pp">*</span>fastq.gz <span class="at">-o</span> rawFastQC</span>
+<span id="cb59-20"><a href="methods.html#cb59-20" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> rawReads/<span class="pp">*</span>fastq.gz <span class="at">-o</span> rawFastQC</span>
+<span id="cb59-21"><a href="methods.html#cb59-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-22"><a href="methods.html#cb59-22" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> rawFastQC</span>
+<span id="cb59-23"><a href="methods.html#cb59-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
+<span id="cb59-24"><a href="methods.html#cb59-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-25"><a href="methods.html#cb59-25" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> .</span>
+<span id="cb59-26"><a href="methods.html#cb59-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> </span>
+<span id="cb59-27"><a href="methods.html#cb59-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-28"><a href="methods.html#cb59-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-29"><a href="methods.html#cb59-29" aria-hidden="true" tabindex="-1"></a><span class="ex">cd..</span></span>
+<span id="cb59-30"><a href="methods.html#cb59-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-31"><a href="methods.html#cb59-31" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> trimmedReads</span>
+<span id="cb59-32"><a href="methods.html#cb59-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-33"><a href="methods.html#cb59-33" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /usr/local/anaconda3/envs/rna-seq_test/share/trimmomatic-0.39-2/adapters/TruSeq3-PE-2.fa .</span>
+<span id="cb59-34"><a href="methods.html#cb59-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-35"><a href="methods.html#cb59-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-36"><a href="methods.html#cb59-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Trimmomatic </span></span>
+<span id="cb59-37"><a href="methods.html#cb59-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-38"><a href="methods.html#cb59-38" aria-hidden="true" tabindex="-1"></a><span class="co"># The generic trimmomatic command:</span></span>
+<span id="cb59-39"><a href="methods.html#cb59-39" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> trimmomatic-0.39.jar PE inputforward.fq.gz inputreverse.fq.gz outputforwardpaired.fq.gz outputforwardunpaired.fq.gz outputreversepaired.fq.gz outputreverseunpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36</span>
+<span id="cb59-40"><a href="methods.html#cb59-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-41"><a href="methods.html#cb59-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Try 03 SUCCESS!!!?</span></span>
+<span id="cb59-42"><a href="methods.html#cb59-42" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz <span class="at">-baseout</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="dv">2</span><span class="op">&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span>
+<span id="cb59-43"><a href="methods.html#cb59-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-44"><a href="methods.html#cb59-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-45"><a href="methods.html#cb59-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample 1 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)</span></span>
+<span id="cb59-46"><a href="methods.html#cb59-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-47"><a href="methods.html#cb59-47" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz <span class="at">-baseout</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="dv">2</span><span class="op">&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span>
+<span id="cb59-48"><a href="methods.html#cb59-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-49"><a href="methods.html#cb59-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample 2 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)</span></span>
+<span id="cb59-50"><a href="methods.html#cb59-50" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko2_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko2_S1_L001_R2_001_2.fastq.gz <span class="at">-baseout</span> trimmedReads/mPDL_RNA7D_Ko2_S1_L001_R2_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="dv">2</span><span class="op">&gt;</span> trimmedReads/mPDL_RNA7D_Ko2_S1_L001trimming.log</span>
+<span id="cb59-51"><a href="methods.html#cb59-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-52"><a href="methods.html#cb59-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Pipe and loop for all files.</span></span>
+<span id="cb59-53"><a href="methods.html#cb59-53" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames.txt <span class="kw">|</span> <span class="ex">parallel</span> <span class="at">-j</span> 4 <span class="st">&quot;trimmomatic PE rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2&gt; trimmedReads/{}trimming.log&quot;</span> <span class="co">#Not successful. </span></span>
+<span id="cb59-54"><a href="methods.html#cb59-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-55"><a href="methods.html#cb59-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-56"><a href="methods.html#cb59-56" aria-hidden="true" tabindex="-1"></a><span class="co"># In TrimmedRead run multiqc</span></span>
+<span id="cb59-57"><a href="methods.html#cb59-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-58"><a href="methods.html#cb59-58" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
+<span id="cb59-59"><a href="methods.html#cb59-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-60"><a href="methods.html#cb59-60" aria-hidden="true" tabindex="-1"></a> <span class="ex">multiqc</span> .</span>
+<span id="cb59-61"><a href="methods.html#cb59-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-62"><a href="methods.html#cb59-62" aria-hidden="true" tabindex="-1"></a><span class="co"># fastQC of trimmed files again?</span></span>
+<span id="cb59-63"><a href="methods.html#cb59-63" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> trimmedFastQC</span>
+<span id="cb59-64"><a href="methods.html#cb59-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-65"><a href="methods.html#cb59-65" aria-hidden="true" tabindex="-1"></a><span class="co"># rm -d trimmedFastQC # Make sure folder is in main folder, if not delete</span></span>
+<span id="cb59-66"><a href="methods.html#cb59-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-67"><a href="methods.html#cb59-67" aria-hidden="true" tabindex="-1"></a><span class="co"># Run fastqc... Trimmed files have no file extension. Why???</span></span>
+<span id="cb59-68"><a href="methods.html#cb59-68" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> trimmedReads/<span class="pp">*</span> <span class="at">-o</span> trimmedFastQC</span>
+<span id="cb59-69"><a href="methods.html#cb59-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-70"><a href="methods.html#cb59-70" aria-hidden="true" tabindex="-1"></a><span class="co"># .zip and qc html files will be created. Run multiqc</span></span>
+<span id="cb59-71"><a href="methods.html#cb59-71" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> trimmedFastQC</span>
+<span id="cb59-72"><a href="methods.html#cb59-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-73"><a href="methods.html#cb59-73" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> .</span></code></pre></div>
 
 </div>
             </section>

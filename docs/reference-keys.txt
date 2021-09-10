@@ -24,6 +24,7 @@ rna-seq-analisys-with-kakus-data-sample.
 data-analysis.
 sra-download-qc-and-trimming
 trimmomatic
+indexing-with-star
 methods
 youtube-references.
 anaconda-set-up-robust-data-science-environment-with-miniconda-and-conda-forge.

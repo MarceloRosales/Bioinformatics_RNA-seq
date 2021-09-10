@@ -221,7 +221,9 @@ ls
  multiqc .
 ```
 
-This will take all the .log files created in by the the TruSeq3-PE-2.fa trimmed data.
+This will take all the .log files created in by the  TruSeq3-PE-2.fa trimmed data.
+
+Note: Seems like multiqc can take all html and log files and combine the information with in them in a single html report file. 
 
 ```{bash, eval=FALSE}
 # fastQC of trimmed files again?
@@ -239,6 +241,44 @@ multiqc .
 
 ```
 
+## Indexing with STAR
+
+STAR is a tool that allow us to build an index of the mouse genome; then, with those index files we can then map the reads against the genome and find the location of each of those reads where they are mapped in the genome. Once we have that, the we can do a the **"read count"**  
+
+For more information see 
+
+[STAR: ultrafast universal RNA-seq aligner]
+(https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3530905/)
+STAR Manual [download link](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbEdRZzNEMVdieXRVeDhTekJsRUVJc3Z6a1lnd3xBQ3Jtc0trM0tNRm5hS19salF6MWZjWXVCQWh6aDFKS21ZNVBtTEM5a3p6YlRfa045OHFXZXhaaEROM0xRa0xSVVRsbDMxR0dOdHdBejFCUVAxSGtHODZpUEdWSWI5SVJsdTI0SzdUMDBjSzdqdkxuRTVVZmVmWQ&q=https%3A%2F%2Fraw.githubusercontent.com%2Falexdobin%2FSTAR%2Fmaster%2Fdoc%2FSTARmanual.pdf).  [PDF file in local HD](file:///Volumes/homes/RosalesJM/SynDS220/NiigataU/Genewiz/Trial01/STARmanual.pdf)  
+[Link to manual page](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf).  
+
+1. Download the Mouse genome form the NCBI page.  
+[Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file](### Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file.)  
+1. Create the index. 
+
+```{bash, eval=FALSE}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##End
 
 ```{bash, eval=FALSE}
 ```

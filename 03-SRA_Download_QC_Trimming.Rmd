@@ -250,10 +250,15 @@ For more information see
 [STAR: ultrafast universal RNA-seq aligner]
 (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3530905/)
 STAR Manual [download link](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbEdRZzNEMVdieXRVeDhTekJsRUVJc3Z6a1lnd3xBQ3Jtc0trM0tNRm5hS19salF6MWZjWXVCQWh6aDFKS21ZNVBtTEM5a3p6YlRfa045OHFXZXhaaEROM0xRa0xSVVRsbDMxR0dOdHdBejFCUVAxSGtHODZpUEdWSWI5SVJsdTI0SzdUMDBjSzdqdkxuRTVVZmVmWQ&q=https%3A%2F%2Fraw.githubusercontent.com%2Falexdobin%2FSTAR%2Fmaster%2Fdoc%2FSTARmanual.pdf).  [PDF file in local HD](file:///Volumes/homes/RosalesJM/SynDS220/NiigataU/Genewiz/Trial01/STARmanual.pdf)  
-[Link to manual page](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf).  
+[Link to manual page](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf){target="_blank"}.  
 
 1. Download the Mouse genome form the NCBI page.  
-[Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file](https://marcelorosales.github.io/Bioinformatics_RNA-seq/index.html#custompersonal-way-to-download-the-mus_musculus_ncbi_build37.2.tar.gz-file.)  
+See [Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file](#Mus_musculus_NCBI_build37.2) Section, or open section in a [new tab](https://marcelorosales.github.io/Bioinformatics_RNA-seq/index.html#custompersonal-way-to-download-the-mus_musculus_ncbi_build37.2.tar.gz-file){target="_blank"}  
+
+[Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file](#Mus-musculus-NCBI-build37-2)  
+
+See \@ref(Mus-musculus-NCBI-build37-2)  
+
 1. Create the index. 
 
 ```{bash, eval=FALSE}

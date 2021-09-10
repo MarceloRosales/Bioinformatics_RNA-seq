@@ -340,7 +340,7 @@ With the index files made, we can start aligning with STAR. It's important here 
 > Complicated.!!!!!!!!!!!!!!!!!!!!!!!   
 
 
-### Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file.   
+### Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file.{#Mus-musculus-NCBI-build37-2}
 > Esaest so far.
 
 1. Go to the iGenomes Ready-To-Use Reference Sequences and Annotations from [illumina.](https://support.illumina.com/sequencing/sequencing_software/igenome.html).  

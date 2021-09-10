@@ -8,7 +8,7 @@ alignment-procedures-and-files.
 using-tophat-early-version
 using-tophat
 using-star
-custompersonal-way-to-download-the-mus_musculus_ncbi_build37.2.tar.gz-file.
+Mus-musculus-NCBI-build37-2
 get-the-sample-files.
 starting-to-analize-fastq.gz-files
 trimming-with-trimmomatic

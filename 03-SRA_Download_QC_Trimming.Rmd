@@ -253,7 +253,7 @@ STAR Manual [download link](https://www.youtube.com/redirect?event=video_descrip
 [Link to manual page](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf).  
 
 1. Download the Mouse genome form the NCBI page.  
-[Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file](### Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file.)  
+[Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file](https://marcelorosales.github.io/Bioinformatics_RNA-seq/index.html#custompersonal-way-to-download-the-mus_musculus_ncbi_build37.2.tar.gz-file.)  
 1. Create the index. 
 
 ```{bash, eval=FALSE}

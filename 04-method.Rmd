@@ -84,8 +84,46 @@ fastqc trimmedReads/* -o trimmedFastQC
 cd trimmedFastQC
 
 multiqc .
+```
 
 
+Alignment with STAR  
+
+1. Download the Mouse genome form the NCBI page.  See \@ref(Mus-musculus-NCBI-build37-2)   
+```{bash, eval=FALSE}
+
+```
 
 
+2. Unzip the tar.gz file. FYI: This processes require a long time.  
+```{bash, eval=FALSE}
+# Check the correct environment.
+. /usr/local/anaconda3/bin/activate && conda activate /usr/local/anaconda3/envs/rna-seq_test
+
+# Check the correct folder/directory.   
+cd "/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/Mus_musculus_NCBI_build37.2.tar.gz"
+
+#Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/Mus_musculus_NCBI_build37.2.tar.gz: Not a directory
+cd "/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/"
+
+# Unzip file
+ tar xvfz Mus_musculus_NCBI_build37.2.tar.gz
+```
+
+3. Confirm that STAR is installed if not Install STAR.  
+```{bash, eval=FALSE}
+# Make sure of enviroment.  
+STAR --help
+
+#If not found install.  
+conda install STAR 
+
+# Make sure is from "bioconda".  Preceed([y]/n)? message.
+y
+
+# Check again. Long list of flags.  
+STAR --help
+
+# Create directory for starIndex. 
+mkdir starIndex
 ```

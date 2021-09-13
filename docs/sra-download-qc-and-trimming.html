@@ -434,6 +434,8 @@ Come back to this later.</p>
 </div>
 <div id="indexing-with-star" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Indexing with STAR</h2>
+<p><strong>Bioinformatics - Building Genome Index and Aligning with STAR</strong><br />
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7LK-FtX6Qbo?list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 <p>STAR is a tool that allow us to build an index of the mouse genome; then, with those index files we can then map the reads against the genome and find the location of each of those reads where they are mapped in the genome. Once we have that, the we can do a the <strong>“read count”</strong></p>
 <p>For more information see</p>
 <p>[STAR: ultrafast universal RNA-seq aligner]
@@ -442,16 +444,80 @@ STAR Manual <a href="https://www.youtube.com/redirect?event=video_description&am
 <a href="https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf" target="_blank">Link to manual page</a>.</p>
 <ol style="list-style-type: decimal">
 <li>Download the Mouse genome form the NCBI page.<br />
-See <a href="#Mus_musculus_NCBI_build37.2">Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file</a> Section, or open section in a <a href="https://marcelorosales.github.io/Bioinformatics_RNA-seq/index.html#custompersonal-way-to-download-the-mus_musculus_ncbi_build37.2.tar.gz-file" target="_blank">new tab</a></li>
+See <a href="index.html#Mus-musculus-NCBI-build37-2">Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file</a> section. (open section in a <a href="https://marcelorosales.github.io/Bioinformatics_RNA-seq/index.html#custompersonal-way-to-download-the-mus_musculus_ncbi_build37.2.tar.gz-file" target="_blank">new tab</a>)</li>
 </ol>
-<p><a href="index.html#Mus-musculus-NCBI-build37-2">Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file</a></p>
 <p>See <a href="index.html#Mus-musculus-NCBI-build37-2">1.3.4</a></p>
-<ol style="list-style-type: decimal">
-<li>Create the index.</li>
+<ol start="2" style="list-style-type: decimal">
+<li>Once file is downloaded, unzip. (It will take a long time)<br />
+Make sure to be in the same folder/directory as the tar.gz file.<br />
+extracted files will be saved in a Mus_musculus folder/directory automatically created.</li>
 </ol>
-<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="sra-download-qc-and-trimming.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the correct environment.</span></span>
+<span id="cb57-2"><a href="sra-download-qc-and-trimming.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> /usr/local/anaconda3/bin/activate <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
+<span id="cb57-3"><a href="sra-download-qc-and-trimming.html#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="sra-download-qc-and-trimming.html#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the correct folder/directory.   </span></span>
+<span id="cb57-5"><a href="sra-download-qc-and-trimming.html#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/Mus_musculus_NCBI_build37.2.tar.gz&quot;</span></span>
+<span id="cb57-6"><a href="sra-download-qc-and-trimming.html#cb57-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-7"><a href="sra-download-qc-and-trimming.html#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="co"># cd &quot;folder path&quot;</span></span>
+<span id="cb57-8"><a href="sra-download-qc-and-trimming.html#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/Mus_musculus_NCBI_build37.2.tar.gz: Not a directory</span></span>
+<span id="cb57-9"><a href="sra-download-qc-and-trimming.html#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/&quot;</span></span>
+<span id="cb57-10"><a href="sra-download-qc-and-trimming.html#cb57-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-11"><a href="sra-download-qc-and-trimming.html#cb57-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Check contents</span></span>
+<span id="cb57-12"><a href="sra-download-qc-and-trimming.html#cb57-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>  </span>
+<span id="cb57-13"><a href="sra-download-qc-and-trimming.html#cb57-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-14"><a href="sra-download-qc-and-trimming.html#cb57-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Unzip file</span></span>
+<span id="cb57-15"><a href="sra-download-qc-and-trimming.html#cb57-15" aria-hidden="true" tabindex="-1"></a> <span class="fu">tar</span> xvfz Mus_musculus_NCBI_build37.2.tar.gz  </span></code></pre></div>
+<p>Tar command info <a href="https://www.interserver.net/tips/kb/use-tar-command-linux-examples/#:~:text=The%20tar%20command%20stands%20for,gzip%2C%20and%20bzip%20in%20Linux.">for linux here</a> and for mac <a href="https://support.apple.com/guide/terminal/compress-and-uncompress-file-archives-apdc52250ee-4659-4751-9a3a-8b7988150530/mac#:~:text=Create%20a%20compressed%20tar%20archive,tar%20command%2C%20then%20press%20Return.&amp;text=The%20z%20flag%20indicates%20that,you%20aren&#39;t%20required%20to.">here</a></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Confirm that STAR is installed if not Install STAR.</li>
+</ol>
+<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="sra-download-qc-and-trimming.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure of enviroment.  </span></span>
+<span id="cb58-2"><a href="sra-download-qc-and-trimming.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> <span class="at">--help</span></span>
+<span id="cb58-3"><a href="sra-download-qc-and-trimming.html#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-4"><a href="sra-download-qc-and-trimming.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co">#If not found install.  </span></span>
+<span id="cb58-5"><a href="sra-download-qc-and-trimming.html#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install STAR </span>
+<span id="cb58-6"><a href="sra-download-qc-and-trimming.html#cb58-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-7"><a href="sra-download-qc-and-trimming.html#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure is from &quot;bioconda&quot;.  Preceed([y]/n)? message.</span></span>
+<span id="cb58-8"><a href="sra-download-qc-and-trimming.html#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="ex">y</span></span>
+<span id="cb58-9"><a href="sra-download-qc-and-trimming.html#cb58-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-10"><a href="sra-download-qc-and-trimming.html#cb58-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Check again. Long list of flags.  </span></span>
+<span id="cb58-11"><a href="sra-download-qc-and-trimming.html#cb58-11" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> <span class="at">--help</span></span>
+<span id="cb58-12"><a href="sra-download-qc-and-trimming.html#cb58-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-13"><a href="sra-download-qc-and-trimming.html#cb58-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a  directory for starIndex.  </span></span>
+<span id="cb58-14"><a href="sra-download-qc-and-trimming.html#cb58-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> starIndex</span>
+<span id="cb58-15"><a href="sra-download-qc-and-trimming.html#cb58-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-16"><a href="sra-download-qc-and-trimming.html#cb58-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Run STAR.<br />
+Make sure that the unzip folder of <strong>Mus_musculus_NCBI_build37.2.tar.gz (Mus_musculus)</strong> is in the same directory as trimmed/environment. Is this necessary???!</li>
+</ol>
+<p>FYI:<br />
+Mus_musculus_NCBI_build37.2.tar.gz zip file is 23.58 GB.<br />
+Mus_musculus unziped folder is 98.77 GB.
+Initially downloaded into: <code>"/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/Mus_musculus_NCBI_build37.2.tar.gz"</code><br />
+Trial analysis forlder in: <code>"/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02"</code></p>
+<p>Mus_musculus unziped folder moved to:
+/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02/Mus_musculus</p>
+<p>Path to <strong>genome.fa</strong> file.<br />
+/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/Mus_musculus/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa</p>
+<p>Path to <strong>genes.gtf</strong> file.<br />
+/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/Mus_musculus/NCBI/build37.2/Annotation/Archives/archive-2015-07-17-14-32-40/Genes/genes.gtf<br />
+However better to use the <strong>folder Shortcut (known as aliases on Mac)</strong> created when unziped. This eliminates the <code>Archives/archive-2015-07-17-14-32-40</code>section of the path. So… use
+/Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="sra-download-qc-and-trimming.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure that the unzip folder of Mus_musculus_NCBI_build37.2.tar.gz (Mus_musculus) is in the same directory as environment/analysis folder in this case:  </span></span>
+<span id="cb59-2"><a href="sra-download-qc-and-trimming.html#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-3"><a href="sra-download-qc-and-trimming.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02/&quot;</span></span>
+<span id="cb59-4"><a href="sra-download-qc-and-trimming.html#cb59-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-5"><a href="sra-download-qc-and-trimming.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Run STAR</span></span>
+<span id="cb59-6"><a href="sra-download-qc-and-trimming.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> <span class="at">--runThreadN</span> 64 <span class="at">--runMode</span> genomeGenerate <span class="at">--genomeDir</span> starIndex <span class="at">--genomeFastaFiles</span> Mus_musculus/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa <span class="at">--sjdbGTFfile</span> Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf</span></code></pre></div>
+<p>These process will take about 15 min or longer depending con computer’s processing power.</p>
+<p>–runThreadN <strong>64</strong>: Number of threads use for processing.<br />
+–runMode <strong>genomeGenerate</strong>: To start star generates the index files therefore genomeGenerate.
+–genomeDir <strong>starIndex</strong>:This is the directory for the star index output (is not the genome FASTA files).
+–genomeFastaFiles <strong>Mus_musculus/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa</strong>: the whole genome of the mouse is in this file.
+–sjdbGTFfile <strong>Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf</strong>: This lets star know that the next file we are going to give it is a GTF file which is the anotation file of all the transcript that we are going to try to identify with our reads. It may not be really necessary, but it is recommended to usefor more accuracy, specially in de novo transcrip discovery, you would use this basically to take all the reads and map them.</p>
 <p>##End</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
 
 </div>
 </div>

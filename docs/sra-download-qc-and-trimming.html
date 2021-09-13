@@ -510,14 +510,74 @@ However better to use the <strong>folder Shortcut (known as aliases on Mac)</str
 <span id="cb59-4"><a href="sra-download-qc-and-trimming.html#cb59-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-5"><a href="sra-download-qc-and-trimming.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Run STAR</span></span>
 <span id="cb59-6"><a href="sra-download-qc-and-trimming.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> <span class="at">--runThreadN</span> 64 <span class="at">--runMode</span> genomeGenerate <span class="at">--genomeDir</span> starIndex <span class="at">--genomeFastaFiles</span> Mus_musculus/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa <span class="at">--sjdbGTFfile</span> Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf</span></code></pre></div>
-<p>These process will take about 15 min or longer depending con computer’s processing power.</p>
-<p>–runThreadN <strong>64</strong>: Number of threads use for processing.<br />
+<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="sra-download-qc-and-trimming.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 12:47:47 ..... started STAR run</span>
+<span id="cb60-2"><a href="sra-download-qc-and-trimming.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 12:47:48 ... starting to generate Genome files</span>
+<span id="cb60-3"><a href="sra-download-qc-and-trimming.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 12:49:24 ..... processing annotations GTF</span>
+<span id="cb60-4"><a href="sra-download-qc-and-trimming.html#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 12:49:40 ... starting to sort Suffix Array. This may take a long time...</span>
+<span id="cb60-5"><a href="sra-download-qc-and-trimming.html#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 12:49:51 ... sorting Suffix Array chunks and saving them to disk...</span>
+<span id="cb60-6"><a href="sra-download-qc-and-trimming.html#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 13:23:01 ... loading chunks from disk, packing SA...</span>
+<span id="cb60-7"><a href="sra-download-qc-and-trimming.html#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 13:48:03 ... finished generating suffix array</span>
+<span id="cb60-8"><a href="sra-download-qc-and-trimming.html#cb60-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 13:48:03 ... generating Suffix Array index</span>
+<span id="cb60-9"><a href="sra-download-qc-and-trimming.html#cb60-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 13:53:59 ... completed Suffix Array index</span>
+<span id="cb60-10"><a href="sra-download-qc-and-trimming.html#cb60-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 13:54:00 ..... inserting junctions into the genome indices</span>
+<span id="cb60-11"><a href="sra-download-qc-and-trimming.html#cb60-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-12"><a href="sra-download-qc-and-trimming.html#cb60-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Try several times but it could not finished correctly, &quot;System run out of application memory. </span></span>
+<span id="cb60-13"><a href="sra-download-qc-and-trimming.html#cb60-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-14"><a href="sra-download-qc-and-trimming.html#cb60-14" aria-hidden="true" tabindex="-1"></a><span class="co"># It is important that the hole process is fully completed.  It takes quite a long time and uses a lot of memory resource.</span></span></code></pre></div>
+<p>Your System Has Run Out of Application Memory on Mac.</p>
+<p>Solutions:
+1. Close unnecessary webpages/programs.<br />
+2. Free up more space on the system HDD (at least 20% of free memory?).<br />
+3. Google chrome application memory leak?. Run task manager and check memory usage.<br />
+4. Check memory pressure (<code>memory pressure</code> command) and double ckeck your free space. Also try running <code>sudo purge</code> from the terminal.
+5. Re-start computer to reset uptime.
+6. Update software.
+7. Reset Mac’s NVRAM and PRAM.
+8. Close chrome and/or Safari.#</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="sra-download-qc-and-trimming.html#cb61-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-2"><a href="sra-download-qc-and-trimming.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> version: 2.7.9a   compiled:  :/Users/cshl/data/STAR/STAR/source</span>
+<span id="cb61-3"><a href="sra-download-qc-and-trimming.html#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 16:19:40 ..... started STAR run</span>
+<span id="cb61-4"><a href="sra-download-qc-and-trimming.html#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 16:19:41 ... starting to generate Genome files</span>
+<span id="cb61-5"><a href="sra-download-qc-and-trimming.html#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 16:21:14 ..... processing annotations GTF</span>
+<span id="cb61-6"><a href="sra-download-qc-and-trimming.html#cb61-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 16:21:28 ... starting to sort Suffix Array. This may take a long time...</span>
+<span id="cb61-7"><a href="sra-download-qc-and-trimming.html#cb61-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 16:21:37 ... sorting Suffix Array chunks and saving them to disk...</span>
+<span id="cb61-8"><a href="sra-download-qc-and-trimming.html#cb61-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 16:53:49 ... loading chunks from disk, packing SA...</span>
+<span id="cb61-9"><a href="sra-download-qc-and-trimming.html#cb61-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:18:12 ... finished generating suffix array</span>
+<span id="cb61-10"><a href="sra-download-qc-and-trimming.html#cb61-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:18:12 ... generating Suffix Array index</span>
+<span id="cb61-11"><a href="sra-download-qc-and-trimming.html#cb61-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:23:21 ... completed Suffix Array index</span>
+<span id="cb61-12"><a href="sra-download-qc-and-trimming.html#cb61-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:23:24 ..... inserting junctions into the genome indices</span>
+<span id="cb61-13"><a href="sra-download-qc-and-trimming.html#cb61-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:25:56 ... writing Genome to disk ...</span>
+<span id="cb61-14"><a href="sra-download-qc-and-trimming.html#cb61-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:27:06 ... writing Suffix Array to disk ...</span>
+<span id="cb61-15"><a href="sra-download-qc-and-trimming.html#cb61-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:36:19 ... writing SAindex to disk</span>
+<span id="cb61-16"><a href="sra-download-qc-and-trimming.html#cb61-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:37:01 ..... finished successfully</span>
+<span id="cb61-17"><a href="sra-download-qc-and-trimming.html#cb61-17" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">rna-seq_test</span><span class="kw">)</span> <span class="ex">MR-MBP20:Trial02</span> marcelorosales$ </span>
+<span id="cb61-18"><a href="sra-download-qc-and-trimming.html#cb61-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-19"><a href="sra-download-qc-and-trimming.html#cb61-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the files were created in the folder.</span></span>
+<span id="cb61-20"><a href="sra-download-qc-and-trimming.html#cb61-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-21"><a href="sra-download-qc-and-trimming.html#cb61-21" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> starIndex</span>
+<span id="cb61-22"><a href="sra-download-qc-and-trimming.html#cb61-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-23"><a href="sra-download-qc-and-trimming.html#cb61-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<p>These process will take about 2 hrs or longer depending con computer’s processing power.</p>
+<p>The optins/flags coded were:<br />
+–runThreadN <strong>64</strong>: Number of threads use for processing.<br />
 –runMode <strong>genomeGenerate</strong>: To start star generates the index files therefore genomeGenerate.
 –genomeDir <strong>starIndex</strong>:This is the directory for the star index output (is not the genome FASTA files).
 –genomeFastaFiles <strong>Mus_musculus/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa</strong>: the whole genome of the mouse is in this file.
 –sjdbGTFfile <strong>Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf</strong>: This lets star know that the next file we are going to give it is a GTF file which is the anotation file of all the transcript that we are going to try to identify with our reads. It may not be really necessary, but it is recommended to usefor more accuracy, specially in de novo transcrip discovery, you would use this basically to take all the reads and map them.</p>
+<p>Whit this files will now map the reads of our samples</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Align reads</li>
+</ol>
+<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="sra-download-qc-and-trimming.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a new directory to target as output directory.</span></span>
+<span id="cb62-2"><a href="sra-download-qc-and-trimming.html#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="sra-download-qc-and-trimming.html#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> starAligned</span>
+<span id="cb62-4"><a href="sra-download-qc-and-trimming.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<p>For aligning there is some issues with the flags <code>command Z cat</code> which tells star tha the files were inputting are zipped.<br />
+The way around it is to (maybe not the best way) gun zip, and the put on the files that we want (treammed reads) in a cat file. (file containig a catalog or list of the files downloaded or to be fed to the application).</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="sra-download-qc-and-trimming.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> Filename.txt <span class="kw">|</span> <span class="ex">parallel</span> <span class="at">-j</span> 1 <span class="st">&quot;gunzip trimmedReads/{}_*P.gz &amp;&amp; </span></span></code></pre></div>
+<p>SAM is human readable, BAM is compress binary version (for CPU to read),</p>
 <p>##End</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
 
 </div>
 </div>

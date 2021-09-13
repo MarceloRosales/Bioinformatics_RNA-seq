@@ -127,3 +127,33 @@ STAR --help
 # Create directory for starIndex. 
 mkdir starIndex
 ```
+
+4. Run STAR
+```{bash, eval=FALSE}
+# Make sure that the unzip folder of Mus_musculus_NCBI_build37.2.tar.gz (Mus_musculus) is in the same directory as environment/analysis folder in this case:  
+
+cd "/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02/"
+
+# Run STAR. Takes long time. wait until  ..... finished successfully message appears. if not rerun again. 
+
+STAR --runThreadN 64 --runMode genomeGenerate --genomeDir starIndex --genomeFastaFiles Mus_musculus/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa --sjdbGTFfile Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf
+
+```
+5. Align reads
+
+```{bash, eval=FALSE}
+# create a new directory
+
+mkdir starAligned
+
+
+
+```
+
+
+
+
+
+
+
+

@@ -1,5 +1,6 @@
 # RNA-Seq-MKdata
 
+## PCA
 ```{r, eval=FALSE}
 # PCA of Raw count file
 # Load the data file (count) --------
@@ -138,7 +139,12 @@ ggplot(data = pca.data_count, aes(x=X, y=Y, label=Sample, color=Sample, fill=Sam
   xlab(paste("PC1 - ", pca.var.per[1], "%", sep = "")) +
   ylab(paste("PC2 - ", pca.var.per[2], "%", sep = "")) +
   ggtitle("PCA Graph prcomp center scaled :120")
+```
 
+## Differential expression
+Top 10 -100 genes
+
+```{r, eval=FALSE}
 # Top 10 genes expresion ------------
 # Lets look at how to use loading scores to determine which genes have the largest effect on where samples are plotted in the PCA plot
 
@@ -193,7 +199,11 @@ write.xlsx(Top100DEgenes_prcomp, file = "~/Box Sync/Niigata Uni Box/Kakenhi/2020
 # install.packages("writexl")
 library("writexl")
 write_xlsx(TopDEgenes_prcomp, "~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/all_raw_count01.xlsx", sheet= top10_genes)
+```
 
+##  RNA-seq (ScienceparkSG)
+
+```{r, eval=FALSE}
 #  RNA-seq (ScienceparkSG) ****** -----------------
 # Metadata table construction -----------------
 # experimental metadata., metadata, cold data file construction.
@@ -671,7 +681,11 @@ res2 <- results(dds3, contrast = c("Genotype",                      # name of th
 all_equal(res, res2)
 
 mcols(res)
+```
 
+## False discovery rates FDR / Benjamini-Hocheberg method
+
+```{r, eval=FALSE}
 # False discovery rates FDR / Benjamini-Hocheberg method ----------
 # Explanation of this method here: https://youtu.be/K8LQSvtjcEo 
 # We can count the number of genes that are differentially regulated at a certain \(\alpha\) level.
@@ -743,11 +757,11 @@ write.xlsx(diff, file = "~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw 
 # # install.packages("writexl")
 # library("writexl")
 # write_xlsx(TopDEgenes_prcomp, "~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/all_raw_count01.xlsx", sheet= top10_genes)
+```
 
+## Volcano plot  
 
-
-
-
+```{r, eval=FALSE}
 # Volcano plot -----------
 # First, we are going to “shrink” the \(\log2\) fold changes to remove the noise associated with fold changes coming from genes with low count levels. Shrinkage of effect size (LFC estimates) is useful for visualization and ranking of genes. This helps to get more meaningful log2 fold changes for all genes independently of their expression level.
 
@@ -787,7 +801,11 @@ EnhancedVolcano(toptable = resLFC,
                 title = "WT vs Ko comparison (fold change cutoff = 2, p-value cutoff = 1e-06)",
                 subtitle = 'Differential expression',
 )
+```
 
+## Heatmap & normalization   
+
+```{r, eval=FALSE}
 # Heatmap --------------------
 
 library(pheatmap)
@@ -947,9 +965,12 @@ pheatmap(counts_scaled_filtered,
          annotation_col = anno_col_info,
          annotation_colors = anno_info_colors,
          main = "Clustering with ward method")
+```
 
 
+## MA plots  
 
+```{r, eval=FALSE}
 # MA plots -------
 
 plotMA(dds3, alpha = 0.01)
@@ -967,8 +988,11 @@ plotMA(
   returnData = FALSE,
   MLE = FALSE,
 )
+```
 
+## Eastern New Mexico University  ENMU method
 
+```{r, eval=FALSE}
 # Eastern New Mexico University  ENMU ***** ------
 # Load Data
 

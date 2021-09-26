@@ -59,6 +59,14 @@ pathway-and-regulation-of-genes-for-rna-polymerase.
 pathway-and-regulation-of-genes-for-nucleotide-excision-repair.
 pathway-and-regulation-of-genes-for-non-homologous-end-joining.
 rna-seq-mkdata
+pca
+differential-expression
+rna-seq-scienceparksg
+false-discovery-rates-fdr-benjamini-hocheberg-method
+volcano-plot
+heatmap-normalization
+ma-plots
+eastern-new-mexico-university-enmu-method
 wgcna-rna-seq-blog
 WGCNA
 wgcna-rpackage-installation-procedure.

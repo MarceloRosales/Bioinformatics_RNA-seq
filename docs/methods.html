@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="file-download-or-sra-qc-and-trimming.html"/>
-<link rel="next" href="external-ref.html"/>
+<link rel="next" href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -64,6 +64,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -171,46 +172,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="file-download-or-sra-qc-and-trimming.html"><a href="file-download-or-sra-qc-and-trimming.html#setting-r-environment."><i class="fa fa-check"></i><b>2.5</b> Setting R environment.</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>3</b> Methods</a></li>
-<li class="chapter" data-level="4" data-path="external-ref.html"><a href="external-ref.html"><i class="fa fa-check"></i><b>4</b> External Ref</a></li>
-<li class="chapter" data-level="5" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><i class="fa fa-check"></i><b>5</b> RNA Seq Differentially Expressed, GO Enrichment, and Pathway analysis</a>
+<li class="chapter" data-level="4" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><i class="fa fa-check"></i><b>4</b> RNA Seq Differentially Expressed, GO Enrichment, and Pathway analysis</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#background"><i class="fa fa-check"></i><b>5.1</b> <strong>Background</strong></a></li>
-<li class="chapter" data-level="5.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#cleaning-data"><i class="fa fa-check"></i><b>5.2</b> <strong>Cleaning Data</strong></a>
+<li class="chapter" data-level="4.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#background"><i class="fa fa-check"></i><b>4.1</b> <strong>Background</strong></a></li>
+<li class="chapter" data-level="4.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#cleaning-data"><i class="fa fa-check"></i><b>4.2</b> <strong>Cleaning Data</strong></a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#programs-used"><i class="fa fa-check"></i><b>5.2.1</b> Programs used?</a></li>
-<li class="chapter" data-level="5.2.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#acquiring-sequences"><i class="fa fa-check"></i><b>5.2.2</b> Acquiring sequences</a></li>
-<li class="chapter" data-level="5.2.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#fastqc"><i class="fa fa-check"></i><b>5.2.3</b> FastQC</a></li>
-<li class="chapter" data-level="5.2.4" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#trimming-with-trimmomatic-1"><i class="fa fa-check"></i><b>5.2.4</b> Trimming with Trimmomatic</a></li>
-<li class="chapter" data-level="5.2.5" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#alignment"><i class="fa fa-check"></i><b>5.2.5</b> Alignment</a></li>
-<li class="chapter" data-level="5.2.6" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#assembling-transcripts-with-cufflinks"><i class="fa fa-check"></i><b>5.2.6</b> Assembling transcripts with Cufflinks</a></li>
-<li class="chapter" data-level="5.2.7" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#checking-for-contamination"><i class="fa fa-check"></i><b>5.2.7</b> Checking for Contamination</a></li>
-<li class="chapter" data-level="5.2.8" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#counting-transcripts"><i class="fa fa-check"></i><b>5.2.8</b> Counting Transcripts</a></li>
+<li class="chapter" data-level="4.2.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#programs-used"><i class="fa fa-check"></i><b>4.2.1</b> Programs used?</a></li>
+<li class="chapter" data-level="4.2.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#acquiring-sequences"><i class="fa fa-check"></i><b>4.2.2</b> Acquiring sequences</a></li>
+<li class="chapter" data-level="4.2.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#fastqc"><i class="fa fa-check"></i><b>4.2.3</b> FastQC</a></li>
+<li class="chapter" data-level="4.2.4" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#trimming-with-trimmomatic-1"><i class="fa fa-check"></i><b>4.2.4</b> Trimming with Trimmomatic</a></li>
+<li class="chapter" data-level="4.2.5" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#alignment"><i class="fa fa-check"></i><b>4.2.5</b> Alignment</a></li>
+<li class="chapter" data-level="4.2.6" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#assembling-transcripts-with-cufflinks"><i class="fa fa-check"></i><b>4.2.6</b> Assembling transcripts with Cufflinks</a></li>
+<li class="chapter" data-level="4.2.7" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#checking-for-contamination"><i class="fa fa-check"></i><b>4.2.7</b> Checking for Contamination</a></li>
+<li class="chapter" data-level="4.2.8" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#counting-transcripts"><i class="fa fa-check"></i><b>4.2.8</b> Counting Transcripts</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#differentially-expressed-sequence-identification"><i class="fa fa-check"></i><b>5.3</b> <strong>Differentially Expressed Sequence Identification</strong></a>
+<li class="chapter" data-level="4.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#differentially-expressed-sequence-identification"><i class="fa fa-check"></i><b>4.3</b> <strong>Differentially Expressed Sequence Identification</strong></a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#analyzing-reads-counts"><i class="fa fa-check"></i><b>5.3.1</b> Analyzing Reads Counts</a></li>
+<li class="chapter" data-level="4.3.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#analyzing-reads-counts"><i class="fa fa-check"></i><b>4.3.1</b> Analyzing Reads Counts</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#interactions-cause-a-difference-between-the-lfc-betwen-pooled-data-e.g.-p53-control-and-ir-and-p53---control-and-ir"><i class="fa fa-check"></i><b>5.4</b> Interactions cause a difference between the lfc betwen pooled data, e.g. p53+/+ (control and IR) and p53-/- (control and IR)</a>
+<li class="chapter" data-level="4.4" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#interactions-cause-a-difference-between-the-lfc-betwen-pooled-data-e.g.-p53-control-and-ir-and-p53---control-and-ir"><i class="fa fa-check"></i><b>4.4</b> Interactions cause a difference between the lfc betwen pooled data, e.g. p53+/+ (control and IR) and p53-/- (control and IR)</a>
 <ul>
-<li class="chapter" data-level="5.4.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>5.4.1</b> Exploratory Data Analysis</a></li>
-<li class="chapter" data-level="5.4.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#identification-of-differentially-expressed-genes"><i class="fa fa-check"></i><b>5.4.2</b> Identification of Differentially Expressed Genes</a></li>
-<li class="chapter" data-level="5.4.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#gene-annotations"><i class="fa fa-check"></i><b>5.4.3</b> Gene Annotations</a></li>
+<li class="chapter" data-level="4.4.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>4.4.1</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#identification-of-differentially-expressed-genes"><i class="fa fa-check"></i><b>4.4.2</b> Identification of Differentially Expressed Genes</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#gene-annotations"><i class="fa fa-check"></i><b>4.4.3</b> Gene Annotations</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#go-enrichment-analysis-using-gostats"><i class="fa fa-check"></i><b>5.5</b> 7. GO Enrichment analysis using GOstats</a>
+<li class="chapter" data-level="4.5" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#go-enrichment-analysis-using-gostats"><i class="fa fa-check"></i><b>4.5</b> 7. GO Enrichment analysis using GOstats</a>
 <ul>
-<li class="chapter" data-level="5.5.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#go-enrichment-analysis-of-downregulated-genes"><i class="fa fa-check"></i><b>5.5.1</b> GO Enrichment analysis of downregulated genes</a></li>
+<li class="chapter" data-level="4.5.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#go-enrichment-analysis-of-downregulated-genes"><i class="fa fa-check"></i><b>4.5.1</b> GO Enrichment analysis of downregulated genes</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-analysis-using-expression-data"><i class="fa fa-check"></i><b>5.6</b> 8. Pathway analysis using expression data</a>
+<li class="chapter" data-level="4.6" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-analysis-using-expression-data"><i class="fa fa-check"></i><b>4.6</b> 8. Pathway analysis using expression data</a>
 <ul>
-<li class="chapter" data-level="5.6.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#prepare-data"><i class="fa fa-check"></i><b>5.6.1</b> Prepare data</a></li>
-<li class="chapter" data-level="5.6.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#kegg-pathways"><i class="fa fa-check"></i><b>5.6.2</b> KEGG pathways</a></li>
-<li class="chapter" data-level="5.6.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-oxidative-phosphorylation."><i class="fa fa-check"></i><b>5.6.3</b> Pathway and regulation of genes for Oxidative phosphorylation.</a></li>
-<li class="chapter" data-level="5.6.4" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-glycosylphosphatidylinositolgpi-anchor-biosynthesis."><i class="fa fa-check"></i><b>5.6.4</b> Pathway and regulation of genes for Glycosylphosphatidylinositol(GPI)-anchor biosynthesis.</a></li>
-<li class="chapter" data-level="5.6.5" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-rna-polymerase."><i class="fa fa-check"></i><b>5.6.5</b> Pathway and regulation of genes for RNA polymerase.</a></li>
-<li class="chapter" data-level="5.6.6" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-nucleotide-excision-repair."><i class="fa fa-check"></i><b>5.6.6</b> Pathway and regulation of genes for Nucleotide excision repair.</a></li>
-<li class="chapter" data-level="5.6.7" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-non-homologous-end-joining."><i class="fa fa-check"></i><b>5.6.7</b> Pathway and regulation of genes for Non-homologous end-joining.</a></li>
+<li class="chapter" data-level="4.6.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#prepare-data"><i class="fa fa-check"></i><b>4.6.1</b> Prepare data</a></li>
+<li class="chapter" data-level="4.6.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#kegg-pathways"><i class="fa fa-check"></i><b>4.6.2</b> KEGG pathways</a></li>
+<li class="chapter" data-level="4.6.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-oxidative-phosphorylation."><i class="fa fa-check"></i><b>4.6.3</b> Pathway and regulation of genes for Oxidative phosphorylation.</a></li>
+<li class="chapter" data-level="4.6.4" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-glycosylphosphatidylinositolgpi-anchor-biosynthesis."><i class="fa fa-check"></i><b>4.6.4</b> Pathway and regulation of genes for Glycosylphosphatidylinositol(GPI)-anchor biosynthesis.</a></li>
+<li class="chapter" data-level="4.6.5" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-rna-polymerase."><i class="fa fa-check"></i><b>4.6.5</b> Pathway and regulation of genes for RNA polymerase.</a></li>
+<li class="chapter" data-level="4.6.6" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-nucleotide-excision-repair."><i class="fa fa-check"></i><b>4.6.6</b> Pathway and regulation of genes for Nucleotide excision repair.</a></li>
+<li class="chapter" data-level="4.6.7" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-non-homologous-end-joining."><i class="fa fa-check"></i><b>4.6.7</b> Pathway and regulation of genes for Non-homologous end-joining.</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="rna-seq-mkdata.html"><a href="rna-seq-mkdata.html"><i class="fa fa-check"></i><b>5</b> RNA-Seq-MKdata</a></li>
 <li class="chapter" data-level="6" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html"><i class="fa fa-check"></i><b>6</b> WGCNA RNA-seq Blog</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#WGCNA"><i class="fa fa-check"></i><b>6.1</b> Introduction to the WGCNA Rpackage</a>
@@ -232,6 +233,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="youtube-references-.html"><a href="youtube-references-.html#trimmomatic."><i class="fa fa-check"></i><b>7.3</b> Trimmomatic.</a></li>
 <li class="chapter" data-level="7.4" data-path="youtube-references-.html"><a href="youtube-references-.html#building-genome-index-and-aligning-with-star"><i class="fa fa-check"></i><b>7.4</b> Building Genome Index and Aligning with STAR</a></li>
 </ul></li>
+<li class="chapter" data-level="8" data-path="external-ref.html"><a href="external-ref.html"><i class="fa fa-check"></i><b>8</b> External Ref</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -290,7 +292,7 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb58-14"><a href="methods.html#cb58-14" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> rawReads</span>
 <span id="cb58-15"><a href="methods.html#cb58-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb58-16"><a href="methods.html#cb58-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Download files from webpage source. (one by one)</span></span>
-<span id="cb58-17"><a href="methods.html#cb58-17" aria-hidden="true" tabindex="-1"></a><span class="ex">fastq-dump</span> --gzip --split-file mPDL_RNA7D_Ko1 <span class="kw">&amp;</span></span>
+<span id="cb58-17"><a href="methods.html#cb58-17" aria-hidden="true" tabindex="-1"></a><span class="ex">fastq-dump</span> <span class="at">--gzip</span> <span class="at">--split-file</span> mPDL_RNA7D_Ko1 <span class="kw">&amp;</span></span>
 <span id="cb58-18"><a href="methods.html#cb58-18" aria-hidden="true" tabindex="-1"></a><span class="co"># The &amp; indicates to run in the background. To see the jobs in the bkg.</span></span>
 <span id="cb58-19"><a href="methods.html#cb58-19" aria-hidden="true" tabindex="-1"></a><span class="bu">jobs</span></span>
 <span id="cb58-20"><a href="methods.html#cb58-20" aria-hidden="true" tabindex="-1"></a></span>
@@ -301,16 +303,16 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb58-25"><a href="methods.html#cb58-25" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install multiqc</span></code></pre></div>
 <div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="methods.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some git preferences for git contributions.  </span></span>
 <span id="cb59-2"><a href="methods.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
-<span id="cb59-3"><a href="methods.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config --list</span>
+<span id="cb59-3"><a href="methods.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--list</span></span>
 <span id="cb59-4"><a href="methods.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># set git email</span></span>
 <span id="cb59-5"><a href="methods.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config user.email <span class="st">&quot;email@example.com&quot;</span></span>
 <span id="cb59-6"><a href="methods.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co"># confirm emal</span></span>
-<span id="cb59-7"><a href="methods.html#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config --global user.email</span>
+<span id="cb59-7"><a href="methods.html#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email</span>
 <span id="cb59-8"><a href="methods.html#cb59-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-9"><a href="methods.html#cb59-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-10"><a href="methods.html#cb59-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-11"><a href="methods.html#cb59-11" aria-hidden="true" tabindex="-1"></a><span class="co"># For the rna-seq_test environment. </span></span>
-<span id="cb59-12"><a href="methods.html#cb59-12" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> <span class="ex">/usr/local/anaconda3/bin/activate</span> <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
+<span id="cb59-12"><a href="methods.html#cb59-12" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> /usr/local/anaconda3/bin/activate <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
 <span id="cb59-13"><a href="methods.html#cb59-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-14"><a href="methods.html#cb59-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-15"><a href="methods.html#cb59-15" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02&quot;</span></span>
@@ -319,8 +321,8 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb59-18"><a href="methods.html#cb59-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-19"><a href="methods.html#cb59-19" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> rawFastQC </span>
 <span id="cb59-20"><a href="methods.html#cb59-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-21"><a href="methods.html#cb59-21" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> -t 64 rawReads/*fastq.gz -o rawFastQC</span>
-<span id="cb59-22"><a href="methods.html#cb59-22" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> rawReads/*fastq.gz -o rawFastQC</span>
+<span id="cb59-21"><a href="methods.html#cb59-21" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">-t</span> 64 rawReads/<span class="pp">*</span>fastq.gz <span class="at">-o</span> rawFastQC</span>
+<span id="cb59-22"><a href="methods.html#cb59-22" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> rawReads/<span class="pp">*</span>fastq.gz <span class="at">-o</span> rawFastQC</span>
 <span id="cb59-23"><a href="methods.html#cb59-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-24"><a href="methods.html#cb59-24" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> rawFastQC</span>
 <span id="cb59-25"><a href="methods.html#cb59-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
@@ -353,12 +355,12 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb59-52"><a href="methods.html#cb59-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Trimmomatic </span></span>
 <span id="cb59-53"><a href="methods.html#cb59-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-54"><a href="methods.html#cb59-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Original (one by one)</span></span>
-<span id="cb59-55"><a href="methods.html#cb59-55" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE -threads 5 rawReads/mPDL_RNA7D_Ko1_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1 ILLUMINACLIP:truSeq-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="op">2&gt;</span> trimmedReads/mPDL_RNA7D_Ko1trimming.log</span>
+<span id="cb59-55"><a href="methods.html#cb59-55" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE <span class="at">-threads</span> 5 rawReads/mPDL_RNA7D_Ko1_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_2.fastq.gz <span class="at">-baseout</span> trimmedReads/mPDL_RNA7D_Ko1 ILLUMINACLIP:truSeq-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="dv">2</span><span class="op">&gt;</span> trimmedReads/mPDL_RNA7D_Ko1trimming.log</span>
 <span id="cb59-56"><a href="methods.html#cb59-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-57"><a href="methods.html#cb59-57" aria-hidden="true" tabindex="-1"></a><span class="co">#???????????? HOw to determing leading, trailing and minimun length</span></span>
 <span id="cb59-58"><a href="methods.html#cb59-58" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-59"><a href="methods.html#cb59-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Original (all automatically)</span></span>
-<span id="cb59-60"><a href="methods.html#cb59-60" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames2.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 4 <span class="st">&quot;trimmomatic PE -threads 5 rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:truSeq-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2&gt; trimmedReads/{}trimming.log&quot;</span></span>
+<span id="cb59-60"><a href="methods.html#cb59-60" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames2.txt <span class="kw">|</span> <span class="ex">parallel</span> <span class="at">-j</span> 4 <span class="st">&quot;trimmomatic PE -threads 5 rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:truSeq-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2&gt; trimmedReads/{}trimming.log&quot;</span></span>
 <span id="cb59-61"><a href="methods.html#cb59-61" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-62"><a href="methods.html#cb59-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if jobs are running</span></span>
 <span id="cb59-63"><a href="methods.html#cb59-63" aria-hidden="true" tabindex="-1"></a><span class="bu">jobs</span></span>
@@ -367,21 +369,21 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb59-66"><a href="methods.html#cb59-66" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-67"><a href="methods.html#cb59-67" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-68"><a href="methods.html#cb59-68" aria-hidden="true" tabindex="-1"></a><span class="co"># The generic trimmomatic command:</span></span>
-<span id="cb59-69"><a href="methods.html#cb59-69" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> -jar trimmomatic-0.39.jar PE inputforward.fq.gz inputreverse.fq.gz outputforwardpaired.fq.gz outputforwardunpaired.fq.gz outputreversepaired.fq.gz outputreverseunpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36</span>
+<span id="cb59-69"><a href="methods.html#cb59-69" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> trimmomatic-0.39.jar PE inputforward.fq.gz inputreverse.fq.gz outputforwardpaired.fq.gz outputforwardunpaired.fq.gz outputreversepaired.fq.gz outputreverseunpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36</span>
 <span id="cb59-70"><a href="methods.html#cb59-70" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-71"><a href="methods.html#cb59-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Try 03 SUCCESS!!!?</span></span>
-<span id="cb59-72"><a href="methods.html#cb59-72" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="op">2&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span>
+<span id="cb59-72"><a href="methods.html#cb59-72" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz <span class="at">-baseout</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="dv">2</span><span class="op">&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span>
 <span id="cb59-73"><a href="methods.html#cb59-73" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-74"><a href="methods.html#cb59-74" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-75"><a href="methods.html#cb59-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample 1 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)</span></span>
 <span id="cb59-76"><a href="methods.html#cb59-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-77"><a href="methods.html#cb59-77" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="op">2&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span>
+<span id="cb59-77"><a href="methods.html#cb59-77" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz <span class="at">-baseout</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="dv">2</span><span class="op">&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span>
 <span id="cb59-78"><a href="methods.html#cb59-78" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-79"><a href="methods.html#cb59-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample 2 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)</span></span>
-<span id="cb59-80"><a href="methods.html#cb59-80" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko2_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko2_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko2_S1_L001_R2_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="op">2&gt;</span> trimmedReads/mPDL_RNA7D_Ko2_S1_L001trimming.log</span>
+<span id="cb59-80"><a href="methods.html#cb59-80" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko2_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko2_S1_L001_R2_001_2.fastq.gz <span class="at">-baseout</span> trimmedReads/mPDL_RNA7D_Ko2_S1_L001_R2_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="dv">2</span><span class="op">&gt;</span> trimmedReads/mPDL_RNA7D_Ko2_S1_L001trimming.log</span>
 <span id="cb59-81"><a href="methods.html#cb59-81" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-82"><a href="methods.html#cb59-82" aria-hidden="true" tabindex="-1"></a><span class="co"># Pipe and loop for all files.</span></span>
-<span id="cb59-83"><a href="methods.html#cb59-83" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 4 <span class="st">&quot;trimmomatic PE rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2&gt; trimmedReads/{}trimming.log&quot;</span> #Not successful. </span>
+<span id="cb59-83"><a href="methods.html#cb59-83" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames.txt <span class="kw">|</span> <span class="ex">parallel</span> <span class="at">-j</span> 4 <span class="st">&quot;trimmomatic PE rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2&gt; trimmedReads/{}trimming.log&quot;</span> <span class="co">#Not successful. </span></span>
 <span id="cb59-84"><a href="methods.html#cb59-84" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-85"><a href="methods.html#cb59-85" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-86"><a href="methods.html#cb59-86" aria-hidden="true" tabindex="-1"></a><span class="co"># In TrimmedRead run multiqc</span></span>
@@ -396,7 +398,7 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb59-95"><a href="methods.html#cb59-95" aria-hidden="true" tabindex="-1"></a><span class="co"># rm -d trimmedFastQC # Make sure folder is in main folder, if not delete</span></span>
 <span id="cb59-96"><a href="methods.html#cb59-96" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-97"><a href="methods.html#cb59-97" aria-hidden="true" tabindex="-1"></a><span class="co"># Run fastqc... Trimmed files have no file extension. Why???</span></span>
-<span id="cb59-98"><a href="methods.html#cb59-98" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> trimmedReads/* -o trimmedFastQC</span>
+<span id="cb59-98"><a href="methods.html#cb59-98" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> trimmedReads/<span class="pp">*</span> <span class="at">-o</span> trimmedFastQC</span>
 <span id="cb59-99"><a href="methods.html#cb59-99" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-100"><a href="methods.html#cb59-100" aria-hidden="true" tabindex="-1"></a><span class="co"># .zip and qc html files will be created. Run multiqc</span></span>
 <span id="cb59-101"><a href="methods.html#cb59-101" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> trimmedFastQC</span>
@@ -411,7 +413,7 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <li>Unzip the tar.gz file. FYI: This processes require a long time.</li>
 </ol>
 <div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="methods.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the correct environment.</span></span>
-<span id="cb61-2"><a href="methods.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> <span class="ex">/usr/local/anaconda3/bin/activate</span> <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
+<span id="cb61-2"><a href="methods.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> /usr/local/anaconda3/bin/activate <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
 <span id="cb61-3"><a href="methods.html#cb61-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb61-4"><a href="methods.html#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the correct folder/directory.   </span></span>
 <span id="cb61-5"><a href="methods.html#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/Mus_musculus_NCBI_build37.2.tar.gz&quot;</span></span>
@@ -425,7 +427,7 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <li>Confirm that STAR is installed if not Install STAR.</li>
 </ol>
 <div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="methods.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure of enviroment.  </span></span>
-<span id="cb62-2"><a href="methods.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> --help</span>
+<span id="cb62-2"><a href="methods.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> <span class="at">--help</span></span>
 <span id="cb62-3"><a href="methods.html#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-4"><a href="methods.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co">#If not found install.  </span></span>
 <span id="cb62-5"><a href="methods.html#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install STAR </span>
@@ -434,7 +436,7 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb62-8"><a href="methods.html#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="ex">y</span></span>
 <span id="cb62-9"><a href="methods.html#cb62-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-10"><a href="methods.html#cb62-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Check again. Long list of flags.  </span></span>
-<span id="cb62-11"><a href="methods.html#cb62-11" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> --help</span>
+<span id="cb62-11"><a href="methods.html#cb62-11" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> <span class="at">--help</span></span>
 <span id="cb62-12"><a href="methods.html#cb62-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-13"><a href="methods.html#cb62-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create directory for starIndex. </span></span>
 <span id="cb62-14"><a href="methods.html#cb62-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> starIndex</span></code></pre></div>
@@ -449,7 +451,7 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb63-4"><a href="methods.html#cb63-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-5"><a href="methods.html#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Run STAR. Takes long time. wait until  ..... finished successfully message appears. if not rerun again. </span></span>
 <span id="cb63-6"><a href="methods.html#cb63-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-7"><a href="methods.html#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> --runThreadN 64 --runMode genomeGenerate --genomeDir starIndex --genomeFastaFiles Mus_musculus/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa --sjdbGTFfile Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf</span></code></pre></div>
+<span id="cb63-7"><a href="methods.html#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> <span class="at">--runThreadN</span> 64 <span class="at">--runMode</span> genomeGenerate <span class="at">--genomeDir</span> starIndex <span class="at">--genomeFastaFiles</span> Mus_musculus/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa <span class="at">--sjdbGTFfile</span> Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf</span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Align reads</li>
 </ol>
@@ -466,7 +468,7 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
         </div>
       </div>
 <a href="file-download-or-sra-qc-and-trimming.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="external-ref.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

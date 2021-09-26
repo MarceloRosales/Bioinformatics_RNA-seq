@@ -1,0 +1,1278 @@
+# RNA-Seq-MKdata
+
+```{r, eval=FALSE}
+# PCA of Raw count file
+# Load the data file (count) --------
+
+# all_tpmCSV <- read.csv ("~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/all.tpm02.csv", header = T, row.names=1)
+library(readxl)
+all_raw_count <- read_excel("~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/all.raw.count.xlsx")
+
+head(all_raw_count)
+class(all_raw_count)
+dim(all_raw_count)
+
+all_raw_count00 <- all_raw_count %>% column_to_rownames(var="GeneID") 
+
+
+# Extract column names.
+colnames <- colnames(all_raw_count)
+colnames
+# “r convert list to comma separated string”
+paste(shQuote(colnames), collapse=", ") # with quotes.
+paste(colnames, collapse = ",") # without quotes. 
+
+excluded_vars <- c("GeneName", "Chr", "Start", "End", "Strand", "Length" )
+
+library(dplyr) # for select function
+all_raw_count01 <- select(all_raw_count, -excluded_vars) # it works, but... better use:
+all_raw_count01 <- select(all_raw_count, -all_of(excluded_vars)) #exclude all variables in excluded_vars
+head(all_raw_count01)
+dim(all_raw_count01)
+
+class(all_raw_count01)
+# data.frame
+
+# df preparation --------
+# Convert values of a column into row names in a df. Source: https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame
+library(tidyverse)
+
+# Method01 
+# rownames(all_raw_count01) <- all_raw_count01[,1] # Converting first column into row names.* Column will still remain. 
+# all_raw_count01[,1] <- NULL # Erasing 1st column. 
+# all_raw_count01
+
+# Method03: #Worked!!
+all_raw_count01 <- all_raw_count01 %>% column_to_rownames(var="GeneID") 
+# Source: https://www.geeksforgeeks.org/convert-values-in-column-into-row-names-of-dataframe-in-r/
+
+head(all_raw_count01 [,1:5])
+
+# Quick exploration of the data ----------
+all_raw_count01 <- na.omit(all_raw_count01) # delete all rows with NA
+# all_raw_count01_matrix <- as.matrix(all_raw_count01) #convert df into matrix. 
+
+boxplot(all_raw_count01, las= 2, main = "Count raw 47")  # To many outlier and variation, better work with the log scale. 
+all_raw_count01_log <- log(all_raw_count01+1) #here log +1 because the log of 0 = infinity and we will not be able to see the data.
+boxplot(all_raw_count01_log, las = 2, col = "lightblue", ylim=c(-1,15), main = "Count raw log 49") # las =2 to make the x labels vertically aligned.
+
+# Histograms of especific samples.
+mPDL_RNA14D_Ko1 <- all_raw_count01_log[,1]
+mPDL_RNA14D_Ko2 <- all_raw_count01_log[,2]
+mPDL_RNA14D_WT1 <- all_raw_count01_log[,5]
+
+hist(mPDL_RNA14D_Ko1, col = "red")
+hist(mPDL_RNA14D_Ko2, col = "yellow")
+hist(mPDL_RNA14D_WT1, col = "green", main = paste("Count raw 14Ko1, 14Ko2, 14Wt1 54"), add=T)
+
+# df clean/filter of non expresed genes ------------------
+# If Center and Scale needed, remove all rows containing all 0 values.
+# df1[rowSums(df1[])>0,]
+all_raw_count02 <- all_raw_count01[rowSums(all_raw_count01[])>0,] 
+
+head(all_raw_count02 [,1:5])
+
+boxplot(all_raw_count02, las= 2, main = "Count raw no 0 :67")
+all_raw_count02_log <- log(all_raw_count02+1) #here log +1 because the log of 0 = infinity and we will not be able to see the data.
+boxplot(all_raw_count02_log, las = 2, col = "green", ylim=c(-1,15), main = "Count raw no 0 log :69") # las =2 to make the x labels vertically aligned.
+
+mPDL_RNA14D_Ko1_02 <- all_raw_count02_log[,1]
+mPDL_RNA14D_Ko2_02 <- all_raw_count02_log[,2]
+mPDL_RNA14D_WT1_02 <- all_raw_count02_log[,5]
+
+col1 <- rgb(1,0,0, 0.5) # red
+col2 <- rgb(1,1,0, 0.5) # yellow
+col3 <- rgb(0,0,1, 0.5) # blue
+col4 <- rgb(0,1,0, 0.5) # green
+
+# Histograms
+hist(mPDL_RNA14D_Ko1_02, col = col1, breaks = 40)
+hist(mPDL_RNA14D_Ko2_02, col = col2, breaks = 40)
+hist(mPDL_RNA14D_WT1_02, col = col3, breaks = 40, add=T)
+
+# Density Plots. 
+d1 <- density(mPDL_RNA14D_Ko1_02)
+d2 <- density(mPDL_RNA14D_Ko2_02)
+d3 <- density(mPDL_RNA14D_WT1_02)
+
+plot(d1, col="red")
+polygon(d1, col = col1, border = "red") # add color and border to d1
+lines(d2, col="yellow") # add a new line to the density plot created above. 
+polygon(d2, col = col2, border = "green") # add color and border to d2
+lines(d3, col="blue") # add one more line to the density plot. 
+polygon(d3, col = col3, border = "blue") # add color and border to d2
+
+
+# PCA using prcomp --------------- 
+# https://youtu.be/0Jp4gsfOLMs
+head(all_raw_count02 [,1:7])
+pca <- prcomp(t(all_raw_count02), center = T, scale. = T) # 1. Scale = false because there are 0 values. # 2. table was transpose t(), because prcomp() expects samples in rows and genes in columns. 3. The data is not centered... does this make a difference?... No... read here: https://stats.stackexchange.com/questions/189822/how-does-centering-make-a-difference-in-pca-for-svd-and-eigen-decomposition. Searrched with: variables should be shifted to be zero centered. 
+plot(pca$x[,1], pca$x[,2], main = "Plot PCA C1 v C2 :101")
+pca.var <-  pca$sdev^2 # To see how much variation PC1 accounts for. 
+pca.var.per <- round(pca.var/sum(pca.var)*100,1) # % of variations that each PC accounts for is more useful than the value, calculate %.
+pca.var.per
+barplot(pca.var.per, main = "PCA Scree Plot :104", xlab = "Principal component", ylab = "Percent Variation")
+# PC1 accounts for 73.8% of the variation, PC2 15.6%, PC3 5.4% and so on..
+
+#***************************************
+# prcomp returns  3 Things:
+# x <- Contains all the principal components )PCs) for drawing a graph. We use the first 2 columns [,1] and [,2] or PC1 and PC2.In this analysis we have 16 samples, therfore we obtain 16 PCs. PC1 accounts for the most variation in data, PC2 accounts for the second most variation and so on. 
+# sdev <- Standard deviation shows how much variation exists between exh sample. 
+# rotation <- prcom calls "loading" scores "rotation". There are loading scores for each PC.  
+#****************************************
+
+# In ggplot
+  # construct the df for the ggplot 
+library(ggplot2)
+pca.data_count <- data.frame(Sample=rownames(pca$x), 
+                             X=pca$x[,1],
+                             Y=pca$x[,2])
+pca.data_count
+
+
+library(ggrepel) # for the repel function. 
+ggplot(data = pca.data_count, aes(x=X, y=Y, label=Sample, color=Sample, fill=Sample)) +
+  #geom_text(size = 3.5) +
+  geom_point() +
+  geom_text_repel(aes(label = rownames(pca.data_count)), size = 3.5) +
+  xlab(paste("PC1 - ", pca.var.per[1], "%", sep = "")) +
+  ylab(paste("PC2 - ", pca.var.per[2], "%", sep = "")) +
+  ggtitle("PCA Graph prcomp center scaled :120")
+
+# Top 10 genes expresion ------------
+# Lets look at how to use loading scores to determine which genes have the largest effect on where samples are plotted in the PCA plot
+
+# PC1
+loading_scores <- pca$rotation[,1]　# Loading score of PC!
+gene_scores <- abs(loading_scores) # abs() to sort based on the numbers of magnitude rather than from high to low. 
+gene_scores_ranked <-  sort(gene_scores, decreasing = T) # Sort the magnitudes of loading scores from high to low. 
+top10_genes <- names(gene_scores_ranked[1:100]) # Get the names of the top 10 genes with the largest loading scores magnitude. 
+top10_genes
+pca$rotation[top10_genes,1] # show the scores (and +/-)
+
+PC1top10.df <- data.frame(PC1= pca$rotation[top10_genes,1],
+                       PC2= pca$rotation[top10_genes,2])  # Careful This is not top 10 of PC2
+PC1top10.df # Remove PC2
+PC1top10.df[,2] <- NULL
+PC1top10.df
+
+#PC2
+loading_scores <- pca$rotation[,2]　# Loading score of PC
+gene_scores <- abs(loading_scores) # abs() to sort based on the numbers of magnitude rather than from high to low. 
+gene_scores_ranked <-  sort(gene_scores, decreasing = T) # Sort the magnitudes of loading scores from high to low. 
+top10_genes <- names(gene_scores_ranked[1:100]) # Get the names of the top 10 genes with the largest loading scores magnitude. 
+top10_genes # **I am saving using the same name as the others, so this will change for each  component. 
+pca$rotation[top10_genes,2] # show the scores (and +/-)
+
+PC2top10.df <- data.frame(PC2= pca$rotation[top10_genes,2])
+PC2top10.df
+
+Top10DEgenes_prcomp <- merge(PC1top10.df, PC2top10.df, by=0, all=T)
+Top10DEgenes_prcomp
+Top100DEgenes_prcomp <- merge(PC1top10.df, PC2top10.df, by=0, all=T) # Change code above from 10  to 100.
+Top100DEgenes_prcomp
+rm(TopDEgenes)
+
+
+# Save DE genes table in a file. --------
+# .csv file. 
+write.table(Top10DEgenes_prcomp, file =  "~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/TopDEgenes_prcomp.csv", sep = ",", row.names = F)
+
+
+#Excel file. Source: http://www.sthda.com/english/wiki/writing-data-from-r-to-excel-files-xls-xlsx
+library("xlsx")
+# Write the first data set in a new workbook
+write.xlsx(Top10DEgenes_prcomp, file = "~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/Top10DEgenes_prcomp.xlsx",
+           sheetName = "top10", row.names = F, append = FALSE)
+# Add a second data set in a new worksheet
+write.xlsx(Top100DEgenes_prcomp, file = "~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/Top10DEgenes_prcomp.xlsx",
+           sheetName = "top100", row.names = F, append = TRUE) # to add as a new sheet.
+# Add a third data set.....
+
+
+# install.packages("writexl")
+library("writexl")
+write_xlsx(TopDEgenes_prcomp, "~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/all_raw_count01.xlsx", sheet= top10_genes)
+
+#  RNA-seq (ScienceparkSG) ****** -----------------
+# Metadata table construction -----------------
+# experimental metadata., metadata, cold data file construction.
+# Extract column names.
+colnames <- colnames(df)
+# “r convert list to comma separated string”
+paste(shQuote(df), collapse=", ") # with quotes.
+paste(df, collapse = ",") # without quotes. 
+
+# Excel 
+#Copy/paste list to excel > Data > Text to columns > coma separated > Transpose. To delete quotes: Find/replace ' to nothing. 
+# Construct rest of the table in excel (it's faster) then import to R. 
+
+all_raw_count02_colnames <- colnames(all_raw_count02)
+all_raw_count02_colnames
+all_raw_count02_colnames2 <-  paste(shQuote(all_raw_count02_colnames), collapse=", ") # with quotes. 
+all_raw_count02_colnames2 <-  paste(all_raw_count02_colnames, collapse=", ") # without quotes. 
+all_raw_count02_colnames2
+
+library(readxl)
+Metadata <- read_excel("~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/Notes.xlsx", 
+                       sheet = "MetaData")
+head(Metadata)
+
+# Order Metadata as you want to appear in the graphs. 
+library(readxl)
+Metadata2 <- read_excel("~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/Notes.xlsx", 
+                       sheet = "MetaData2")
+Metadata2
+
+
+# Or construct directly in R. 
+# Convert data.frame column to a vector?
+vector <- as.vector(df['colName']) # Op1 As a Tibble. 
+class(vector) 
+vector2 <- df[['colName']] #Opt2 As a Tibble. 
+class(vector)
+vector3 <- df[,2] #Opt.3 As a Tibble. 
+class(avector)
+vector4 <- df$colName   #Opt.4 as string?...
+
+GenotypeVec <- Metadata[,2]
+class(GenotypeVec) 
+GenotypeVec
+GenotypeVec <- as.vector(Metadata['Genotype'])
+class(GenotypeVec) 
+
+GenotypeVec <- Metadata$Genotype
+GenotypeVec
+GenotypeVec <- paste(shQuote(Genotype), collapse = ",") # copy/paste result in c().
+Genotype <- c('Ko','Ko','Ko','Ko','WT','WT','WT','WT','Ko','Ko','Ko','Ko','WT','WT','WT','WT')
+
+TimeVect <- Metadata$Time
+TimeVect
+TimeVect2 <- paste(shQuote(TimeVect), collapse = ",") # copy/paste result in c().
+TimeVect2
+Time <- c('14d','14d','14d','14d','14d','14d','14d','14d','7d','7d','7d','7d','7d','7d','7d','7d')
+
+TissueVect <- Metadata$Tissue
+TissueVect # Instead of new vector name just save in same vector
+TissueVect <- paste(shQuote(TissueVect), collapse = ",") # copy/paste result in c().
+TissueVect
+Tissue <- c('PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL')
+
+ShortNVect <- Metadata$ShortName
+ShortNVect # Instead of new vector name just save in same vector
+ShortNVect <- paste(shQuote(ShortNVect), collapse = ",") # copy/paste result in c().
+ShortNVect
+ShortName <- c('14_Ko1','14_Ko2','14_Ko3','14_Ko4','14_WT1','14_WT2','14_WT3','14_WT4','7_Ko1','7_Ko2','7_Ko3','7_Ko4','7_WT1','7_WT2','7_WT3','7_WT4')
+
+SampNVect <- Metadata$SampleName
+SampNVect # Instead of new vector name just save in same vector
+SampNVect <- paste(shQuote(SampNVect), collapse = ",") # copy/paste result in c().
+SampNVect
+SampName <- c('mPDL_RNA14D_Ko1','mPDL_RNA14D_Ko2','mPDL_RNA14D_Ko3','mPDL_RNA14D_Ko4','mPDL_RNA14D_WT1','mPDL_RNA14D_WT2','mPDL_RNA14D_WT3','mPDL_RNA14D_WT4','mPDL_RNA7D_Ko1','mPDL_RNA7D_Ko2','mPDL_RNA7D_Ko3','mPDL_RNA7D_Ko4','mPDL_RNA7D_WT1','mPDL_RNA7D_WT2','mPDL_RNA7D_WT3','mPDL_RNA7D_WT4')
+
+
+# Or create the Metadata file manually in R. 
+#Create vectors containing the data. 
+SampName <- c('mPDL_RNA14D_Ko1','mPDL_RNA14D_Ko2','mPDL_RNA14D_Ko3','mPDL_RNA14D_Ko4','mPDL_RNA14D_WT1','mPDL_RNA14D_WT2','mPDL_RNA14D_WT3','mPDL_RNA14D_WT4','mPDL_RNA7D_Ko1','mPDL_RNA7D_Ko2','mPDL_RNA7D_Ko3','mPDL_RNA7D_Ko4','mPDL_RNA7D_WT1','mPDL_RNA7D_WT2','mPDL_RNA7D_WT3','mPDL_RNA7D_WT4') # create Samples list as they appear in the df. 
+Genotype <- c('Ko','Ko','Ko','Ko','WT','WT','WT','WT','Ko','Ko','Ko','Ko','WT','WT','WT','WT') # Order according to the samples. 
+Time <- c('14d','14d','14d','14d','14d','14d','14d','14d','7d','7d','7d','7d','7d','7d','7d','7d')
+Tissue <- c('PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL','PDL')
+ShortName <- c('14_Ko1','14_Ko2','14_Ko3','14_Ko4','14_WT1','14_WT2','14_WT3','14_WT4','7_Ko1','7_Ko2','7_Ko3','7_Ko4','7_WT1','7_WT2','7_WT3','7_WT4')
+
+# Combine vectors into a data frame.
+ColdData <- data.frame(Genotype, Time, Tissue, ShortName)
+ColdData
+
+#Create row names with the associated sample names.
+rownames(ColdData) <- c('mPDL_RNA14D_Ko1','mPDL_RNA14D_Ko2','mPDL_RNA14D_Ko3','mPDL_RNA14D_Ko4','mPDL_RNA14D_WT1','mPDL_RNA14D_WT2','mPDL_RNA14D_WT3','mPDL_RNA14D_WT4','mPDL_RNA7D_Ko1','mPDL_RNA7D_Ko2','mPDL_RNA7D_Ko3','mPDL_RNA7D_Ko4','mPDL_RNA7D_WT1','mPDL_RNA7D_WT2','mPDL_RNA7D_WT3','mPDL_RNA7D_WT4')
+ColdData
+
+
+# If df includes the Sample names as a column.
+# Combine vectors into a data frame.
+ColdData2 <- data.frame(SampName, Genotype, Time, Tissue, ShortName)
+ColdData2
+# Convert values of a column into row names in a df. Source: https://stackoverflow.com/questions/5555408/convert-the-values-in-a-column-into-row-names-in-an-existing-data-frame
+library(tidyverse)
+# Method01
+rownames(ColdData2) <- ColdData2[,1] # Converting first column into row names.* Column will still remain. 
+ColdData2
+ColdData2[,1] <- NULL # Erasing 1st column. 
+ColdData2
+# Method02
+row.names(ColdData2) <- ColdData2$SampName
+ColdData2
+ColdData2[1] <- NULL
+ColdData2
+# Method03:
+ColdData2 <- ColdData2 %>% remove_rownames %>% column_to_rownames(var="SampName") 
+ColdData2 <- ColdData2 %>%  column_to_rownames(var="SampName") # no need for remove_rowmanes?
+ColdData2
+# Source: https://www.geeksforgeeks.org/convert-values-in-column-into-row-names-of-dataframe-in-r/
+
+
+
+
+# PCA applied to RNA-seq data --------
+library(DESeq2)
+library(magrittr) # for piper %>%
+library(tidyverse) # for tibble (column to rowname), and other packages. 
+
+#from the https://scienceparkstudygroup.github.io/rna-seq-lesson/aio/index.html
+
+# Imported data
+head(all_raw_count01 [1:7]) # Raw count df
+head(all_raw_count02 [1:7]) # df  with no 0s for centering and scaling. 
+
+head (all_raw_count02[,1:7]) # Use this for dds construction (no 0)
+
+# reorder counts columns according to the experimental design file --------
+colnames(Metadata2)
+counts <- all_raw_count02[,Metadata2$SampleName]
+head(counts [1:7]) 
+
+
+# first five rows and five columns
+counts[1:5, 1:5]
+
+# Create the dds object that will be used through the rest of this episode.
+
+# Check that sample names match in both files
+all(colnames(counts) %in% Metadata2$SampleName)
+all(colnames(counts) == Metadata2$SampleName)
+
+# Differential expression analysis.
+
+## Creation of the DESeqDataSet object
+dds <- DESeqDataSetFromMatrix(countData = counts, 
+                              colData = Metadata2, 
+                              design = ~ Genotype + Time)
+
+# Variance stabilization ---------
+# Plot of mean - sd comparison
+# Variance - mean plot for all genes
+head(counts)
+p_mean_sd_scaled <- 
+  counts %>% 
+  as.data.frame() %>% 
+  rownames_to_column("gene") %>% 
+  pivot_longer(cols = - gene, names_to = "sample", values_to = "counts") %>% 
+  group_by(gene) %>% 
+  summarise(gene_average = mean(counts), gene_stdev = sd(counts)) %>% 
+  ungroup() %>% 
+  ggplot(., aes(x = log10(gene_average), y = log10(gene_stdev))) +
+  geom_point(alpha = 0.5, fill = "grey", colour = "black") +
+  labs(x = "Gene count average (log10 scale)",
+       y = "Gene count standard deviation (log10 scale)") +
+  ggtitle("Mean - Standard deviation relationship\n(no variance stabilisation)")
+p_mean_sd_scaled
+
+is.data.frame(counts2)
+counts2 <- rownames_to_column(counts, "gene")
+counts2 <- pivot_longer(counts2, cols = -gene, names_to = "sample", values_to = "counts")
+counts2 <- group_by(gene)
+
+
+head(counts2[1:5,])
+
+library("vsn")
+meanSdPlot(cts, ranks = FALSE)
+
+# Variance stabilisation
+# dds <- estimateSizeFactors(dds)
+
+dds <-  estimateDispersions(object = dds, 
+                            fitType = "parametric", 
+                            quiet = TRUE)
+
+dds <- estimateSizeFactors(dds)
+dds <-  estimateDispersions(object = dds,
+                            fitType = "parametric",
+                            quiet = TRUE)
+
+vsd = varianceStabilizingTransformation(object = dds, 
+                                        blind = TRUE,           # do not take the design formula into account
+                                        # best practice for sample-level QC
+                                        fitType = "parametric")
+
+# extract the matrix of variance stabilised counts
+variance_stabilised_counts <- assay(vsd)
+
+# create the mean-sd plot
+p_mean_sd_vst <- 
+  variance_stabilised_counts %>% 
+  as.data.frame() %>% 
+  rownames_to_column("gene") %>% 
+  pivot_longer(cols = - gene, names_to = "sample", values_to = "counts") %>% 
+  group_by(gene) %>% 
+  summarise(gene_average = mean(counts), gene_stdev = sd(counts)) %>% 
+  ungroup() %>% 
+  ggplot(., aes(x = gene_average, y = gene_stdev)) +
+  geom_point(alpha = 0.5, fill = "grey", colour = "black") +
+  labs(x = "Gene count average (variance stabilised)", 
+       y = "Gene count standard deviation (variance stabilised)") +
+  ggtitle("Mean - Standard deviation relationship\n(after variance stabilisation ")
+p_mean_sd_vst
+
+# RNA-seq scree plot -----------
+
+# Custom PCA function
+# define a custom R function called "mypca()""
+mypca <- function(x, center = TRUE, scale = TRUE){
+  # Samples should be in rows
+  # Variables in the columns
+  
+  # remove constant variables
+  constant_val = apply(x,2,'sd')
+  x_reduced = x[,constant_val>0]
+  
+  # perform SVD
+  SVD <- svd(scale(x_reduced,center = center, scale = scale))
+  
+  # create scores data frame
+  scores <- as.data.frame(SVD$u %*% diag(SVD$d))
+  rownames(scores) <- rownames(x)
+  colnames(scores) <- paste0("PC", c(1:dim(scores)[2]))
+  
+  # create loadings data frams
+  loadings <- data.frame(SVD$v)
+  colnames(loadings) <- paste0("PC", c(1:dim(loadings)[2]))
+  rownames(loadings) <- colnames(x_reduced)
+  
+  # create data frame for explained variances
+  explained_var <- as.data.frame(round((SVD$d^2) / sum(SVD$d^2)*100, digits = 1))
+  rownames(explained_var) <- paste0("PC", c(1:dim(loadings)[2]))
+  colnames(explained_var) <- "exp_var"
+  
+  # return result
+  return (list("scores" = scores, "loadings" = loadings, "explained_var" = explained_var))
+}
+
+# transpose the data because in variance_stabilised_counts the rows are the variables and the columns correspond to the samples
+t_variance_stabilised_counts <- variance_stabilised_counts # this is not doing anything!!!!
+
+# before computing the PCA, check that samples are in rows and genes in columns
+pca_results <- mypca(t(t_variance_stabilised_counts), # added the transpose t() funtion here!!!.. now it works.!!!
+                     center = TRUE, 
+                     scale = TRUE)
+
+# make the plot
+ggplot(pca_results$explained_var, 
+       aes(x = seq(from = 1, to = nrow(pca_results$explained_var)), 
+           y = exp_var)) +
+  ylab('explained variance (%)') + 
+  ggtitle('Explained variance per component') + 
+  geom_bar(stat = "identity") +
+  labs(x = "Principal Component number") +
+  scale_x_continuous(breaks = seq(
+    from = 1, 
+    to = nrow(pca_results$explained_var)))
+
+#  How much percentage of the total variance are “caught” by PC1 and PC2?
+#  How many PCs are necessary to get 50% of the total variance?
+#  Solution
+cumsum(pca_results$explained_var)[2,1] # shows you that 28.8% of the varaince are explained by PC1 and PC2.
+cumsum(pca_results$explained_var) %>% 
+  as.data.frame() %>% 
+  filter(exp_var > 50) %>% 
+  head(n = 1) # You need to go up to PC7 to catch 51% of the variance.
+
+
+
+
+
+scores <- pca_results$scores
+
+# first 5 rows and columns
+scores[1:5,1:5]
+
+scores_with_conditions <- 
+  scores %>% 
+  rownames_to_column("SampleName") %>% # to prepare to join on the "sample" column
+  left_join(x = .,                 # this means that we are passing the 'scores' dataframe 
+            y = Metadata2,         # this dataframe contains the sample to condition correspondence
+            by = "SampleName")
+
+# shows the first 5 rows and the last 6 columns. Note that conditions were added to the table.  
+scores_with_conditions[1:5, 15:20]
+
+# PC14      PC15          PC16 Genotype Time Tissue
+# 1  11.18538  11.34342 -2.053225e-12       WT    7    PDL
+# 2 -24.19255  42.96321 -2.053225e-12       WT    7    PDL
+# 3  30.91639 -20.58249 -2.053225e-12       WT    7    PDL
+# 4 -26.27940 -26.47902 -2.053225e-12       WT    7    PDL
+# 5 -67.95911 -14.25815 -2.053225e-12       Ko    7    PDL
+
+# explained variance
+# one % variance value per PC
+explained_variance <- 
+  pca_results$explained_var %>% 
+  pull("exp_var")
+
+explained_variance
+
+# RNAseq Ploting ------------------
+# Genotype Plot
+ggplot(scores_with_conditions, 
+       aes(PC1, PC2, color = Genotype)) +
+  geom_point(size = 2) +
+  geom_text_repel(aes(label = SampleName), size = 3) +
+  xlab(paste0("PC1: ",explained_variance[1],"% variance")) +
+  ylab(paste0("PC2: ",explained_variance[2],"% variance")) + 
+  coord_fixed(ratio = 1) +
+  ggtitle("PCA score plot with the Genotype condition overlaid")
+
+# Time Plot
+ggplot(scores_with_conditions, 
+       aes(PC1, PC2, color = Time)) +
+  geom_point(size = 2) +
+  geom_text_repel(aes(label = ShortName), size = 3) +
+  xlab(paste0("PC1: ",explained_variance[1],"% variance")) +
+  ylab(paste0("PC2: ",explained_variance[2],"% variance")) + 
+  coord_fixed(ratio = 1) +
+  ggtitle("PCA score plot with Time condition overlaid")
+
+# Other Condition...
+ggplot(scores_with_conditions, 
+       aes(PC1, PC2, color = dpi)) +
+  geom_point(size = 4) +
+  geom_text_repel(aes(label = sample), size = 3.5) +
+  xlab(paste0("PC1: ",explained_variance[1],"% variance")) +
+  ylab(paste0("PC2: ",explained_variance[2],"% variance")) + 
+  coord_fixed(ratio = 1) +
+  ggtitle("PCA score plot with the time after infection (dpi) overlaid")
+
+# ADD on not working ------
+# Lets look at how to use loading scores to dermine which genes have the largest effect on where samples are plotted in the PCA plot
+# Are Lodings and rotation the same?  Seems like yes!!
+loading_scores2 <- pca_results$loadings[,1]
+gene_scores2 <- abs(loading_scores2)
+gene_scores_ranked2 <-  sort(gene_scores2, decreasing = T)
+top10_genes2 <- row.names(gene_scores_ranked2[1:10])
+top10_genes2
+pca$rotation[top10_genes,1] # show the scores (and +/-)
+
+
+# DESeq2 count normalization ----
+# Let’s see how, in practice, we can use DESeq2 median-of-ratios method to normalize the gene counts.
+
+# Data Import and  matching to the experimantal design and counts data same as above. 
+head(counts[,1:5])
+# Create the DESeqDataSet object
+
+# suppressPackageStartupMessages(library(DESeq2)) # to load DESeq2 and suppress the long startup message
+
+# Creation of the DESeqDataSet object
+dds2 <- DESeqDataSetFromMatrix(countData = all_raw_count02, 
+                               colData = Metadata2, 
+                               design = ~ Genotype) 
+dds2
+
+# Generate normalized counts
+
+dds2 <- estimateSizeFactors(dds2)
+
+sizeFactors(dds2)
+
+# We can plot these size factors to see how much they differ between samples.
+
+library(tidyverse)
+
+# create a dplyr tibble
+size_factors_df <- tibble(
+  sample = names(sizeFactors(dds2)), 
+  correction_factor = sizeFactors(dds2)
+)
+
+# line plot to connect the different size factor values
+p <- ggplot(size_factors_df, aes(x = sample, y = correction_factor, group = 1)) +
+  geom_point() + 
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 90, size = 5)) +
+  scale_y_continuous(limits = c(0.5,2))+
+ # xlab(paste("PC1 - ", pca.var.per[1], "%", sep = "")) +
+  #ylab(paste("PC2 - ", pca.var.per[2], "%", sep = "")) +
+  ggtitle("Median of ratios method of normalization (size factors) to see how much samples differ between eachother ")
+
+
+# to display the plot
+p
+
+# extract the normalised counts
+counts_normalised = counts(dds2, normalized = TRUE)
+counts_normalised[1:5,1:5]
+
+counts_log10 <- log10(counts+1)
+boxplot(counts_log10, las=2, main="Log10 of counts")
+
+counts_normalised_log10 <- log10(counts_normalised+1)
+boxplot(counts_normalised_log10, las=2, col= "green", main="Normalize log10 counts")
+
+
+# Differential expression analysis -----------------------
+
+# Warning *************************************
+# We do not want to work on all comparisons, we will filter out the samples and conditions that we do not need. In this example, only the mock growth and the P. syringae infected condition will remain.
+
+# You should still have the counts and xp_design objects in your R environment. If not, please run the following code.
+# read the xp design file if not available in your environment 
+# Metadata2 <- read.delim("experimental_design_modified.txt", 
+#                         header = T, 
+#                         stringsAsFactors = F, 
+#                         colClasses = rep("character",4))
+# # change col names
+# colnames(Metadata2) <- c("sample", "seed", "infected", "dpi")
+# 
+# 
+# counts <- read.delim("counts.txt", header = T, stringsAsFactors = F)
+# genes <- counts[,1]
+# counts <- counts[,-1]
+# row.names(counts) <- genes
+# 
+# # reorder counts columns according to the experimental design file
+# counts <- counts[, xp_design$sample]
+
+#******************************************************************************
+
+# We will now filter both the counts and xp_design objects to keep a one-factor comparison to investigate....?
+library(DESeq2)
+
+str(Metadata2)
+Metadata2$Time <- as.factor(Metadata2$Time)
+Metadata2$Genotype <- as.factor(Metadata2$Genotype)
+
+str(Metadata2)
+
+# filter design file (mock versus P. syringae at 7 dpi)
+var_GenetypeKo_vs_Time14 = Metadata2 %>% filter(Time == "14") # (Genotype == "Ko" & Time == "14")
+
+# Filter count file accordingly (to keep only samples present in the filtered xp_design file)
+counts_filtered = counts[, colnames(counts) %in% var_GenetypeKo_vs_Time14$SampleName]
+
+## Creation of the DESeqDataSet
+dds3 <- DESeqDataSetFromMatrix(countData = counts_filtered, 
+                               colData = var_GenetypeKo_vs_Time14, 
+                               design = ~ Genotype)
+
+# It is important to make sure that levels are properly ordered so we are indeed using the mock group as our reference level. A positive gene fold change will for instance signify that the gene is upregulated in the P. syringae condition relatively to the mock condition.
+#One way to see how levels are interpreted within the DESeqDataSet object is to display the factor levels.
+dds3$Genotype
+
+dds3 <- DESeq(dds3)
+res <- results(dds3)
+
+# have a peek at the DESeqResults object 
+res
+
+res2 <- results(dds3, contrast = c("Genotype",                      # name of the factor
+                                   "Ko",    # name of the numerator level for fold change
+                                   "WT"))                          # name of the denominator level    
+
+all_equal(res, res2)
+
+mcols(res)
+
+# False discovery rates FDR / Benjamini-Hocheberg method ----------
+# Explanation of this method here: https://youtu.be/K8LQSvtjcEo 
+# We can count the number of genes that are differentially regulated at a certain \(\alpha\) level.
+
+
+library(dplyr)
+
+# threshold of p = 0.01
+res %>% 
+  as.data.frame() %>% 
+  filter(padj < 0.01) %>% 
+  dim()
+# 2347 genes out of 6 samples
+
+2347*100/nrow(counts)   # 6.977643 or around ~7%
+
+# threshold of p = 0.001
+FDR.001 <- res %>% 
+  as.data.frame() %>% 
+  filter(padj < 0.001) %>% 
+  dim()
+FDR.001
+
+FDR.001*100/nrow(counts)   # 4.83410631 or around ~5%
+
+#　You should obtain 2347 differentially expressed genes at 1% and 1626 at 0.1% which are quite important numbers: indeed, it corresponds to respectively ~7% and ~5% of the whole number transcriptome (nrow(counts)　=　total number of mRNA is 33636).
+
+# distribution of adjusted p-values
+hist(res$padj, col="lightblue", main = "Adjusted p-value distribution")
+# distribution of non-adjusted p-values
+hist(res$pvalue, col="grey", main = "Non-adjusted p-value distribution")
+
+# As you can see, the distribution of p-values was already quite similar suggesting that a good proportion of the tests have a significant p-value (inferior to \(\alpha\) = 0.01 for instance). This suggests that a good proportion of these will be true positives (genes truly differentially regulated).
+
+# Extracting the table of differential genes ------------
+
+diff = res %>% 
+  as.data.frame() %>% 
+  rownames_to_column("genes") %>% 
+  filter(padj < 0.01) %>% 
+  arrange(desc(log2FoldChange), 
+          desc(padj))
+head(diff)
+dim(diff)
+
+# Save differential genes table in a file. --------
+# # .csv file. 
+# write.table(diff, file =  "~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/diff.csv", sep = ",", row.names = F)
+# 
+# 
+# #Excel file. Source: http://www.sthda.com/english/wiki/writing-data-from-r-to-excel-files-xls-xlsx
+# library("xlsx")
+# # Write the first data set in a new workbook
+# write.xlsx(diff, file = "~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/diff.xlsx",
+#            sheetName = "diff1", row.names = F, append = FALSE)
+# # Add a second data set in a new worksheet
+# write.xlsx(diff2, file = "~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/Top10DEgenes_prcomp.xlsx",
+#            sheetName = "diff2", row.names = F, append = TRUE) # to add as a new sheet.
+
+# Add a third data set..... I AM ADDING THIS SHEET TO AN EXISTING FILE FROM THE PREVIOUS PCA ANALISYS.
+write.xlsx(diff, file = "~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/Top10DEgenes_prcomp.xlsx",
+           sheetName = "diff1", row.names = F, append = TRUE) # to add as a new sheet.
+
+# # Physically opening an excel file within R (maybe Windows only)
+# Top10DEgenes_prcomp.xlsx_path <- "~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/Top10DEgenes_prcomp.xlsx"
+# command <- paste("open excel", Top10DEgenes_prcomp.xlsx_path)
+# system(command)
+
+# # install.packages("writexl")
+# library("writexl")
+# write_xlsx(TopDEgenes_prcomp, "~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/all_raw_count01.xlsx", sheet= top10_genes)
+
+
+
+
+
+# Volcano plot -----------
+# First, we are going to “shrink” the \(\log2\) fold changes to remove the noise associated with fold changes coming from genes with low count levels. Shrinkage of effect size (LFC estimates) is useful for visualization and ranking of genes. This helps to get more meaningful log2 fold changes for all genes independently of their expression level.
+
+resLFC <- lfcShrink(dds = dds3, 
+                    res = res,
+                    type = "normal",
+                    coef = 2) # corresponds to "WT vs Ko" comparison
+resLFC
+# EnhancedVolcano Installation
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#  install.packages("BiocManager")
+
+#BiocManager::install("EnhancedVolcano")
+
+# load the library if not done yet
+library("EnhancedVolcano")
+
+# The main function is named after the package
+EnhancedVolcano(toptable = resLFC,              # We use the shrunken log2 fold change as noise associated with low count genes is removed 
+                x = "log2FoldChange",           # Name of the column in resLFC that contains the log2 fold changes
+                y = "padj",                     # Name of the column in resLFC that contains the p-value
+                lab = rownames(resLFC)
+)
+
+
+
+EnhancedVolcano(toptable = resLFC,
+                x = "log2FoldChange",
+                y = "padj",
+                lab = rownames(resLFC),
+                labSize = 3,
+                xlim = c(-10, +10),
+                ylim = c(0,100),
+                pCutoff = 1e-06,
+                pointSize = 2.0,
+                FCcutoff = 2, 
+                title = "WT vs Ko comparison (fold change cutoff = 2, p-value cutoff = 1e-06)",
+                subtitle = 'Differential expression',
+)
+
+# Heatmap --------------------
+
+library(pheatmap)
+# df <- scale(mtcars)
+# pheatmap(df)
+
+# import custom function ------
+# source("normalization_function.R") # cant import, so I pasted below. mor_normalization.
+
+mor_normalization = function(data){
+  library(dplyr)
+  library(tibble)
+  
+  # take the log
+  log_data = log(data) 
+  
+  # find the psuedo-references per sample by taking the geometric mean
+  log_data = log_data %>% 
+    rownames_to_column('gene') %>% 
+    mutate (gene_averages = rowMeans(log_data)) %>% 
+    filter(gene_averages != "-Inf")
+  
+  # the last columns is the pseudo-reference column 
+  pseudo_column = ncol(log_data)
+  
+  # where to stop before the pseudo column 
+  before_pseduo = pseudo_column - 1
+  
+  # find the ratio of the log data to the pseudo-reference
+  ratios = sweep(log_data[,2:before_pseduo], 1, log_data[,pseudo_column], "-")
+  
+  # find the median of the ratios
+  sample_medians = apply(ratios, 2, median)
+  
+  # convert the median to a scaling factor
+  scaling_factors = exp(sample_medians)
+  
+  # use scaling factors to scale the original data
+  manually_normalized = sweep(data, 2, scaling_factors, "/")
+  return(manually_normalized)
+}
+
+# First version
+counts_normalised_only_diff_genes = 
+  mor_normalization(counts) %>%                 # normalize the counts using our custom function
+  rownames_to_column("genes") %>%               
+  pivot_longer(- genes,                         # pivot_longer() is an update version of gather() since tidyr version 1.0
+               names_to = "sample", 
+               values_to = "counts") %>% 
+  filter(genes %in% diff$genes) %>%             
+  pivot_wider(names_from = "sample",            # pivot_wider() is an updated approach to spread()
+              values_from = "counts")  %>%      
+  column_to_rownames("genes")                   # the gene column is converted back to row names to create a matrix usable with pheatmap
+
+dim(counts_normalised_only_diff_genes)          # check that you have the expected number of rows and columns
+
+pheatmap(counts_normalised_only_diff_genes, 
+         cluster_rows = FALSE, 
+         cluster_cols = FALSE, 
+         scale = "none",
+         show_rownames = FALSE, 
+         show_colnames = TRUE)
+
+# Heatmap is all blue!! WHY?!!!!!!!!!!!!!
+
+
+# distribution of values in the counts_normalised_only_diff_genes table:
+counts_normalised_only_diff_genes %>% 
+  rownames_to_column("genes") %>% 
+  pivot_longer(- genes, names_to = "sample", values_to = "counts") %>% 
+  with(., hist(counts, col = "dodgerblue"))
+
+# The scale on which gene counts are represented is the (main) issue here.
+# There are a lot of genes for which the number of counts are very low. If you \(\log2\) transform the counts, you get a nice distribution again where all gene frequency become visible again.
+
+counts_normalised_only_diff_genes %>% 
+  rownames_to_column("genes") %>% 
+  pivot_longer(- genes,names_to = "sample", values_to = "counts") %>% 
+  with(., hist(log2(counts), col = "dodgerblue"))
+
+# If you re-run the code for the first heatmap with a log2 transformation, you will get a simple way to display different gene count levels. We add + 1 to account for genes with count values equal to 0.
+
+pheatmap(log2(counts_normalised_only_diff_genes + 1), 
+         cluster_rows = FALSE, 
+         cluster_cols = FALSE, 
+         scale = "none",
+         show_rownames = FALSE, 
+         show_colnames = TRUE)
+
+# Second version with scaling
+
+#Scaling trial 
+set.seed(1)
+x <- runif(10)
+
+# Manually scaling
+(x - mean(x)) / sd(x)
+
+# With scale function
+scale(x)[,1]
+
+remove(x)
+
+counts_scaled = 
+  counts_normalised_only_diff_genes %>% 
+  t(.) %>%                              # transpose to have the genes in columns 
+  scale() %>%                           # scale(x, center = TRUE, scale = TRUE) 
+  t(.)                                  # back in original shape
+
+# sanity check
+# the majority of the values should be around zero
+apply(counts_scaled, MARGIN = 1, mean) %>%                          # calculate the mean per row
+  hist(., main = "", xlab = "Z-score values", col = "dodgerblue2")  
+
+pheatmap(counts_scaled, 
+         cluster_rows = FALSE, 
+         cluster_cols = FALSE, 
+         show_rownames = FALSE, 
+         scale = "none",            # already done "manually"
+         show_colnames = TRUE)
+
+
+# Third version with genes and samples grouped by profiles
+
+pheatmap(counts_scaled, 
+         cluster_rows = TRUE,                      
+         cluster_cols = TRUE, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         main = "Clustering on")
+
+# Fourth version of our heatmap with the 8 samples being investigated.
+
+counts_scaled_filtered = 
+  counts_scaled %>% 
+  as.data.frame() %>%
+  dplyr::select(var_GenetypeKo_vs_Time14$SampleName) # keep the 8 samples
+
+head(counts_scaled_filtered)
+
+# Anotations for the map
+anno_col_info = var_GenetypeKo_vs_Time14 %>% column_to_rownames("SampleName")
+
+anno_info_colors = list(
+  Tissue = c(PDL = "#d8b365"),
+  Genotype = c(WT = "lightgrey", 
+               Ko = "black"),
+  Time = c("14" = "dodgerblue4")
+)
+
+# Heatmatp with anotations
+pheatmap(counts_scaled_filtered, 
+         cluster_rows = TRUE,                       
+         cluster_cols = TRUE, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         annotation_col = anno_col_info,
+         annotation_colors = anno_info_colors,
+         main = "Clustering with ward method")
+
+
+
+# MA plots -------
+
+plotMA(dds3, alpha = 0.01)
+
+## S4 method for signature 'DESeqDataSet'
+plotMA(
+  dds3,
+  alpha = 0.01,
+  main = "DESeqDataSet plotMA",
+  xlab = "mean of normalized counts",
+  # ylim,
+  colNonSig = "gray60",
+  colSig = "red",
+  colLine = "grey40",
+  returnData = FALSE,
+  MLE = FALSE,
+)
+
+
+# Eastern New Mexico University  ENMU ***** ------
+# Load Data
+
+library(readxl)
+all_raw_count <- read_excel("~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/all.raw.count.xlsx")
+
+head(all_raw_count)
+class(all_raw_count)
+dim(all_raw_count)
+
+# Extract column names.
+colnames <- colnames(all_raw_count)
+colnames
+# “r convert list to comma separated string”
+paste(shQuote(colnames), collapse=", ") # with quotes.
+paste(colnames, collapse = ",") # without quotes. 
+
+excluded_vars <- c("GeneName", "Chr", "Start", "End", "Strand", "Length" )
+
+library(dplyr) # for select function
+all_raw_count01 <- select(all_raw_count, -excluded_vars) # it works, but... better use:
+all_raw_count01 <- select(all_raw_count, -all_of(excluded_vars)) #exclude all variables in excluded_vars
+head(all_raw_count01)
+dim(all_raw_count01)
+
+class(all_raw_count01)
+library(tidyverse)
+
+# Converting first column into row names
+all_raw_count01 <- all_raw_count01 %>% column_to_rownames(var="GeneID") 
+
+# Clean/filter of non expresed genes 
+# If Center and Scale needed, remove all rows containing all 0 values.
+# df1[rowSums(df1[])>0,]
+all_raw_count02 <- all_raw_count01[rowSums(all_raw_count01[])>0,] 
+
+head(all_raw_count02 [,1:5])
+
+
+# Load Metadata
+library(readxl)
+Metadata <- read_excel("~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/Notes.xlsx", 
+                       sheet = "MetaData")
+head(Metadata)
+
+# Order Metadata as you want to appear in the graphs. 
+library(readxl)
+Metadata2 <- read_excel("~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/Notes.xlsx", 
+                        sheet = "MetaData2")
+Metadata2
+
+
+str(Metadata2)
+Metadata2$Time <- as.factor(Metadata2$Time)
+Metadata2$Genotype <- as.factor(Metadata2$Genotype)
+
+str(Metadata2)
+
+
+
+# Create dds file
+library(DESeq2)
+
+## Creation of the DESeqDataSet
+dds4 <- DESeqDataSetFromMatrix(countData = all_raw_count02, 
+                               colData = Metadata2, 
+                               design = ~ Genotype) # only one comparison. Time not included. 
+
+
+#?`DESeq2-package`
+
+# Keep only the genes with count >10
+keep <- rowSums(counts(dds4))>=10
+
+# Filter out keep.
+dds4 <- dds4[keep,]
+
+# Estimate Size Factor
+ddsN <- estimateSizeFactors(dds4)
+ddsN <- estimateDispersions(ddsN)
+
+# Normalize Data
+Ndds <- counts(ddsN, normalized=T)
+head(Ndds)
+
+# Save into a file.
+
+
+# Make the differentiation Expression Table.
+ddsDE <- DESeq(dds4) #Why dds4 and not Ndds?
+head(ddsDE)
+
+# Call the results of the differentiation expression analysis and define alpha.
+
+res4 <- results(ddsDE, alpha = 0.001)
+head(res4)
+dim(res4)
+# Save as file.
+
+
+# Order padj values from smallest to largest
+res4Ordered <- res4[order(res4$padj),]
+
+head(res4Ordered)
+
+# Save values in a file. 
+library("xlsx")
+# Add another data set..... I AM ADDING THIS AS A NEW SHEET TO AN EXISTING FILE FROM THE PREVIOUS PCA ANALISYS.
+write.xlsx(res4Ordered, file = "~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/Top10DEgenes_prcomp.xlsx",
+           sheetName = "diff2ENMU.001", row.names = T, append = TRUE) # to add as a new sheet.
+
+# TAKES A LONG TIME TO SAVE... BE PATIENT. *****************************************
+
+# PlotMA
+plotMA(ddsDE,
+       colSig = "red",)
+
+# Plot PCA
+# Apply a variance stabilizing transformation (VST) to the count data
+vsd <- vst(dds4, blind = F)
+vsd
+str(vsd)
+plotPCA(vsd, intgroup = c("Time", "Genotype"))
+
+# Sample to sample distribution
+library(RColorBrewer)
+library(pheatmap)
+sampleDist <- dist(t(assay(vsd)))
+sampleDist
+
+sampleDistMatrix <- as.matrix(sampleDist)
+sampleDistMatrix
+
+rownames(sampleDistMatrix) <- vsd$Genotype
+sampleDistMatrix
+colnames(sampleDistMatrix) <- NULL
+sampleDistMatrix
+#colors <- colorRampPalette(rev(brewer.pal(9, "Blues"))), (225))
+pheatmap(sampleDistMatrix,
+         clustering_distance_rows = sampleDist,
+         clustering_distance_cols = sampleDist,
+         #col=colors
+         )
+
+# Gene expression plotting
+library(ggplot2)
+#install.packages("meltt")
+library(reshape)
+
+# Expression file (Ndds)
+head(Ndds)  # Is a matrix
+
+# DE results file
+head(res4Ordered) # Is not a matrix. but was saved in a file 
+
+# Load DE results file 
+library(readxl)
+statsDE <- read_excel("~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/Top10DEgenes_prcomp.xlsx", 
+                                  sheet = "diff2ENMU.01")
+head(statsDE)
+
+# Change column of GeneID to row names Method 3 
+statsDE <- statsDE %>% column_to_rownames(var="...1") 
+head(statsDE)
+dim(statsDE)
+
+# Check if there are NA values in the df. If true then omit all NA rows. 
+apply(statsDE, 2, function(x) any(is.na(x))) # check by columns
+# baseMean log2FoldChange          lfcSE           stat         pvalue           padj 
+# FALSE          FALSE          FALSE          FALSE          FALSE           TRUE 
+statsDE <- na.omit(statsDE)
+dim(statsDE)
+
+# Filter Significant values. 0.05 or 0.01 or 0.001
+statsDE$sig <- ifelse(statsDE$padj <= 0.01, "sig", "not")
+head(statsDE)
+
+plotMA <- ggplot(statsDE, aes(x= log10(baseMean), y= log2FoldChange, color=sig)) + 
+  geom_point()
+plotMA
+
+# Volcano Plot
+volcanoplot <- ggplot(statsDE, aes(x= log2FoldChange, y= -log10(padj), color = sig)) +
+  geom_point()
+volcanoplot
+
+# Extract the top 10  differentially expressed genes. 
+
+topTen <- statsDE[1:100,]
+topTen
+
+all_raw_count00 <- all_raw_count %>% column_to_rownames(var="GeneID") # For all data columns
+
+all_raw_count00[1:5,]
+topTenMerg <- merge(topTen, all_raw_count00, by=0) 
+topTenMerg [1:5,]
+
+# Save values in a file. 
+library("xlsx")
+# Add another data set..... I AM ADDING THIS AS A NEW SHEET TO AN EXISTING FILE FROM THE PREVIOUS PCA ANALISYS.
+write.xlsx(topTenMerg, file = "~/Box Sync/Niigata Uni Box/Kakenhi/2020-22 Kakenhi/Raw data/Top10DEgenes_prcomp.xlsx",
+           sheetName = "top100MergENMU", row.names = T, append = TRUE) # to add as a new sheet.
+
+# Heat Map of top10 genes.
+# Cunstruct Matrix.
+# Extract column names.
+colnames(topTenMerg)
+paste(shQuote(colnames(topTenMerg)), collapse=", ") # with quotes.
+
+include_var <- c('Row.names', 'mPDL_RNA14D_Ko1', 'mPDL_RNA14D_Ko2', 'mPDL_RNA14D_Ko3', 'mPDL_RNA14D_Ko4', 'mPDL_RNA14D_WT1', 'mPDL_RNA14D_WT2', 'mPDL_RNA14D_WT3', 'mPDL_RNA14D_WT4', 'mPDL_RNA7D_Ko1', 'mPDL_RNA7D_Ko2', 'mPDL_RNA7D_Ko3', 'mPDL_RNA7D_Ko4', 'mPDL_RNA7D_WT1', 'mPDL_RNA7D_WT2', 'mPDL_RNA7D_WT3', 'mPDL_RNA7D_WT4' )
+
+# Top10heat <- topTenMerg[,names(topTenMerg)] %in% include_var #Not working, gives T/F vector instead of matrix.
+# Top10heat
+
+
+Top10heat <- select(topTenMerg, all_of(include_var)) #exclude all variables in excluded_vars
+head(Top10heat)
+dim(Top10heat)
+class(Top10heat)
+
+library(tidyverse)
+# col1 to rownames
+Top10heat <- Top10heat %>% column_to_rownames(var="Row.names") 
+# Source: https://www.geeksforgeeks.org/convert-values-in-column-into-row-names-of-dataframe-in-r/
+
+head(Top10heat)
+
+# reorder  columns according to the experimental design file
+colnames(Metadata2)
+Top10heatord <- Top10heat[,Metadata2$SampleName]
+head(Top10heatord [1:7]) 
+Top10heatord
+
+# Heat plot
+pheatmap(Top10heatord, main = "heatmap top 10 genes try1")
+pheatmap(log2(Top10heatord+1), main = "heatmap top 100 genes try2")
+
+# Individual expression values of the DE genes
+# Only for the top 10 genes. 
+newtop10 <- Top10heatord[1:10,]
+newtop10
+dim(newtop10)
+# construct  appropiate df
+newtop10 <- melt(as.matrix(newtop10))
+# Rename columns
+names(newtop10) <- c("GeneID", "Sample", "count") # maybe better use exp (expression) instead of count. 
+head(newtop10)
+
+# Add new columns Genetype and Time
+newtop10$Genetype <- ifelse(grepl("WT", newtop10$Sample), "WT", "Ko")
+head(newtop10)
+newtop10$Time <- as.factor( ifelse(grepl("7", newtop10$Sample), "7", "14"))
+head(newtop10)
+str(newtop10)
+
+ggplot(newtop10, aes(x= Genetype, y= log2(count+1), color= Genetype)) +
+  geom_point() +
+  facet_grid(Time~GeneID) +
+  theme()
+
+
+# Extremely quick tutorial on DESequ analysis  ***** -----------------------------
+library(htmltools)
+library(DESeq2)
+library(ggplot2)
+
+#setwd()
+
+# Load Data -> construct appropiate df.
+all_raw_count02
+head(all_raw_count02)
+# Load Metadata -> construct appropiate df. 
+Metadata2
+head(Metadata2)
+
+# Contruct DESeqDataSet object
+dds210721 <- DESeqDataSetFromMatrix(countData = all_raw_count02,
+                                    colData = Metadata2,
+                                    design = ~ Genotype +Time, 
+                                    tidy = F) #If the 1st column of countData is the rownames for the count matrix then TRUE
+dds210721
+
+#Run DESeq function for the differentiation Expression Table
+dds210721 <- DESeq(dds210721)
+
+# Call the results of the differentiation expression analysis and define alpha.
+res210721 <- results(dds210721, alpha = 0.001)
+head(res210721, tidy=F)
+dim(res210721)
+
+summary(res210721)
+
+# Sort/order summary list with  padj values from smallest to largest
+res210721Rank <- res210721[order(res210721$padj),]
+
+head(res210721Rank)
+
+
+# Plot PCA
+# Apply a variance stabilizing transformation (VST) to the count data
+vsd210721 <- vst(dds210721, blind = F)
+vsd210721
+str(vsd210721)
+plotPCA(vsd210721, intgroup = c("Time", "Genotype"))
+
+```
+

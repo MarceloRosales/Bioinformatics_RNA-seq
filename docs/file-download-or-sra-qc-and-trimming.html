@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 File Download (or SRA), QC, and Trimming | Bioinformatics_RNA-seq</title>
+  <meta name="description" content="RNA-seq notes and trials" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 File Download (or SRA), QC, and Trimming | Bioinformatics_RNA-seq" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="RNA-seq notes and trials" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 File Download (or SRA), QC, and Trimming | Bioinformatics_RNA-seq" />
+  
+  <meta name="twitter:description" content="RNA-seq notes and trials" />
+  
+
+<meta name="author" content="J. Marcelo Rosales R." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="methods.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Bioinformatics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction to RNA sequencing (RNA_seq)</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#downloading-and-setting-up-conda-environments."><i class="fa fa-check"></i><b>1.1</b> Downloading and setting up conda environments.</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#install-miniconda-or-anaconda."><i class="fa fa-check"></i><b>1.2</b> Install Miniconda, or Anaconda.</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#conda-terminal-commands."><i class="fa fa-check"></i><b>1.2.1</b> Conda terminal commands.</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#anacondaminiconda-install-summary-of-steps."><i class="fa fa-check"></i><b>1.2.2</b> Anaconda/Miniconda install Summary of Steps.</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#conda-activate-error"><i class="fa fa-check"></i><b>1.2.3</b> Conda activate error</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#alignment-procedures-and-files."><i class="fa fa-check"></i><b>1.3</b> Alignment Procedures and files.</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#using-tophat-early-version"><i class="fa fa-check"></i><b>1.3.1</b> Using Tophat (early version)</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#using-tophat"><i class="fa fa-check"></i><b>1.3.2</b> Using Tophat</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#using-star"><i class="fa fa-check"></i><b>1.3.3</b> Using STAR</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#Mus-musculus-NCBI-build37-2"><i class="fa fa-check"></i><b>1.3.4</b> Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file.</a></li>
+<li class="chapter" data-level="1.3.5" data-path="index.html"><a href="index.html#get-the-sample-files."><i class="fa fa-check"></i><b>1.3.5</b> Get the Sample files.</a></li>
+<li class="chapter" data-level="1.3.6" data-path="index.html"><a href="index.html#starting-to-analize-fastq.gz-files"><i class="fa fa-check"></i><b>1.3.6</b> Starting to analize fastq.gz files</a></li>
+<li class="chapter" data-level="1.3.7" data-path="index.html"><a href="index.html#trimming-with-trimmomatic"><i class="fa fa-check"></i><b>1.3.7</b> Trimming with Trimmomatic</a></li>
+<li class="chapter" data-level="1.3.8" data-path="index.html"><a href="index.html#using-star-to-map-genes"><i class="fa fa-check"></i><b>1.3.8</b> Using STAR to map genes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="file-download-or-sra-qc-and-trimming.html"><a href="file-download-or-sra-qc-and-trimming.html"><i class="fa fa-check"></i><b>2</b> File Download (or SRA), QC, and Trimming</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="file-download-or-sra-qc-and-trimming.html"><a href="file-download-or-sra-qc-and-trimming.html#trimmomatic"><i class="fa fa-check"></i><b>2.1</b> Trimmomatic</a></li>
+<li class="chapter" data-level="2.2" data-path="file-download-or-sra-qc-and-trimming.html"><a href="file-download-or-sra-qc-and-trimming.html#indexing-with-star"><i class="fa fa-check"></i><b>2.2</b> Indexing with STAR</a></li>
+<li class="chapter" data-level="2.3" data-path="file-download-or-sra-qc-and-trimming.html"><a href="file-download-or-sra-qc-and-trimming.html#microbial-contamination"><i class="fa fa-check"></i><b>2.3</b> Microbial contamination</a></li>
+<li class="chapter" data-level="2.4" data-path="file-download-or-sra-qc-and-trimming.html"><a href="file-download-or-sra-qc-and-trimming.html#feature-counts."><i class="fa fa-check"></i><b>2.4</b> Feature counts.</a></li>
+<li class="chapter" data-level="2.5" data-path="file-download-or-sra-qc-and-trimming.html"><a href="file-download-or-sra-qc-and-trimming.html#setting-r-environment."><i class="fa fa-check"></i><b>2.5</b> Setting R environment.</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>3</b> Methods</a></li>
+<li class="chapter" data-level="4" data-path="external-ref.html"><a href="external-ref.html"><i class="fa fa-check"></i><b>4</b> External Ref</a></li>
+<li class="chapter" data-level="5" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><i class="fa fa-check"></i><b>5</b> RNA Seq Differentially Expressed, GO Enrichment, and Pathway analysis</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#background"><i class="fa fa-check"></i><b>5.1</b> <strong>Background</strong></a></li>
+<li class="chapter" data-level="5.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#cleaning-data"><i class="fa fa-check"></i><b>5.2</b> <strong>Cleaning Data</strong></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#programs-used"><i class="fa fa-check"></i><b>5.2.1</b> Programs used?</a></li>
+<li class="chapter" data-level="5.2.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#acquiring-sequences"><i class="fa fa-check"></i><b>5.2.2</b> Acquiring sequences</a></li>
+<li class="chapter" data-level="5.2.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#fastqc"><i class="fa fa-check"></i><b>5.2.3</b> FastQC</a></li>
+<li class="chapter" data-level="5.2.4" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#trimming-with-trimmomatic-1"><i class="fa fa-check"></i><b>5.2.4</b> Trimming with Trimmomatic</a></li>
+<li class="chapter" data-level="5.2.5" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#alignment"><i class="fa fa-check"></i><b>5.2.5</b> Alignment</a></li>
+<li class="chapter" data-level="5.2.6" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#assembling-transcripts-with-cufflinks"><i class="fa fa-check"></i><b>5.2.6</b> Assembling transcripts with Cufflinks</a></li>
+<li class="chapter" data-level="5.2.7" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#checking-for-contamination"><i class="fa fa-check"></i><b>5.2.7</b> Checking for Contamination</a></li>
+<li class="chapter" data-level="5.2.8" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#counting-transcripts"><i class="fa fa-check"></i><b>5.2.8</b> Counting Transcripts</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#differentially-expressed-sequence-identification"><i class="fa fa-check"></i><b>5.3</b> <strong>Differentially Expressed Sequence Identification</strong></a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#analyzing-reads-counts"><i class="fa fa-check"></i><b>5.3.1</b> Analyzing Reads Counts</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#interactions-cause-a-difference-between-the-lfc-betwen-pooled-data-e.g.-p53-control-and-ir-and-p53---control-and-ir"><i class="fa fa-check"></i><b>5.4</b> Interactions cause a difference between the lfc betwen pooled data, e.g. p53+/+ (control and IR) and p53-/- (control and IR)</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>5.4.1</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="5.4.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#identification-of-differentially-expressed-genes"><i class="fa fa-check"></i><b>5.4.2</b> Identification of Differentially Expressed Genes</a></li>
+<li class="chapter" data-level="5.4.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#gene-annotations"><i class="fa fa-check"></i><b>5.4.3</b> Gene Annotations</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#go-enrichment-analysis-using-gostats"><i class="fa fa-check"></i><b>5.5</b> 7. GO Enrichment analysis using GOstats</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#go-enrichment-analysis-of-downregulated-genes"><i class="fa fa-check"></i><b>5.5.1</b> GO Enrichment analysis of downregulated genes</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-analysis-using-expression-data"><i class="fa fa-check"></i><b>5.6</b> 8. Pathway analysis using expression data</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#prepare-data"><i class="fa fa-check"></i><b>5.6.1</b> Prepare data</a></li>
+<li class="chapter" data-level="5.6.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#kegg-pathways"><i class="fa fa-check"></i><b>5.6.2</b> KEGG pathways</a></li>
+<li class="chapter" data-level="5.6.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-oxidative-phosphorylation."><i class="fa fa-check"></i><b>5.6.3</b> Pathway and regulation of genes for Oxidative phosphorylation.</a></li>
+<li class="chapter" data-level="5.6.4" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-glycosylphosphatidylinositolgpi-anchor-biosynthesis."><i class="fa fa-check"></i><b>5.6.4</b> Pathway and regulation of genes for Glycosylphosphatidylinositol(GPI)-anchor biosynthesis.</a></li>
+<li class="chapter" data-level="5.6.5" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-rna-polymerase."><i class="fa fa-check"></i><b>5.6.5</b> Pathway and regulation of genes for RNA polymerase.</a></li>
+<li class="chapter" data-level="5.6.6" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-nucleotide-excision-repair."><i class="fa fa-check"></i><b>5.6.6</b> Pathway and regulation of genes for Nucleotide excision repair.</a></li>
+<li class="chapter" data-level="5.6.7" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-non-homologous-end-joining."><i class="fa fa-check"></i><b>5.6.7</b> Pathway and regulation of genes for Non-homologous end-joining.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html"><i class="fa fa-check"></i><b>6</b> WGCNA RNA-seq Blog</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#WGCNA"><i class="fa fa-check"></i><b>6.1</b> Introduction to the WGCNA Rpackage</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#wgcna-rpackage-installation-procedure."><i class="fa fa-check"></i><b>6.1.1</b> WGCNA Rpackage Installation procedure.</a></li>
+<li class="chapter" data-level="6.1.2" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#final-installation-workflow"><i class="fa fa-check"></i><b>6.1.2</b> Final installation workflow:</a></li>
+<li class="chapter" data-level="6.1.3" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#wgcna-tutorial."><i class="fa fa-check"></i><b>6.1.3</b> WGCNA tutorial.</a></li>
+<li class="chapter" data-level="6.1.4" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#gene-expression-analysis"><i class="fa fa-check"></i><b>6.1.4</b> 3.4 Gene expression analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#rna-seq-analisys-with-kakus-data-sample."><i class="fa fa-check"></i><b>6.2</b> RNA-seq Analisys with Kaku’s Data sample.</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="wgcna-rna-seq-blog.html"><a href="wgcna-rna-seq-blog.html#data-analysis."><i class="fa fa-check"></i><b>6.2.1</b> Data Analysis.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="youtube-references-.html"><a href="youtube-references-.html"><i class="fa fa-check"></i><b>7</b> Youtube references.</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="youtube-references-.html"><a href="youtube-references-.html#anaconda-set-up-robust-data-science-environment-with-miniconda-and-conda-forge."><i class="fa fa-check"></i><b>7.1</b> Anaconda set up, Robust Data Science Environment with Miniconda and Conda-Forge.</a></li>
+<li class="chapter" data-level="7.2" data-path="youtube-references-.html"><a href="youtube-references-.html#quality-control-preprocessing-of-raw-reads"><i class="fa fa-check"></i><b>7.2</b> Quality control &amp; preprocessing of raw reads</a></li>
+<li class="chapter" data-level="7.3" data-path="youtube-references-.html"><a href="youtube-references-.html#trimmomatic."><i class="fa fa-check"></i><b>7.3</b> Trimmomatic.</a></li>
+<li class="chapter" data-level="7.4" data-path="youtube-references-.html"><a href="youtube-references-.html#building-genome-index-and-aligning-with-star"><i class="fa fa-check"></i><b>7.4</b> Building Genome Index and Aligning with STAR</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bioinformatics_RNA-seq</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="file-download-or-sra-qc-and-trimming" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> File Download (or SRA), QC, and Trimming</h1>
+<p><a href="https://www.youtube.com/watch?v=UkrUTgAKFiE&amp;list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k&amp;index=2">Bioinformatics - SRA Download, QC, and Trimming</a>.</p>
+<ol style="list-style-type: decimal">
+<li>Create environment (avoid spaces or special characters).</li>
+<li>Init environment</li>
+<li><code>conda install sra-tools</code> This will allow us to pull directly from the sra page. (where the sample ex. Files)</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Go to <a href="https://trace.ncbi.nlm.nih.gov/Traces/study/?acc=SRP061386&amp;o=acc_s%3Aa">page</a>.</li>
+<li>Select only the files needed.</li>
+<li>Then in the Selected &gt; click on Accession List &gt;</li>
+<li>Save (this saves a .txt file with the list of names of the selected files).</li>
+<li>Drag onto the file structure, so its now in system</li>
+<li><code>ls</code> to see the files (SRR_Acc_List.txt)</li>
+<li>Check ‘head SRR_Acc_List.txt’ command</li>
+<li>Also you can use the <code>vi SRR_Acc_List.txt</code> command to see the list in the file. Ex.</li>
+</ol>
+<pre><code>①. SRR2121770\
+②. SRR2121771\
+③. SRR2121774\
+④. SRR2121778\
+⑤. Etc.</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Now that we have the list of files, we have to individually download each one of them.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><p>One way to do that is with the <code>fastq-dump --gzi --split-file SRR2121770 &amp;</code> command.</p>
+<p>①. This command will take the SRR2121770 file, and save it as a .gzi file (to save space)<br />
+②. it will split the file in forward (1) and Reverse (2),<br />
+③. the “&amp;” sign means that it will run this command in the background.</p></li>
+<li><p>This will take some time since the file is big. A way to see if the process is finished or not is with the command <code>jobs</code>, which gives a list of the jobs in process or nothing if there are not jobs running.<br />
+</p></li>
+<li><p>Another way to do it is with the pipe command, so we don’t have to do this process for each file. Use the command <code>cat SRR_Acc_List.txt | parallel fastq-dump --gzi --split-file {}</code>.</p></li>
+</ol>
+<pre><code>①. This will take the SRR_Acc_List.txt and catalog the list.     
+②. Then it will take each of the element in the list &quot;{}&quot; slipt them, and save them as gzi.  
+③. In the rawReads folder???.(create rawReads folder). you will have a list of .fastq.gz_1 and .fastq.gz_2 for each element of the list. `…rawReads$ ls`.  
+④. Each time something is changed in the files, create a new folder and save there so the originals are not modified. Ex. Trimmed.   </code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Once all files are downloaded, install multiqc. <code>conda install multiqc</code>. (if not installed)<br />
+</li>
+<li>Before running fastqc, create an output directory where to save the processed files. <code>mkdir rawFastQC</code> (make sure you are in the right directory before making this folder).<br />
+</li>
+<li>Then run fastqc: <code>fastqc -t 64 rawReads/*fastq.gz -o rawFastQC</code></li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>This means, process files with fastqc using 64 treads (-t 64) windows/linux virtual machine;<br />
+</li>
+<li>by taking all fastqc.gz files in the folder rawReads;<br />
+</li>
+<li>and save in the output directory (-o) called rawFastQC.<br />
+</li>
+<li>This process will take a long time depending on the number and size of the files.</li>
+</ol>
+<ol start="8" style="list-style-type: decimal">
+<li>Once finished <code>cd rawFastQC</code> and check the files <code>ls</code><br />
+</li>
+<li>Then inside the folder, run multiqc in <code>multiqc .</code>.<br />
+</li>
+<li>Once this finished, inside the folder a new “multiqc_report.html” will be created.<br />
+</li>
+<li>Open the files and compare.</li>
+</ol>
+<p>22:29<br />
+<strong>Once this quality control is finished we can pass to the trimming of the samples.</strong></p>
+<div id="trimmomatic" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Trimmomatic</h2>
+<p><a href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic web page</a>.<br />
+Quick start
+Paired End:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="file-download-or-sra-qc-and-trimming.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [Trimmomatic web page](http://www.usadellab.org/cms/?page=trimmomatic).</span></span>
+<span id="cb26-2"><a href="file-download-or-sra-qc-and-trimming.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> -jar trimmomatic-0.39.jar PE input_forward.fq.gz input_reverse.fq.gz output_forward_paired.fq.gz output_forward_unpaired.fq.gz output_reverse_paired.fq.gz output_reverse_unpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36</span></code></pre></div>
+<p><a href="https://datacarpentry.org/wrangling-genomics/03-trimming/index.html">Trimming and Filtering</a> full parameters description and example:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="file-download-or-sra-qc-and-trimming.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># datacarpentry [Trimming and Filtering](https://datacarpentry.org/wrangling-genomics/03-trimming/index.html) </span></span>
+<span id="cb27-2"><a href="file-download-or-sra-qc-and-trimming.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE -threads 4 SRR_1056_1.fastq SRR_1056_2.fastq  <span class="kw">\</span></span>
+<span id="cb27-3"><a href="file-download-or-sra-qc-and-trimming.html#cb27-3" aria-hidden="true" tabindex="-1"></a>              <span class="ex">SRR_1056_1.trimmed.fastq</span> SRR_1056_1un.trimmed.fastq <span class="kw">\</span></span>
+<span id="cb27-4"><a href="file-download-or-sra-qc-and-trimming.html#cb27-4" aria-hidden="true" tabindex="-1"></a>              <span class="ex">SRR_1056_2.trimmed.fastq</span> SRR_1056_2un.trimmed.fastq <span class="kw">\</span></span>
+<span id="cb27-5"><a href="file-download-or-sra-qc-and-trimming.html#cb27-5" aria-hidden="true" tabindex="-1"></a>              <span class="ex">ILLUMINACLIP</span>:SRR_adapters.fa SLIDINGWINDOW:4:20</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Install trimmomatic, <code>conda install trimmomatic</code> (if not installed).</li>
+</ol>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="file-download-or-sra-qc-and-trimming.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install trimmomatic</span>
+<span id="cb28-2"><a href="file-download-or-sra-qc-and-trimming.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># parallel my also be required for task piping.</span></span>
+<span id="cb28-3"><a href="file-download-or-sra-qc-and-trimming.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install parallel</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>If we are going to trim the files, we need to make a new folder, so exit rawFastQC folder. <code>cd..</code> and <code>mkdir trimmedReads</code>, we are going to point trimmomatic the this folder.</li>
+</ol>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="file-download-or-sra-qc-and-trimming.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># exit rawFastQC folder (remember there is a space between cd and .)</span></span>
+<span id="cb29-2"><a href="file-download-or-sra-qc-and-trimming.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> .. </span>
+<span id="cb29-3"><a href="file-download-or-sra-qc-and-trimming.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new folder for trimmed files</span></span>
+<span id="cb29-4"><a href="file-download-or-sra-qc-and-trimming.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> trimmedReads</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>We are going to pull our true adapter sequencer to our working directory. Then it will be a lot easier to point trimmomatic to that vs having to type in the really long path. <code>cp ~/miniconda3/envs/name_of_environment/share/trimmomatic-0.39-1/adapters/TrueSeq3-PE-2.fa .</code> (the last point is important, it means that the command will the done in this folder). This command copy the file TruSeq3-PE-2.fa file to our current folder, why? so the process will be done directly in our folder, instead of the need to type the path to the folder (if not, in the code, instead of the point, type the path to the directory.)<br />
+<code>cp ~/miniconda3/envs/rna-seq_test/share/trimmomatic-0.39-1/adapters/TrueSeq3-PE-2.fa .</code> This gives error. Sometimes, due to updates in conda and trimmomatic, folder names might change or there is a space in a folders name. Check if this is the case by <code>open "/usr/local/anaconda3/envs/rna-seq_test/share/"</code>. Seems like the version of timmomatic is “0.39-2” and not "0.39-1, and I installed anaconda3 and not miniconda3. Correct code and try again.<br />
+Full path is: /usr/local/anaconda3/envs/rna-seq_test/share/trimmomatic-0.39-2/adapters/TruSeq3-PE-2.fa, then the code would be:</li>
+</ol>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="file-download-or-sra-qc-and-trimming.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">`</span><span class="fu">cp</span> /usr/local/anaconda3/envs/rna-seq_test/share/trimmomatic-0.39-2/adapters/TruSeq3-PE-2.fa .<span class="kw">`</span></span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Install Parallel, <code>Conda install paralell</code><br />
+</li>
+<li>Create new directory for the trimmed files. <code>mkdir trimmedReads</code>.<br />
+</li>
+<li>Now run the trimmomatic.<br />
+For my samples it would be…</li>
+</ol>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="file-download-or-sra-qc-and-trimming.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Try 01 FAILED</span></span>
+<span id="cb31-2"><a href="file-download-or-sra-qc-and-trimming.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE -threads 5 rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRALING:3 MINLEN:36 <span class="op">2&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="file-download-or-sra-qc-and-trimming.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Try 02 FAILED</span></span>
+<span id="cb32-2"><a href="file-download-or-sra-qc-and-trimming.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE -threads 5 rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRALING:3 MINLEN:36 <span class="op">2&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="file-download-or-sra-qc-and-trimming.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Try 03 SUCCESS!!!???</span></span>
+<span id="cb33-2"><a href="file-download-or-sra-qc-and-trimming.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="op">2&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="file-download-or-sra-qc-and-trimming.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Try 04 (Datacarpentry)</span></span>
+<span id="cb34-2"><a href="file-download-or-sra-qc-and-trimming.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE -threads 4 rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001 ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="file-download-or-sra-qc-and-trimming.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># datacarpentry [Trimming and Filtering](https://datacarpentry.org/wrangling-genomics/03-trimming/index.html) </span></span>
+<span id="cb35-2"><a href="file-download-or-sra-qc-and-trimming.html#cb35-2" aria-hidden="true" tabindex="-1"></a>$ <span class="ex">trimmomatic</span> PE -threads 4 </span>
+<span id="cb35-3"><a href="file-download-or-sra-qc-and-trimming.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="ex">SRR_1056_1.fastq</span> </span>
+<span id="cb35-4"><a href="file-download-or-sra-qc-and-trimming.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="ex">SRR_1056_2.fastq</span>  <span class="kw">\</span></span>
+<span id="cb35-5"><a href="file-download-or-sra-qc-and-trimming.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="ex">SRR_1056_1.trimmed.fastq</span> </span>
+<span id="cb35-6"><a href="file-download-or-sra-qc-and-trimming.html#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="ex">SRR_1056_1un.trimmed.fastq</span> <span class="kw">\</span></span>
+<span id="cb35-7"><a href="file-download-or-sra-qc-and-trimming.html#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="ex">SRR_1056_2.trimmed.fastq</span> </span>
+<span id="cb35-8"><a href="file-download-or-sra-qc-and-trimming.html#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="ex">SRR_1056_2un.trimmed.fastq</span> <span class="kw">\</span></span>
+<span id="cb35-9"><a href="file-download-or-sra-qc-and-trimming.html#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="ex">ILLUMINACLIP</span>:SRR_adapters.fa SLIDINGWINDOW:4:20</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="file-download-or-sra-qc-and-trimming.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample 1 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)</span></span>
+<span id="cb36-2"><a href="file-download-or-sra-qc-and-trimming.html#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="file-download-or-sra-qc-and-trimming.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="op">2&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="file-download-or-sra-qc-and-trimming.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample 2 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)</span></span>
+<span id="cb37-2"><a href="file-download-or-sra-qc-and-trimming.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko2_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko2_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko2_S1_L001_R2_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="op">2&gt;</span> trimmedReads/mPDL_RNA7D_Ko2_S1_L001trimming.log</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="file-download-or-sra-qc-and-trimming.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> -jar trimmomatic-0.39.jar PE input_forward.fq.gz input_reverse.fq.gz output_forward_paired.fq.gz output_forward_unpaired.fq.gz output_reverse_paired.fq.gz output_reverse_unpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36</span></code></pre></div>
+<p>The <strong>PE</strong> means <strong>“Pair end Read”</strong>, because we have both forward and reverse ends (1 and 2); If we would have only one end read (1 or 2) then it would be only single read, for single reads we type SE (instead of the PE).</p>
+<p>Timmomatic usually use up to 5 threads, thus we use <strong>“-threads 5”</strong>. (What if we don’t type the # of threads? would it use all threads? Why is this important?….)</p>
+<p>Then type the path to the folder and files containing the files to be trimmed. <strong>rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001.fastq.gz</strong> (forward), and type also the reverse <strong>“rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001.fastq.gz”</strong><br />
+The <strong>“-baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001”</strong> means that; the base file name of the output will all have the name <strong>" trimmedReads/mPDL_RNA7D_Ko1_S1_L001"</strong>. It will place the file in the trimmedReads folder and all the file with start with the name mPDL_RNA7D_Ko1_S1_L001.</p>
+<p>Then we use the True sequence adapter (TruSeq3-PE-2.fa) that we moved to the working folder by typing <strong>“ILLUMINACLIP:TruSeq3-PE-2.fa:”</strong> (you can use the tap for auto completion coz it is in the same folder)</p>
+<p>Then we place the trimming parameters??… <strong>“2:30:10:2keepBothReads”</strong>. Add more info here…..<br />
+how to understand the trimmomatic flags? <a href="https://youtu.be/Op3W5TEej3k?list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k">Understanding Trimmomatic</a></p>
+<p>The <strong>“LEADING:3 TRALING:3”</strong>means that; if the bases have bad quality, then trimm the leading 3 and trailing 3 bases. <a href="https://youtu.be/UkrUTgAKFiE?list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k&amp;t=1729">more info</a>, If the quality is of very good quality we can remove 10, but we dont want to remove/through away that much information from out reeds.</p>
+<p>Then, since our reads are really short and we are looking at their quality, we want to set a mean length. <strong>“MINLEN:36”</strong>. So if any or our 51 base pair reads have more than 15 removed (51-15= 36), we are just not going to use or keep them because we lost ~33% of the information of that read, so is not going to be a good (quality?) read.</p>
+<p>Then we want to keep the output. <strong>“2&gt; mPDL_RNA7D_Ko1_S1_L001trimming.log`”</strong>, the “2” is to keep output, and then feed that into “&gt;” the “trimmedReads folder, and make (from all the ourput) a nice report like for fastQC and colled it”mPDL_RNA7D_Ko1_S1_L001trimming.log".</p>
+<p>From all the code typed, there will be 5 outputs to be loged, ….
+Since this takes really long time, and option will be to do a cat with the reads and do 4 jobs at a time.</p>
+<p>For my files..??</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="file-download-or-sra-qc-and-trimming.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Not working</span></span>
+<span id="cb39-2"><a href="file-download-or-sra-qc-and-trimming.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> Filename.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 4 <span class="st">&quot;trimmomatic PE -threads 5 rawReads/{}_R1_001.fastq.gz rawReads/{}_R2_001.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRALING:3 MINLEN:36 2&gt; trimmedReads/{}trimming.log&quot;</span></span></code></pre></div>
+<p>In the tutorial for auto loading.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="file-download-or-sra-qc-and-trimming.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> Filename_list.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 4 <span class="st">&quot;trimmomatic PE -threads 5 rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRALING:3 MINLEN:36 2&gt; trimmedReads/{}trimming.log&quot;</span></span></code></pre></div>
+<p>Control + Z to stop running and add <code>bj 1</code> (in root?) to run in the background. type <code>jobs</code> (in terminal) to see the jobs running in the background.</p>
+<p>In the github tutorial:
+Conda was used again to run Trimmomatic. This isn’t as easy as using the wildcard like with FastQC because each output has to be personalized for the read files that are input into Trimmomatic. Also, we have to make sure that the adapter sequences are in the same folder that we are running so we can refer to them easily when calling the Trimmomatic program. In this case, we are using the TruSeq3-PE-2.fa adapter sequences For example:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="file-download-or-sra-qc-and-trimming.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/miniconda2/bin/trimmomatic</span> PE SRR2121770_1.fastq.gz SRR2121770_2.fastq.gz 770_fp.fq.gz 770_fu.fq.gz 770_rp.fq.gz 770_ru.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRALING:3 MINLEN:36 <span class="kw">&amp;</span></span></code></pre></div>
+<p>Finally for this trial I used:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="file-download-or-sra-qc-and-trimming.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample 1 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)</span></span>
+<span id="cb42-2"><a href="file-download-or-sra-qc-and-trimming.html#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="file-download-or-sra-qc-and-trimming.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="op">2&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span>
+<span id="cb42-4"><a href="file-download-or-sra-qc-and-trimming.html#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="file-download-or-sra-qc-and-trimming.html#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample 2 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)</span></span>
+<span id="cb42-6"><a href="file-download-or-sra-qc-and-trimming.html#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko2_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko2_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko2_S1_L001_R2_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="op">2&gt;</span> trimmedReads/mPDL_RNA7D_Ko2_S1_L001trimming.log</span></code></pre></div>
+<p>Pipe line code for automatic file loading to trimmomatic still not successfully tested.<br />
+Come back to this later.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="file-download-or-sra-qc-and-trimming.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pipe and loop for all files.</span></span>
+<span id="cb43-2"><a href="file-download-or-sra-qc-and-trimming.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 4 <span class="st">&quot;trimmomatic PE rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2&gt; trimmedReads/{}trimming.log&quot;</span> #Not successful.</span></code></pre></div>
+<p>Finally re-run the fastqc and multiqc of the trimmed data.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="file-download-or-sra-qc-and-trimming.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In TrimmedRead folder</span></span>
+<span id="cb44-2"><a href="file-download-or-sra-qc-and-trimming.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
+<span id="cb44-3"><a href="file-download-or-sra-qc-and-trimming.html#cb44-3" aria-hidden="true" tabindex="-1"></a> <span class="ex">multiqc</span> .</span></code></pre></div>
+<p>This will take all the .log files created in by the TruSeq3-PE-2.fa trimmed data.</p>
+<p>Note: Seems like multiqc can take all html and log files and combine the information with in them in a single html report file.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="file-download-or-sra-qc-and-trimming.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fastQC of trimmed files again?</span></span>
+<span id="cb45-2"><a href="file-download-or-sra-qc-and-trimming.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> trimmedFastQC</span>
+<span id="cb45-3"><a href="file-download-or-sra-qc-and-trimming.html#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="file-download-or-sra-qc-and-trimming.html#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co"># rm -d trimmedFastQC # Make sure folder is in main folder, if not delete</span></span>
+<span id="cb45-5"><a href="file-download-or-sra-qc-and-trimming.html#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-6"><a href="file-download-or-sra-qc-and-trimming.html#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Run fastqc... Trimmed files have no file extension. Why???</span></span>
+<span id="cb45-7"><a href="file-download-or-sra-qc-and-trimming.html#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> trimmedReads/* -o trimmedFastQC</span>
+<span id="cb45-8"><a href="file-download-or-sra-qc-and-trimming.html#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-9"><a href="file-download-or-sra-qc-and-trimming.html#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="co"># .zip and qc html files will be created. Run multiqc</span></span>
+<span id="cb45-10"><a href="file-download-or-sra-qc-and-trimming.html#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> trimmedFastQC</span>
+<span id="cb45-11"><a href="file-download-or-sra-qc-and-trimming.html#cb45-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-12"><a href="file-download-or-sra-qc-and-trimming.html#cb45-12" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> .</span></code></pre></div>
+</div>
+<div id="indexing-with-star" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Indexing with STAR</h2>
+<p><strong>Bioinformatics - Building Genome Index and Aligning with STAR</strong><br />
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7LK-FtX6Qbo?list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<p>STAR is a tool that allow us to build an index of the mouse genome; then, with those index files we can then map the reads against the genome and find the location of each of those reads where they are mapped in the genome. Once we have that, the we can do a the <strong>“read count”</strong></p>
+<p>For more information see</p>
+<p>[STAR: ultrafast universal RNA-seq aligner]
+(<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3530905/" class="uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3530905/</a>)
+STAR Manual <a href="https://www.youtube.com/redirect?event=video_description&amp;redir_token=QUFFLUhqbEdRZzNEMVdieXRVeDhTekJsRUVJc3Z6a1lnd3xBQ3Jtc0trM0tNRm5hS19salF6MWZjWXVCQWh6aDFKS21ZNVBtTEM5a3p6YlRfa045OHFXZXhaaEROM0xRa0xSVVRsbDMxR0dOdHdBejFCUVAxSGtHODZpUEdWSWI5SVJsdTI0SzdUMDBjSzdqdkxuRTVVZmVmWQ&amp;q=https%3A%2F%2Fraw.githubusercontent.com%2Falexdobin%2FSTAR%2Fmaster%2Fdoc%2FSTARmanual.pdf">download link</a>. <a href="file:///Volumes/homes/RosalesJM/SynDS220/NiigataU/Genewiz/Trial01/STARmanual.pdf">PDF file in local HD</a><br />
+<a href="https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf" target="_blank">Link to manual page</a>.</p>
+<ol style="list-style-type: decimal">
+<li>Download the Mouse genome form the NCBI page.<br />
+See <a href="index.html#Mus-musculus-NCBI-build37-2">Custom/personal way to Download the Mus_musculus_NCBI_build37.2.tar.gz file</a> section. (open section in a <a href="https://marcelorosales.github.io/Bioinformatics_RNA-seq/index.html#custompersonal-way-to-download-the-mus_musculus_ncbi_build37.2.tar.gz-file" target="_blank">new tab</a>)</li>
+</ol>
+<p>See <a href="index.html#Mus-musculus-NCBI-build37-2">1.3.4</a></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Once file is downloaded, unzip. (It will take a long time)<br />
+Make sure to be in the same folder/directory as the tar.gz file.<br />
+extracted files will be saved in a Mus_musculus folder/directory automatically created.</li>
+</ol>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="file-download-or-sra-qc-and-trimming.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the correct environment.</span></span>
+<span id="cb46-2"><a href="file-download-or-sra-qc-and-trimming.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> <span class="ex">/usr/local/anaconda3/bin/activate</span> <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
+<span id="cb46-3"><a href="file-download-or-sra-qc-and-trimming.html#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="file-download-or-sra-qc-and-trimming.html#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the correct folder/directory.   </span></span>
+<span id="cb46-5"><a href="file-download-or-sra-qc-and-trimming.html#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/Mus_musculus_NCBI_build37.2.tar.gz&quot;</span></span>
+<span id="cb46-6"><a href="file-download-or-sra-qc-and-trimming.html#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="file-download-or-sra-qc-and-trimming.html#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="co"># cd &quot;folder path&quot;</span></span>
+<span id="cb46-8"><a href="file-download-or-sra-qc-and-trimming.html#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/Mus_musculus_NCBI_build37.2.tar.gz: Not a directory</span></span>
+<span id="cb46-9"><a href="file-download-or-sra-qc-and-trimming.html#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/&quot;</span></span>
+<span id="cb46-10"><a href="file-download-or-sra-qc-and-trimming.html#cb46-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-11"><a href="file-download-or-sra-qc-and-trimming.html#cb46-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Check contents</span></span>
+<span id="cb46-12"><a href="file-download-or-sra-qc-and-trimming.html#cb46-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>  </span>
+<span id="cb46-13"><a href="file-download-or-sra-qc-and-trimming.html#cb46-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-14"><a href="file-download-or-sra-qc-and-trimming.html#cb46-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Unzip file</span></span>
+<span id="cb46-15"><a href="file-download-or-sra-qc-and-trimming.html#cb46-15" aria-hidden="true" tabindex="-1"></a> <span class="fu">tar</span> xvfz Mus_musculus_NCBI_build37.2.tar.gz  </span></code></pre></div>
+<p>Tar command info <a href="https://www.interserver.net/tips/kb/use-tar-command-linux-examples/#:~:text=The%20tar%20command%20stands%20for,gzip%2C%20and%20bzip%20in%20Linux.">for linux here</a> and for mac <a href="https://support.apple.com/guide/terminal/compress-and-uncompress-file-archives-apdc52250ee-4659-4751-9a3a-8b7988150530/mac#:~:text=Create%20a%20compressed%20tar%20archive,tar%20command%2C%20then%20press%20Return.&amp;text=The%20z%20flag%20indicates%20that,you%20aren&#39;t%20required%20to.">here</a></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Confirm that STAR is installed if not Install STAR.</li>
+</ol>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="file-download-or-sra-qc-and-trimming.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure of enviroment.  </span></span>
+<span id="cb47-2"><a href="file-download-or-sra-qc-and-trimming.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> --help</span>
+<span id="cb47-3"><a href="file-download-or-sra-qc-and-trimming.html#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="file-download-or-sra-qc-and-trimming.html#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co">#If not found install.  </span></span>
+<span id="cb47-5"><a href="file-download-or-sra-qc-and-trimming.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install STAR </span>
+<span id="cb47-6"><a href="file-download-or-sra-qc-and-trimming.html#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-7"><a href="file-download-or-sra-qc-and-trimming.html#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure is from &quot;bioconda&quot;.  Preceed([y]/n)? message.</span></span>
+<span id="cb47-8"><a href="file-download-or-sra-qc-and-trimming.html#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="ex">y</span></span>
+<span id="cb47-9"><a href="file-download-or-sra-qc-and-trimming.html#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-10"><a href="file-download-or-sra-qc-and-trimming.html#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Check again. Long list of flags.  </span></span>
+<span id="cb47-11"><a href="file-download-or-sra-qc-and-trimming.html#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> --help</span>
+<span id="cb47-12"><a href="file-download-or-sra-qc-and-trimming.html#cb47-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-13"><a href="file-download-or-sra-qc-and-trimming.html#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a  directory for starIndex.  </span></span>
+<span id="cb47-14"><a href="file-download-or-sra-qc-and-trimming.html#cb47-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> starIndex</span>
+<span id="cb47-15"><a href="file-download-or-sra-qc-and-trimming.html#cb47-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-16"><a href="file-download-or-sra-qc-and-trimming.html#cb47-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Run STAR.<br />
+Make sure that the unzip folder of <strong>Mus_musculus_NCBI_build37.2.tar.gz (Mus_musculus)</strong> is in the same directory as trimmed/environment. Is this necessary???!</li>
+</ol>
+<p>FYI:<br />
+Mus_musculus_NCBI_build37.2.tar.gz zip file is 23.58 GB.<br />
+Mus_musculus unziped folder is 98.77 GB.
+Initially downloaded into: <code>"/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/Mus_musculus_NCBI_build37.2.tar.gz"</code><br />
+Trial analysis forlder in: <code>"/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02"</code></p>
+<p>Mus_musculus unziped folder moved to:
+/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02/Mus_musculus</p>
+<p>Path to <strong>genome.fa</strong> file.<br />
+/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/Mus_musculus/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa</p>
+<p>Path to <strong>genes.gtf</strong> file.<br />
+/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/Mus_musculus/NCBI/build37.2/Annotation/Archives/archive-2015-07-17-14-32-40/Genes/genes.gtf<br />
+However better to use the <strong>folder Shortcut (known as aliases on Mac)</strong> created when unziped. This eliminates the <code>Archives/archive-2015-07-17-14-32-40</code>section of the path. So… use
+/Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="file-download-or-sra-qc-and-trimming.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure that the unzip folder of Mus_musculus_NCBI_build37.2.tar.gz (Mus_musculus) is in the same directory as environment/analysis folder in this case:  </span></span>
+<span id="cb48-2"><a href="file-download-or-sra-qc-and-trimming.html#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="file-download-or-sra-qc-and-trimming.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02/&quot;</span></span>
+<span id="cb48-4"><a href="file-download-or-sra-qc-and-trimming.html#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="file-download-or-sra-qc-and-trimming.html#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Run STAR</span></span>
+<span id="cb48-6"><a href="file-download-or-sra-qc-and-trimming.html#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> --runThreadN 64 --runMode genomeGenerate --genomeDir starIndex --genomeFastaFiles Mus_musculus/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa --sjdbGTFfile Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="file-download-or-sra-qc-and-trimming.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 12:47:47 ..... started STAR run</span>
+<span id="cb49-2"><a href="file-download-or-sra-qc-and-trimming.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 12:47:48 ... starting to generate Genome files</span>
+<span id="cb49-3"><a href="file-download-or-sra-qc-and-trimming.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 12:49:24 ..... processing annotations GTF</span>
+<span id="cb49-4"><a href="file-download-or-sra-qc-and-trimming.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 12:49:40 ... starting to sort Suffix Array. This may take a long time...</span>
+<span id="cb49-5"><a href="file-download-or-sra-qc-and-trimming.html#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 12:49:51 ... sorting Suffix Array chunks and saving them to disk...</span>
+<span id="cb49-6"><a href="file-download-or-sra-qc-and-trimming.html#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 13:23:01 ... loading chunks from disk, packing SA...</span>
+<span id="cb49-7"><a href="file-download-or-sra-qc-and-trimming.html#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 13:48:03 ... finished generating suffix array</span>
+<span id="cb49-8"><a href="file-download-or-sra-qc-and-trimming.html#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 13:48:03 ... generating Suffix Array index</span>
+<span id="cb49-9"><a href="file-download-or-sra-qc-and-trimming.html#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 13:53:59 ... completed Suffix Array index</span>
+<span id="cb49-10"><a href="file-download-or-sra-qc-and-trimming.html#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 13:54:00 ..... inserting junctions into the genome indices</span>
+<span id="cb49-11"><a href="file-download-or-sra-qc-and-trimming.html#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-12"><a href="file-download-or-sra-qc-and-trimming.html#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Try several times but it could not finished correctly, &quot;System run out of application memory. </span></span>
+<span id="cb49-13"><a href="file-download-or-sra-qc-and-trimming.html#cb49-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-14"><a href="file-download-or-sra-qc-and-trimming.html#cb49-14" aria-hidden="true" tabindex="-1"></a><span class="co"># It is important that the hole process is fully completed.  It takes quite a long time and uses a lot of memory resource.</span></span></code></pre></div>
+<p>Your System Has Run Out of Application Memory on Mac.</p>
+<p>Solutions:
+1. Close unnecessary webpages/programs.<br />
+2. Free up more space on the system HDD (at least 20% of free memory?).<br />
+3. Google chrome application memory leak?. Run task manager and check memory usage.<br />
+4. Check memory pressure (<code>memory pressure</code> command) and double ckeck your free space. Also try running <code>sudo purge</code> from the terminal.
+5. Re-start computer to reset uptime.
+6. Update software.
+7. Reset Mac’s NVRAM and PRAM.
+8. Close chrome and/or Safari.#</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="file-download-or-sra-qc-and-trimming.html#cb50-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-2"><a href="file-download-or-sra-qc-and-trimming.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> version: 2.7.9a   compiled:  :/Users/cshl/data/STAR/STAR/source</span>
+<span id="cb50-3"><a href="file-download-or-sra-qc-and-trimming.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 16:19:40 ..... started STAR run</span>
+<span id="cb50-4"><a href="file-download-or-sra-qc-and-trimming.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 16:19:41 ... starting to generate Genome files</span>
+<span id="cb50-5"><a href="file-download-or-sra-qc-and-trimming.html#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 16:21:14 ..... processing annotations GTF</span>
+<span id="cb50-6"><a href="file-download-or-sra-qc-and-trimming.html#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 16:21:28 ... starting to sort Suffix Array. This may take a long time...</span>
+<span id="cb50-7"><a href="file-download-or-sra-qc-and-trimming.html#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 16:21:37 ... sorting Suffix Array chunks and saving them to disk...</span>
+<span id="cb50-8"><a href="file-download-or-sra-qc-and-trimming.html#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 16:53:49 ... loading chunks from disk, packing SA...</span>
+<span id="cb50-9"><a href="file-download-or-sra-qc-and-trimming.html#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:18:12 ... finished generating suffix array</span>
+<span id="cb50-10"><a href="file-download-or-sra-qc-and-trimming.html#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:18:12 ... generating Suffix Array index</span>
+<span id="cb50-11"><a href="file-download-or-sra-qc-and-trimming.html#cb50-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:23:21 ... completed Suffix Array index</span>
+<span id="cb50-12"><a href="file-download-or-sra-qc-and-trimming.html#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:23:24 ..... inserting junctions into the genome indices</span>
+<span id="cb50-13"><a href="file-download-or-sra-qc-and-trimming.html#cb50-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:25:56 ... writing Genome to disk ...</span>
+<span id="cb50-14"><a href="file-download-or-sra-qc-and-trimming.html#cb50-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:27:06 ... writing Suffix Array to disk ...</span>
+<span id="cb50-15"><a href="file-download-or-sra-qc-and-trimming.html#cb50-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:36:19 ... writing SAindex to disk</span>
+<span id="cb50-16"><a href="file-download-or-sra-qc-and-trimming.html#cb50-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Sep</span> 13 17:37:01 ..... finished successfully</span>
+<span id="cb50-17"><a href="file-download-or-sra-qc-and-trimming.html#cb50-17" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">rna-seq_test</span><span class="kw">)</span> <span class="ex">MR-MBP20</span>:Trial02 marcelorosales$ </span>
+<span id="cb50-18"><a href="file-download-or-sra-qc-and-trimming.html#cb50-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-19"><a href="file-download-or-sra-qc-and-trimming.html#cb50-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the files were created in the folder.</span></span>
+<span id="cb50-20"><a href="file-download-or-sra-qc-and-trimming.html#cb50-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-21"><a href="file-download-or-sra-qc-and-trimming.html#cb50-21" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> starIndex</span>
+<span id="cb50-22"><a href="file-download-or-sra-qc-and-trimming.html#cb50-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-23"><a href="file-download-or-sra-qc-and-trimming.html#cb50-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<p>These process will take about 2 hrs or longer depending con computer’s processing power.</p>
+<p>The optins/flags coded were:<br />
+–runThreadN <strong>64</strong>: Number of threads use for processing.<br />
+–runMode <strong>genomeGenerate</strong>: To start star generates the index files therefore genomeGenerate.
+–genomeDir <strong>starIndex</strong>:This is the directory for the star index output (is not the genome FASTA files).
+–genomeFastaFiles <strong>Mus_musculus/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa</strong>: the whole genome of the mouse is in this file.
+–sjdbGTFfile <strong>Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf</strong>: This lets star know that the next file we are going to give it is a GTF file which is the anotation file of all the transcript that we are going to try to identify with our reads. It may not be really necessary, but it is recommended to usefor more accuracy, specially in de novo transcrip discovery, you would use this basically to take all the reads and map them.</p>
+<blockquote>
+<p>STAR will create the index files and save them in the “starIndex” folder. Whit this files compleated, we will now map the reads of our samples</p>
+</blockquote>
+<ol start="5" style="list-style-type: decimal">
+<li>Align reads<br />
+Create a Folder to save the sample reads.</li>
+</ol>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="file-download-or-sra-qc-and-trimming.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a new directory to target as output directory.</span></span>
+<span id="cb51-2"><a href="file-download-or-sra-qc-and-trimming.html#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="file-download-or-sra-qc-and-trimming.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> starAligned</span>
+<span id="cb51-4"><a href="file-download-or-sra-qc-and-trimming.html#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<p>For aligning, there are some issues with the flags <code>command Z cat</code> which tells star that the files we’re inputting are zipped.<br />
+The way around it is to (maybe not the best way) <code>gunzip</code> flag (command/app). The way to use this is to do/perform the command beforehand, and then input on the files that we want, which it would be something like <code>treammedReads/[]</code> in a cat file. (file containing a catalog or list of the files downloaded or to be fed to the application).<br />
+To create a cat file see <a href="https://linuxize.com/post/linux-cat-command/#:~:text=To%20create%20a%20new%20file,D%20to%20save%20the%20file.">Cat command in Linux</a> or see <a href="https://youtu.be/4EW0VewOb5Q">video</a></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="file-download-or-sra-qc-and-trimming.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> filenames.txt</span>
+<span id="cb52-2"><a href="file-download-or-sra-qc-and-trimming.html#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-3"><a href="file-download-or-sra-qc-and-trimming.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Type or copy paste.</span></span>
+<span id="cb52-4"><a href="file-download-or-sra-qc-and-trimming.html#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="file-download-or-sra-qc-and-trimming.html#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="ex">mPDL_RNA7D_Ko1_S1_L001_R1_001_1P</span></span>
+<span id="cb52-6"><a href="file-download-or-sra-qc-and-trimming.html#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="ex">mPDL_RNA7D_Ko1_S1_L001_R1_001_2P</span></span>
+<span id="cb52-7"><a href="file-download-or-sra-qc-and-trimming.html#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="ex">mPDL_RNA7D_Ko2_S1_L001_R2_001_1P</span></span>
+<span id="cb52-8"><a href="file-download-or-sra-qc-and-trimming.html#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="ex">mPDL_RNA7D_Ko2_S1_L001_R2_001_2P</span></span>
+<span id="cb52-9"><a href="file-download-or-sra-qc-and-trimming.html#cb52-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-10"><a href="file-download-or-sra-qc-and-trimming.html#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="co"># press control +D to save </span></span>
+<span id="cb52-11"><a href="file-download-or-sra-qc-and-trimming.html#cb52-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-12"><a href="file-download-or-sra-qc-and-trimming.html#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Also, might need to instal pigz</span></span>
+<span id="cb52-13"><a href="file-download-or-sra-qc-and-trimming.html#cb52-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-14"><a href="file-download-or-sra-qc-and-trimming.html#cb52-14" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install -c conda-forge pigz</span></code></pre></div>
+<p>mPDL_RNA7D_Ko1_S1_L001_R1_001_1P
+mPDL_RNA7D_Ko1_S1_L001_R1_001_1U
+mPDL_RNA7D_Ko1_S1_L001_R1_001_2P
+mPDL_RNA7D_Ko1_S1_L001_R1_001_2U
+mPDL_RNA7D_Ko2_S1_L001_R2_001_1P
+mPDL_RNA7D_Ko2_S1_L001_R2_001_1U
+mPDL_RNA7D_Ko2_S1_L001_R2_001_2P
+mPDL_RNA7D_Ko2_S1_L001_R2_001_2U</p>
+<p>mPDL_RNA7D_Ko1_S1_L001_R1_001_1P
+mPDL_RNA7D_Ko1_S1_L001_R1_001_2P
+mPDL_RNA7D_Ko2_S1_L001_R2_001_1P
+mPDL_RNA7D_Ko2_S1_L001_R2_001_2P</p>
+<p>changed to match filenames.txt</p>
+<p>mPDL_RNA7D_Ko1_1P
+mPDL_RNA7D_Ko1_2P
+mPDL_RNA7D_Ko2_1P
+mPDL_RNA7D_Ko2_2P</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="file-download-or-sra-qc-and-trimming.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Original</span></span>
+<span id="cb53-2"><a href="file-download-or-sra-qc-and-trimming.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames2.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 2 <span class="st">&quot;gunzip trimmedReads/{}_*P.gz &amp;&amp; STAR --runThreadN 32 --genomeDir starIndex --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --outSAMtype BAM SortedByCoordinate &amp;&amp; pigz trimmedReads/{}_*P&quot;</span></span>
+<span id="cb53-3"><a href="file-download-or-sra-qc-and-trimming.html#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="file-download-or-sra-qc-and-trimming.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ERROR</span></span>
+<span id="cb53-5"><a href="file-download-or-sra-qc-and-trimming.html#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co"># zsh:1: no matches found: trimmedReads/mPDL_RNA7D_Ko1_*P.gz</span></span>
+<span id="cb53-6"><a href="file-download-or-sra-qc-and-trimming.html#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="co"># zsh:1: no matches found: trimmedReads/mPDL_RNA7D_Ko2_*P.gz</span></span>
+<span id="cb53-7"><a href="file-download-or-sra-qc-and-trimming.html#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-8"><a href="file-download-or-sra-qc-and-trimming.html#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="co"># zsh:1: no matches found: trimmedReads/mPDL_RNA7D_Ko1_*P.gz</span></span>
+<span id="cb53-9"><a href="file-download-or-sra-qc-and-trimming.html#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="co"># zsh:1: no matches found: trimmedReads/mPDL_RNA7D_Ko2_*P.gz</span></span>
+<span id="cb53-10"><a href="file-download-or-sra-qc-and-trimming.html#cb53-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-11"><a href="file-download-or-sra-qc-and-trimming.html#cb53-11" aria-hidden="true" tabindex="-1"></a><span class="co"># With no extensions. </span></span>
+<span id="cb53-12"><a href="file-download-or-sra-qc-and-trimming.html#cb53-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-13"><a href="file-download-or-sra-qc-and-trimming.html#cb53-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames2.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 2 <span class="st">&quot;gunzip trimmedReads/{}_*P &amp;&amp; STAR --runThreadN 32 --genomeDir starIndex --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --outSAMtype BAM SortedByCoordinate &amp;&amp; pigz trimmedReads/{}_*P&quot;</span></span>
+<span id="cb53-14"><a href="file-download-or-sra-qc-and-trimming.html#cb53-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-15"><a href="file-download-or-sra-qc-and-trimming.html#cb53-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ERROR</span></span>
+<span id="cb53-16"><a href="file-download-or-sra-qc-and-trimming.html#cb53-16" aria-hidden="true" tabindex="-1"></a><span class="co">#gunzip: trimmedReads/mPDL_RNA7D_Ko1_1P: unknown suffix -- ignored</span></span>
+<span id="cb53-17"><a href="file-download-or-sra-qc-and-trimming.html#cb53-17" aria-hidden="true" tabindex="-1"></a><span class="co">#gunzip: trimmedReads/mPDL_RNA7D_Ko1_2P: unknown suffix -- ignored</span></span>
+<span id="cb53-18"><a href="file-download-or-sra-qc-and-trimming.html#cb53-18" aria-hidden="true" tabindex="-1"></a><span class="co">#gunzip: trimmedReads/mPDL_RNA7D_Ko2_1P: unknown suffix -- ignored</span></span>
+<span id="cb53-19"><a href="file-download-or-sra-qc-and-trimming.html#cb53-19" aria-hidden="true" tabindex="-1"></a><span class="co">#gunzip: trimmedReads/mPDL_RNA7D_Ko2_2P: unknown suffix -- ignored</span></span>
+<span id="cb53-20"><a href="file-download-or-sra-qc-and-trimming.html#cb53-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-21"><a href="file-download-or-sra-qc-and-trimming.html#cb53-21" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames2.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 2 <span class="st">&quot;STAR --runThreadN 32 --genomeDir starIndex --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --outSAMtype BAM SortedByCoordinate &amp;&amp; pigz trimmedReads/{}_*P&quot;</span></span>
+<span id="cb53-22"><a href="file-download-or-sra-qc-and-trimming.html#cb53-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-23"><a href="file-download-or-sra-qc-and-trimming.html#cb53-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-24"><a href="file-download-or-sra-qc-and-trimming.html#cb53-24" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb53-25"><a href="file-download-or-sra-qc-and-trimming.html#cb53-25" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames2.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 2 <span class="st">&quot;gunzip trimmedReads/{}_*P.gz &amp;&amp; STAR --runThreadN 32 --genomeDir starIndex --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --outSAMtype BAM SortedByCoordinate &amp;&amp; pigz trimmedReads/{}_*P&quot;</span></span>
+<span id="cb53-26"><a href="file-download-or-sra-qc-and-trimming.html#cb53-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-27"><a href="file-download-or-sra-qc-and-trimming.html#cb53-27" aria-hidden="true" tabindex="-1"></a><span class="co"># No gunzip </span></span>
+<span id="cb53-28"><a href="file-download-or-sra-qc-and-trimming.html#cb53-28" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames2.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 2 <span class="st">&quot;STAR --runThreadN 32 --genomeDir starIndex --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --outSAMtype BAM SortedByCoordinate &amp;&amp; pigz trimmedReads/{}_*P&quot;</span></span>
+<span id="cb53-29"><a href="file-download-or-sra-qc-and-trimming.html#cb53-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-30"><a href="file-download-or-sra-qc-and-trimming.html#cb53-30" aria-hidden="true" tabindex="-1"></a><span class="co">##  NOT WORKING... OPTIONS:</span></span>
+<span id="cb53-31"><a href="file-download-or-sra-qc-and-trimming.html#cb53-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-32"><a href="file-download-or-sra-qc-and-trimming.html#cb53-32" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. FIRST convert all .*P files to gz () and do it in the background (use &amp; at the end of line).</span></span>
+<span id="cb53-33"><a href="file-download-or-sra-qc-and-trimming.html#cb53-33" aria-hidden="true" tabindex="-1"></a><span class="ex">pigz</span> trimmedReads/*P <span class="kw">&amp;</span></span>
+<span id="cb53-34"><a href="file-download-or-sra-qc-and-trimming.html#cb53-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Check</span></span>
+<span id="cb53-35"><a href="file-download-or-sra-qc-and-trimming.html#cb53-35" aria-hidden="true" tabindex="-1"></a><span class="bu">bg</span> 1</span>
+<span id="cb53-36"><a href="file-download-or-sra-qc-and-trimming.html#cb53-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-37"><a href="file-download-or-sra-qc-and-trimming.html#cb53-37" aria-hidden="true" tabindex="-1"></a><span class="co"># to see if it is working </span></span>
+<span id="cb53-38"><a href="file-download-or-sra-qc-and-trimming.html#cb53-38" aria-hidden="true" tabindex="-1"></a><span class="bu">jobs</span></span>
+<span id="cb53-39"><a href="file-download-or-sra-qc-and-trimming.html#cb53-39" aria-hidden="true" tabindex="-1"></a><span class="co"># [1]    running    pigz trimmedReads/*P</span></span>
+<span id="cb53-40"><a href="file-download-or-sra-qc-and-trimming.html#cb53-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-41"><a href="file-download-or-sra-qc-and-trimming.html#cb53-41" aria-hidden="true" tabindex="-1"></a><span class="co"># to see Process type</span></span>
+<span id="cb53-42"><a href="file-download-or-sra-qc-and-trimming.html#cb53-42" aria-hidden="true" tabindex="-1"></a><span class="ex">top</span> # see commad <span class="st">&quot;pigz&quot;</span> <span class="st">&quot;STAR&quot;</span> if running. also top </span>
+<span id="cb53-43"><a href="file-download-or-sra-qc-and-trimming.html#cb53-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-44"><a href="file-download-or-sra-qc-and-trimming.html#cb53-44" aria-hidden="true" tabindex="-1"></a><span class="co"># To stop control + Z</span></span>
+<span id="cb53-45"><a href="file-download-or-sra-qc-and-trimming.html#cb53-45" aria-hidden="true" tabindex="-1"></a><span class="co"># To exit control + C</span></span>
+<span id="cb53-46"><a href="file-download-or-sra-qc-and-trimming.html#cb53-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-47"><a href="file-download-or-sra-qc-and-trimming.html#cb53-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Now all P files are gz. run code.</span></span>
+<span id="cb53-48"><a href="file-download-or-sra-qc-and-trimming.html#cb53-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-49"><a href="file-download-or-sra-qc-and-trimming.html#cb53-49" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames2.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 2 <span class="st">&quot;gunzip trimmedReads/{}_*P.gz &amp;&amp; STAR --runThreadN 32 --genomeDir starIndex --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --outSAMtype BAM SortedByCoordinate &amp;&amp; pigz trimmedReads/{}_*P&quot;</span> <span class="kw">&amp;</span></span>
+<span id="cb53-50"><a href="file-download-or-sra-qc-and-trimming.html#cb53-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-51"><a href="file-download-or-sra-qc-and-trimming.html#cb53-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-52"><a href="file-download-or-sra-qc-and-trimming.html#cb53-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Found better code.</span></span>
+<span id="cb53-53"><a href="file-download-or-sra-qc-and-trimming.html#cb53-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-54"><a href="file-download-or-sra-qc-and-trimming.html#cb53-54" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames2.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 2 <span class="st">&quot;parallel gunzip ::: trimmedReads/{}_*P.gz &amp;&amp; STAR --runThreadN 64 --genomeLoad LoadAndKeep --genomeDir starIndex/ --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --limitBAMsortRAM 5000000000 --outSAMtype BAM SortedByCoordinate --outReadsUnmapped Fastx &amp;&amp; pigz trimmedReads/{}_*P&quot;</span> <span class="kw">&amp;</span></span>
+<span id="cb53-55"><a href="file-download-or-sra-qc-and-trimming.html#cb53-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-56"><a href="file-download-or-sra-qc-and-trimming.html#cb53-56" aria-hidden="true" tabindex="-1"></a><span class="co"># I there is no need to unzip</span></span>
+<span id="cb53-57"><a href="file-download-or-sra-qc-and-trimming.html#cb53-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-58"><a href="file-download-or-sra-qc-and-trimming.html#cb53-58" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames2.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 2 <span class="st">&quot;STAR --runThreadN 64 --genomeLoad LoadAndKeep --genomeDir starIndex/ --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --limitBAMsortRAM 5000000000 --outSAMtype BAM SortedByCoordinate --outReadsUnmapped Fastx &amp;&amp; pigz trimmedReads/{}_*P&quot;</span></span>
+<span id="cb53-59"><a href="file-download-or-sra-qc-and-trimming.html#cb53-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-60"><a href="file-download-or-sra-qc-and-trimming.html#cb53-60" aria-hidden="true" tabindex="-1"></a><span class="co"># ERROR</span></span>
+<span id="cb53-61"><a href="file-download-or-sra-qc-and-trimming.html#cb53-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-62"><a href="file-download-or-sra-qc-and-trimming.html#cb53-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Shared memory error: 4, errno: Invalid argument(22)</span></span>
+<span id="cb53-63"><a href="file-download-or-sra-qc-and-trimming.html#cb53-63" aria-hidden="true" tabindex="-1"></a><span class="co"># EXITING because of FATAL ERROR: problems with shared memory: error from shmget() or shm_open().</span></span>
+<span id="cb53-64"><a href="file-download-or-sra-qc-and-trimming.html#cb53-64" aria-hidden="true" tabindex="-1"></a><span class="co"># SOLUTION: check shared memory settings as explained in STAR manual, OR run STAR with --genomeLoad NoSharedMemory to avoid using shared memory</span></span>
+<span id="cb53-65"><a href="file-download-or-sra-qc-and-trimming.html#cb53-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-66"><a href="file-download-or-sra-qc-and-trimming.html#cb53-66" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames2.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 2 <span class="st">&quot;STAR --runThreadN 64 --genomeLoad NoSharedMemory --genomeDir starIndex/ --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --limitBAMsortRAM 5000000000 --outSAMtype BAM SortedByCoordinate --outReadsUnmapped Fastx&quot;</span></span>
+<span id="cb53-67"><a href="file-download-or-sra-qc-and-trimming.html#cb53-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-68"><a href="file-download-or-sra-qc-and-trimming.html#cb53-68" aria-hidden="true" tabindex="-1"></a><span class="co"># ERROR</span></span>
+<span id="cb53-69"><a href="file-download-or-sra-qc-and-trimming.html#cb53-69" aria-hidden="true" tabindex="-1"></a><span class="co"># BAMoutput.cpp:27:BAMoutput: exiting because of *OUTPUT FILE* error: could not create output file starAligned/mPDL_RNA7D_Ko2_STARtmp//BAMsort/49/2</span></span>
+<span id="cb53-70"><a href="file-download-or-sra-qc-and-trimming.html#cb53-70" aria-hidden="true" tabindex="-1"></a><span class="co"># SOLUTION: check that the path exists and you have write permission for this file. Also check ulimit -n and increase it to allow more open files.</span></span>
+<span id="cb53-71"><a href="file-download-or-sra-qc-and-trimming.html#cb53-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-72"><a href="file-download-or-sra-qc-and-trimming.html#cb53-72" aria-hidden="true" tabindex="-1"></a><span class="bu">ulimit</span> -n</span>
+<span id="cb53-73"><a href="file-download-or-sra-qc-and-trimming.html#cb53-73" aria-hidden="true" tabindex="-1"></a><span class="co">#2560</span></span>
+<span id="cb53-74"><a href="file-download-or-sra-qc-and-trimming.html#cb53-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-75"><a href="file-download-or-sra-qc-and-trimming.html#cb53-75" aria-hidden="true" tabindex="-1"></a><span class="bu">ulimit</span> -n 100000</span>
+<span id="cb53-76"><a href="file-download-or-sra-qc-and-trimming.html#cb53-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-77"><a href="file-download-or-sra-qc-and-trimming.html#cb53-77" aria-hidden="true" tabindex="-1"></a><span class="ex">fg1</span> #? What us tgus for?</span>
+<span id="cb53-78"><a href="file-download-or-sra-qc-and-trimming.html#cb53-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-79"><a href="file-download-or-sra-qc-and-trimming.html#cb53-79" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames2.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 2 <span class="st">&quot;STAR --runThreadN 64 --genomeLoad NoSharedMemory --genomeDir starIndex/ --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --limitBAMsortRAM 5000000000 --outSAMtype BAM SortedByCoordinate --outReadsUnmapped Fastx&quot;</span></span>
+<span id="cb53-80"><a href="file-download-or-sra-qc-and-trimming.html#cb53-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-81"><a href="file-download-or-sra-qc-and-trimming.html#cb53-81" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames2.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 1 <span class="st">&quot;STAR --runThreadN 64 --genomeLoad NoSharedMemory --genomeDir starIndex/ --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --limitBAMsortRAM 5000000000 --outSAMtype BAM SortedByCoordinate --outReadsUnmapped Fastx&quot;</span></span>
+<span id="cb53-82"><a href="file-download-or-sra-qc-and-trimming.html#cb53-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-83"><a href="file-download-or-sra-qc-and-trimming.html#cb53-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-84"><a href="file-download-or-sra-qc-and-trimming.html#cb53-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-85"><a href="file-download-or-sra-qc-and-trimming.html#cb53-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-86"><a href="file-download-or-sra-qc-and-trimming.html#cb53-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-87"><a href="file-download-or-sra-qc-and-trimming.html#cb53-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-88"><a href="file-download-or-sra-qc-and-trimming.html#cb53-88" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> --runThreadN 32 --genomeDir starIndex --readFilesIn trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1P trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/mPDL_RNA7D_Ko1_S1_L001_R1_001 --outSAMtype BAM SortedByCoordinate</span></code></pre></div>
+<p>SAM is human readable, BAM is compress binary version (for CPU to read),</p>
+</div>
+<div id="microbial-contamination" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Microbial contamination</h2>
+<p>For this use/install Kraken2</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
+</div>
+<div id="feature-counts." class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Feature counts.</h2>
+<p><a href="https://youtu.be/hX9vCII__Ok?list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k">video</a></p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="file-download-or-sra-qc-and-trimming.html#cb55-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-2"><a href="file-download-or-sra-qc-and-trimming.html#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-3"><a href="file-download-or-sra-qc-and-trimming.html#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Install subreads.</span></span>
+<span id="cb55-4"><a href="file-download-or-sra-qc-and-trimming.html#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-5"><a href="file-download-or-sra-qc-and-trimming.html#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install subread</span>
+<span id="cb55-6"><a href="file-download-or-sra-qc-and-trimming.html#cb55-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-7"><a href="file-download-or-sra-qc-and-trimming.html#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="co"># count</span></span>
+<span id="cb55-8"><a href="file-download-or-sra-qc-and-trimming.html#cb55-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-9"><a href="file-download-or-sra-qc-and-trimming.html#cb55-9" aria-hidden="true" tabindex="-1"></a><span class="ex">featureCounts</span> -h</span>
+<span id="cb55-10"><a href="file-download-or-sra-qc-and-trimming.html#cb55-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-11"><a href="file-download-or-sra-qc-and-trimming.html#cb55-11" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02/Mus_musculus/NCBI/build37.2/Annotation/Archives/archive-2015-07-17-14-32-40/Genes/&quot;</span></span>
+<span id="cb55-12"><a href="file-download-or-sra-qc-and-trimming.html#cb55-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-13"><a href="file-download-or-sra-qc-and-trimming.html#cb55-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> genes.gtf</span>
+<span id="cb55-14"><a href="file-download-or-sra-qc-and-trimming.html#cb55-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-15"><a href="file-download-or-sra-qc-and-trimming.html#cb55-15" aria-hidden="true" tabindex="-1"></a><span class="co"># GTF file has gene_id (sametimes is doesnt work!), and transcipt_id. This two are going to be used to label genes.  in the fearuresCounts -h you can see the code to input the *_id.</span></span>
+<span id="cb55-16"><a href="file-download-or-sra-qc-and-trimming.html#cb55-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-17"><a href="file-download-or-sra-qc-and-trimming.html#cb55-17" aria-hidden="true" tabindex="-1"></a><span class="co"># make a count Directoru</span></span>
+<span id="cb55-18"><a href="file-download-or-sra-qc-and-trimming.html#cb55-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-19"><a href="file-download-or-sra-qc-and-trimming.html#cb55-19" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02&quot;</span></span>
+<span id="cb55-20"><a href="file-download-or-sra-qc-and-trimming.html#cb55-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-21"><a href="file-download-or-sra-qc-and-trimming.html#cb55-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> readCounts</span>
+<span id="cb55-22"><a href="file-download-or-sra-qc-and-trimming.html#cb55-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-23"><a href="file-download-or-sra-qc-and-trimming.html#cb55-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Read counts</span></span>
+<span id="cb55-24"><a href="file-download-or-sra-qc-and-trimming.html#cb55-24" aria-hidden="true" tabindex="-1"></a><span class="co"># as .txt</span></span>
+<span id="cb55-25"><a href="file-download-or-sra-qc-and-trimming.html#cb55-25" aria-hidden="true" tabindex="-1"></a><span class="ex">featureCounts</span> -T 8 -a Mus_musculus/NCBI/build37.2/Annotation/Archives/archive-2015-07-17-14-32-40/Genes/genes.gtf -g <span class="kw">`</span><span class="ex">transcript_id</span><span class="kw">`</span> -o readCounts/readCounts.txt starAlign/*.bam</span>
+<span id="cb55-26"><a href="file-download-or-sra-qc-and-trimming.html#cb55-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-27"><a href="file-download-or-sra-qc-and-trimming.html#cb55-27" aria-hidden="true" tabindex="-1"></a><span class="co"># as .csv?</span></span>
+<span id="cb55-28"><a href="file-download-or-sra-qc-and-trimming.html#cb55-28" aria-hidden="true" tabindex="-1"></a><span class="ex">featureCounts</span> -T 8 -a Mus_musculus/NCBI/build37.2/Annotation/Archives/archive-2015-07-17-14-32-40/Genes/genes.gtf -g <span class="kw">`</span><span class="ex">transcript_id</span><span class="kw">`</span> -o readCounts/readCounts.csv starAlign/*.bam</span>
+<span id="cb55-29"><a href="file-download-or-sra-qc-and-trimming.html#cb55-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-30"><a href="file-download-or-sra-qc-and-trimming.html#cb55-30" aria-hidden="true" tabindex="-1"></a><span class="co"># make the report</span></span>
+<span id="cb55-31"><a href="file-download-or-sra-qc-and-trimming.html#cb55-31" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> readCounts</span>
+<span id="cb55-32"><a href="file-download-or-sra-qc-and-trimming.html#cb55-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-33"><a href="file-download-or-sra-qc-and-trimming.html#cb55-33" aria-hidden="true" tabindex="-1"></a><span class="ex">multiqc</span> .</span></code></pre></div>
+</div>
+<div id="setting-r-environment." class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Setting R environment.</h2>
+<p>Intall packages</p>
+<p>Packages</p>
+<p>readr (install.packages(‘readr’))<br />
+limma (BiocManager::install(‘limma’))<br />
+DESeq2 (BiocManager::install(‘DESeq2’))<br />
+dplyr (install.packages(“dplyr”))<br />
+ggplot2 (install.packages(“ggplot2”))<br />
+gplots (install.packages(“gplots”))<br />
+Annotations (BiocManager::install(‘AnnotationDbi’))<br />
+org.Hs.eg.db (BiocManager::install(‘org.Hs.eg.db’))<br />
+This is for Human<br />
+org.Mm.eg.db (BiocManager::install(‘org.Mm.eg.db’))<br />
+This is for Mouse<br />
+ggrepel (install.packages(“ggrepel”))<br />
+ReportingTools (BiocManager::install(‘ReportingTools’))<br />
+GO.db (BiocManager::install(‘GO.db’))<br />
+GOstats (BiocManager::install(‘GOstats’))<br />
+pathview (BiocManager::install(‘pathview’))<br />
+gage (BiocManager::install(‘gage’))<br />
+gageData (BiocManager::install(‘gageData’))<br />
+select (BiocManager::install(‘Select’))</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="file-download-or-sra-qc-and-trimming.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;ggplots&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;greppel&quot;</span> ))</span>
+<span id="cb56-2"><a href="file-download-or-sra-qc-and-trimming.html#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="file-download-or-sra-qc-and-trimming.html#cb56-3" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="fu">c</span>(<span class="st">&quot;lima&quot;</span>, <span class="st">&quot;DESeq2&quot;</span>, <span class="st">&quot;AnotationDbi&quot;</span>, <span class="st">&quot;org.Mn.eg.db&quot;</span>, <span class="st">&quot;ReportingTools&quot;</span>, <span class="st">&quot;GO.db&quot;</span>, <span class="st">&quot;GOstats&quot;</span>, <span class="st">&quot;pathview&quot;</span>, <span class="st">&quot;gage&quot;</span>, <span class="st">&quot;gageDATA&quot;</span>, <span class="st">&quot;select&quot;</span>))</span>
+<span id="cb56-4"><a href="file-download-or-sra-qc-and-trimming.html#cb56-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-5"><a href="file-download-or-sra-qc-and-trimming.html#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Libraries</span></span>
+<span id="cb56-6"><a href="file-download-or-sra-qc-and-trimming.html#cb56-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-7"><a href="file-download-or-sra-qc-and-trimming.html#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(limma)</span>
+<span id="cb56-8"><a href="file-download-or-sra-qc-and-trimming.html#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb56-9"><a href="file-download-or-sra-qc-and-trimming.html#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb56-10"><a href="file-download-or-sra-qc-and-trimming.html#cb56-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb56-11"><a href="file-download-or-sra-qc-and-trimming.html#cb56-11" aria-hidden="true" tabindex="-1"></a>countData <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;readCounts.csv&quot;</span>, <span class="at">skip =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p>##End</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="methods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Bioinformatics_RNA-seq.pdf", "Bioinformatics_RNA-seq.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

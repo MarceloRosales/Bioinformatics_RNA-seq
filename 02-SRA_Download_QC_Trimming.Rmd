@@ -1,4 +1,4 @@
-# SRA Download, QC, and Trimming
+# File Download (or SRA), QC, and Trimming
 
 [Bioinformatics - SRA Download, QC, and Trimming](https://www.youtube.com/watch?v=UkrUTgAKFiE&list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k&index=2).
 

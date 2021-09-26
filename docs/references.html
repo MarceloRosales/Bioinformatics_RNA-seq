@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="rna-seq-for-stat736.html"/>
+<link rel="prev" href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"/>
 
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -181,7 +181,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="sra-download-qc-and-trimming.html"><a href="sra-download-qc-and-trimming.html#trimmomatic"><i class="fa fa-check"></i><b>3.1</b> Trimmomatic</a></li>
 <li class="chapter" data-level="3.2" data-path="sra-download-qc-and-trimming.html"><a href="sra-download-qc-and-trimming.html#indexing-with-star"><i class="fa fa-check"></i><b>3.2</b> Indexing with STAR</a></li>
-<li class="chapter" data-level="3.3" data-path="sra-download-qc-and-trimming.html"><a href="sra-download-qc-and-trimming.html#feature-counts."><i class="fa fa-check"></i><b>3.3</b> Feature counts.</a></li>
+<li class="chapter" data-level="3.3" data-path="sra-download-qc-and-trimming.html"><a href="sra-download-qc-and-trimming.html#microbial-contamination"><i class="fa fa-check"></i><b>3.3</b> Microbial contamination</a></li>
+<li class="chapter" data-level="3.4" data-path="sra-download-qc-and-trimming.html"><a href="sra-download-qc-and-trimming.html#feature-counts."><i class="fa fa-check"></i><b>3.4</b> Feature counts.</a></li>
+<li class="chapter" data-level="3.5" data-path="sra-download-qc-and-trimming.html"><a href="sra-download-qc-and-trimming.html#setting-r-environment."><i class="fa fa-check"></i><b>3.5</b> Setting R environment.</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
 <li class="chapter" data-level="5" data-path="youtube-references-.html"><a href="youtube-references-.html"><i class="fa fa-check"></i><b>5</b> Youtube references.</a>
@@ -192,43 +194,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4" data-path="youtube-references-.html"><a href="youtube-references-.html#building-genome-index-and-aligning-with-star"><i class="fa fa-check"></i><b>5.4</b> Building Genome Index and Aligning with STAR</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
-<li class="chapter" data-level="7" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html"><i class="fa fa-check"></i><b>7</b> RNA Seq for STAT736</a>
+<li class="chapter" data-level="7" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><i class="fa fa-check"></i><b>7</b> RNA Seq Differentially Expressed, GO Enrichment, and Pathway analysis</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#background"><i class="fa fa-check"></i><b>7.1</b> <strong>Background</strong></a></li>
-<li class="chapter" data-level="7.2" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#cleaning-data"><i class="fa fa-check"></i><b>7.2</b> <strong>Cleaning Data</strong></a>
+<li class="chapter" data-level="7.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#background"><i class="fa fa-check"></i><b>7.1</b> <strong>Background</strong></a></li>
+<li class="chapter" data-level="7.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#cleaning-data"><i class="fa fa-check"></i><b>7.2</b> <strong>Cleaning Data</strong></a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#programs-used"><i class="fa fa-check"></i><b>7.2.1</b> Programs used?</a></li>
-<li class="chapter" data-level="7.2.2" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#acquiring-sequences"><i class="fa fa-check"></i><b>7.2.2</b> Acquiring sequences</a></li>
-<li class="chapter" data-level="7.2.3" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#fastqc"><i class="fa fa-check"></i><b>7.2.3</b> FastQC</a></li>
-<li class="chapter" data-level="7.2.4" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#trimming-with-trimmomatic-1"><i class="fa fa-check"></i><b>7.2.4</b> Trimming with Trimmomatic</a></li>
-<li class="chapter" data-level="7.2.5" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#alignment"><i class="fa fa-check"></i><b>7.2.5</b> Alignment</a></li>
-<li class="chapter" data-level="7.2.6" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#assembling-transcripts-with-cufflinks"><i class="fa fa-check"></i><b>7.2.6</b> Assembling transcripts with Cufflinks</a></li>
-<li class="chapter" data-level="7.2.7" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#checking-for-contamination"><i class="fa fa-check"></i><b>7.2.7</b> Checking for Contamination</a></li>
-<li class="chapter" data-level="7.2.8" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#counting-transcripts"><i class="fa fa-check"></i><b>7.2.8</b> Counting Transcripts</a></li>
+<li class="chapter" data-level="7.2.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#programs-used"><i class="fa fa-check"></i><b>7.2.1</b> Programs used?</a></li>
+<li class="chapter" data-level="7.2.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#acquiring-sequences"><i class="fa fa-check"></i><b>7.2.2</b> Acquiring sequences</a></li>
+<li class="chapter" data-level="7.2.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#fastqc"><i class="fa fa-check"></i><b>7.2.3</b> FastQC</a></li>
+<li class="chapter" data-level="7.2.4" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#trimming-with-trimmomatic-1"><i class="fa fa-check"></i><b>7.2.4</b> Trimming with Trimmomatic</a></li>
+<li class="chapter" data-level="7.2.5" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#alignment"><i class="fa fa-check"></i><b>7.2.5</b> Alignment</a></li>
+<li class="chapter" data-level="7.2.6" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#assembling-transcripts-with-cufflinks"><i class="fa fa-check"></i><b>7.2.6</b> Assembling transcripts with Cufflinks</a></li>
+<li class="chapter" data-level="7.2.7" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#checking-for-contamination"><i class="fa fa-check"></i><b>7.2.7</b> Checking for Contamination</a></li>
+<li class="chapter" data-level="7.2.8" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#counting-transcripts"><i class="fa fa-check"></i><b>7.2.8</b> Counting Transcripts</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#differentially-expressed-sequence-identification"><i class="fa fa-check"></i><b>7.3</b> <strong>Differentially Expressed Sequence Identification</strong></a>
+<li class="chapter" data-level="7.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#differentially-expressed-sequence-identification"><i class="fa fa-check"></i><b>7.3</b> <strong>Differentially Expressed Sequence Identification</strong></a>
 <ul>
-<li class="chapter" data-level="7.3.1" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#analyzing-reads-counts"><i class="fa fa-check"></i><b>7.3.1</b> Analyzing Reads Counts</a></li>
+<li class="chapter" data-level="7.3.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#analyzing-reads-counts"><i class="fa fa-check"></i><b>7.3.1</b> Analyzing Reads Counts</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#interactions-cause-a-difference-between-the-lfc-betwen-pooled-data-e.g.-p53-control-and-ir-and-p53---control-and-ir"><i class="fa fa-check"></i><b>7.4</b> Interactions cause a difference between the lfc betwen pooled data, e.g. p53+/+ (control and IR) and p53-/- (control and IR)</a>
+<li class="chapter" data-level="7.4" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#interactions-cause-a-difference-between-the-lfc-betwen-pooled-data-e.g.-p53-control-and-ir-and-p53---control-and-ir"><i class="fa fa-check"></i><b>7.4</b> Interactions cause a difference between the lfc betwen pooled data, e.g. p53+/+ (control and IR) and p53-/- (control and IR)</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>7.4.1</b> Exploratory Data Analysis</a></li>
-<li class="chapter" data-level="7.4.2" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#identification-of-differentially-expressed-genes"><i class="fa fa-check"></i><b>7.4.2</b> Identification of Differentially Expressed Genes</a></li>
-<li class="chapter" data-level="7.4.3" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#gene-annotations"><i class="fa fa-check"></i><b>7.4.3</b> Gene Annotations</a></li>
+<li class="chapter" data-level="7.4.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>7.4.1</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="7.4.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#identification-of-differentially-expressed-genes"><i class="fa fa-check"></i><b>7.4.2</b> Identification of Differentially Expressed Genes</a></li>
+<li class="chapter" data-level="7.4.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#gene-annotations"><i class="fa fa-check"></i><b>7.4.3</b> Gene Annotations</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#go-enrichment-analysis-using-gostats"><i class="fa fa-check"></i><b>7.5</b> 7. GO Enrichment analysis using GOstats</a>
+<li class="chapter" data-level="7.5" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#go-enrichment-analysis-using-gostats"><i class="fa fa-check"></i><b>7.5</b> 7. GO Enrichment analysis using GOstats</a>
 <ul>
-<li class="chapter" data-level="7.5.1" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#go-enrichment-analysis-of-downregulated-genes"><i class="fa fa-check"></i><b>7.5.1</b> GO Enrichment analysis of downregulated genes</a></li>
+<li class="chapter" data-level="7.5.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#go-enrichment-analysis-of-downregulated-genes"><i class="fa fa-check"></i><b>7.5.1</b> GO Enrichment analysis of downregulated genes</a></li>
 </ul></li>
-<li class="chapter" data-level="7.6" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#pathway-analysis-using-expression-data"><i class="fa fa-check"></i><b>7.6</b> 8. Pathway analysis using expression data</a>
+<li class="chapter" data-level="7.6" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-analysis-using-expression-data"><i class="fa fa-check"></i><b>7.6</b> 8. Pathway analysis using expression data</a>
 <ul>
-<li class="chapter" data-level="7.6.1" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#prepare-data"><i class="fa fa-check"></i><b>7.6.1</b> Prepare data</a></li>
-<li class="chapter" data-level="7.6.2" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#kegg-pathways"><i class="fa fa-check"></i><b>7.6.2</b> KEGG pathways</a></li>
-<li class="chapter" data-level="7.6.3" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#pathway-and-regulation-of-genes-for-oxidative-phosphorylation."><i class="fa fa-check"></i><b>7.6.3</b> Pathway and regulation of genes for Oxidative phosphorylation.</a></li>
-<li class="chapter" data-level="7.6.4" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#pathway-and-regulation-of-genes-for-glycosylphosphatidylinositolgpi-anchor-biosynthesis."><i class="fa fa-check"></i><b>7.6.4</b> Pathway and regulation of genes for Glycosylphosphatidylinositol(GPI)-anchor biosynthesis.</a></li>
-<li class="chapter" data-level="7.6.5" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#pathway-and-regulation-of-genes-for-rna-polymerase."><i class="fa fa-check"></i><b>7.6.5</b> Pathway and regulation of genes for RNA polymerase.</a></li>
-<li class="chapter" data-level="7.6.6" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#pathway-and-regulation-of-genes-for-nucleotide-excision-repair."><i class="fa fa-check"></i><b>7.6.6</b> Pathway and regulation of genes for Nucleotide excision repair.</a></li>
-<li class="chapter" data-level="7.6.7" data-path="rna-seq-for-stat736.html"><a href="rna-seq-for-stat736.html#pathway-and-regulation-of-genes-for-non-homologous-end-joining."><i class="fa fa-check"></i><b>7.6.7</b> Pathway and regulation of genes for Non-homologous end-joining.</a></li>
+<li class="chapter" data-level="7.6.1" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#prepare-data"><i class="fa fa-check"></i><b>7.6.1</b> Prepare data</a></li>
+<li class="chapter" data-level="7.6.2" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#kegg-pathways"><i class="fa fa-check"></i><b>7.6.2</b> KEGG pathways</a></li>
+<li class="chapter" data-level="7.6.3" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-oxidative-phosphorylation."><i class="fa fa-check"></i><b>7.6.3</b> Pathway and regulation of genes for Oxidative phosphorylation.</a></li>
+<li class="chapter" data-level="7.6.4" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-glycosylphosphatidylinositolgpi-anchor-biosynthesis."><i class="fa fa-check"></i><b>7.6.4</b> Pathway and regulation of genes for Glycosylphosphatidylinositol(GPI)-anchor biosynthesis.</a></li>
+<li class="chapter" data-level="7.6.5" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-rna-polymerase."><i class="fa fa-check"></i><b>7.6.5</b> Pathway and regulation of genes for RNA polymerase.</a></li>
+<li class="chapter" data-level="7.6.6" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-nucleotide-excision-repair."><i class="fa fa-check"></i><b>7.6.6</b> Pathway and regulation of genes for Nucleotide excision repair.</a></li>
+<li class="chapter" data-level="7.6.7" data-path="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html"><a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html#pathway-and-regulation-of-genes-for-non-homologous-end-joining."><i class="fa fa-check"></i><b>7.6.7</b> Pathway and regulation of genes for Non-homologous end-joining.</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -261,7 +263,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="rna-seq-for-stat736.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

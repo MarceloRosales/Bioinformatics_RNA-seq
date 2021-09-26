@@ -562,6 +562,14 @@ STAR --runThreadN 32 --genomeDir starIndex --readFilesIn trimmedReads/mPDL_RNA7D
 SAM is human readable, BAM is compress binary version (for CPU to read), 
 
 
+## Microbial contamination
+
+For this use/install Kraken2   
+
+```{bash, eval=FALSE}
+
+```
+
 
 
 
@@ -611,7 +619,49 @@ multiqc .
 ```
 
 
+## Setting R environment.
 
+Intall packages  
+
+Packages
+
+readr (install.packages(‘readr’))  
+limma (BiocManager::install(‘limma’))  
+DESeq2 (BiocManager::install(‘DESeq2’))  
+dplyr (install.packages(“dplyr”))  
+ggplot2 (install.packages(“ggplot2”))  
+gplots (install.packages(“gplots”))  
+Annotations (BiocManager::install(‘AnnotationDbi’))  
+org.Hs.eg.db (BiocManager::install(‘org.Hs.eg.db’))  
+This is for Human  
+org.Mm.eg.db (BiocManager::install(‘org.Mm.eg.db’))  
+This is for Mouse  
+ggrepel (install.packages(“ggrepel”))  
+ReportingTools (BiocManager::install(‘ReportingTools’))  
+GO.db (BiocManager::install(‘GO.db’))  
+GOstats (BiocManager::install(‘GOstats’))  
+pathview (BiocManager::install(‘pathview’))  
+gage (BiocManager::install(‘gage’))  
+gageData (BiocManager::install(‘gageData’))  
+select (BiocManager::install(‘Select’))  
+
+
+```{r, eval=FALSE}
+install.packages(c("dplyr", "ggplots", "ggplot2", "greppel" ))
+
+BiocManager::install(c("lima", "DESeq2", "AnotationDbi", "org.Mn.eg.db", "ReportingTools", "GO.db", "GOstats", "pathview", "gage", "gageDATA", "select"))
+
+# Libraries
+
+library(limma)
+library(DESeq2)
+library(dplyr)
+library(readr)
+countData = read_csv("readCounts.csv", skip = 1)
+
+
+
+```
 
 
 ##End

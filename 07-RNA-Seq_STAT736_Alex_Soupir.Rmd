@@ -1,5 +1,6 @@
-# RNA Seq for STAT736 
-Alex Soupir Tutorial
+# RNA Seq Differentially Expressed, GO Enrichment, and Pathway analysis
+
+based on: for STAT736 Alex Soupir Tutorial
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

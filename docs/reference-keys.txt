@@ -25,7 +25,9 @@ data-analysis.
 sra-download-qc-and-trimming
 trimmomatic
 indexing-with-star
+microbial-contamination
 feature-counts.
+setting-r-environment.
 methods
 youtube-references.
 anaconda-set-up-robust-data-science-environment-with-miniconda-and-conda-forge.
@@ -33,7 +35,7 @@ quality-control-preprocessing-of-raw-reads
 trimmomatic.
 building-genome-index-and-aligning-with-star
 final-words
-rna-seq-for-stat736
+rna-seq-differentially-expressed-go-enrichment-and-pathway-analysis
 background
 cleaning-data
 programs-used

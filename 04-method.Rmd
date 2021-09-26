@@ -8,10 +8,53 @@ Trimming with Trimmomatic
 QC/multiqc of trimmed Reads
 Genome Index and Aligning with STAR
 
+Raw Data file names original:   
+mPDL_RNA7D_Ko2_S1_L001_R2_001_2.fastq.gz
+mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz
+mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz
+mPDL_RNA7D_Ko2_S1_L001_R1_001_1.fastq.gz
+
+Change (for easy management) to: 
+mPDL_RNA7D_Ko1_1.fastq.gz
+mPDL_RNA7D_Ko1_2.fastq.gz
+mPDL_RNA7D_Ko2_1.fastq.gz
+mPDL_RNA7D_Ko2_2.fastq.gz
+
+> Seems like original raw data was already splited
+
+```{bash, eval=FALSE}
+# Create the cat file with the file names.
+cat > filenames.txt
+
+#Type or copy paste the name of the files to be analyzed.
+# In last line press enter and then control + D to save the file names in the cat file. 
+
+#Check the list
+head filenames.txt
+
+# Since already spliced not need to run this section. 
+
+# In conda environment
+mkdir rawReads
+cd rawReads
+
+# Download files from webpage source. (one by one)
+fastq-dump --gzip --split-file mPDL_RNA7D_Ko1 &
+# The & indicates to run in the background. To see the jobs in the bkg.
+jobs
+
+# Download files from webpage source. (all at once). Better to do overnight.
+cat filenames.txt | parallel "fastq-dump --gzip --split-file {}"
+
+# files will be Forward (1) Reverse (2) or Paired reads. 
+conda install multiqc
+
+```
+
 
 
 ```{bash, eval=FALSE}
-# Some git preferences fof git contributions.  
+# Some git preferences for git contributions.  
 git status
 git config --list
 # set git email
@@ -27,6 +70,8 @@ git config --global user.email
 
 cd "/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02"
 
+## Run FAST QC
+
 mkdir rawFastQC 
 
 fastqc -t 64 rawReads/*fastq.gz -o rawFastQC
@@ -35,18 +80,46 @@ fastqc rawReads/*fastq.gz -o rawFastQC
 cd rawFastQC
 ls
 
+## Run multyQC
+
 multiqc .
 ls 
 
 
 cd..
 
+## Trimming 
+
+cat > filenames2.txt
+mPDL_RNA7D_Ko1
+mPDL_RNA7D_Ko2
+
+cat filenames2.txt
+
+
+
+
 mkdir trimmedReads
 
+# Pull TrueSeq to folder. 
 cp /usr/local/anaconda3/envs/rna-seq_test/share/trimmomatic-0.39-2/adapters/TruSeq3-PE-2.fa .
 
 
 # Run Trimmomatic 
+
+# Original (one by one)
+trimmomatic PE -threads 5 rawReads/mPDL_RNA7D_Ko1_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1 ILLUMINACLIP:truSeq-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2> trimmedReads/mPDL_RNA7D_Ko1trimming.log
+
+#???????????? HOw to determing leading, trailing and minimun length
+
+# Original (all automatically)
+cat filenames2.txt | parallel -j 4 "trimmomatic PE -threads 5 rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:truSeq-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2> trimmedReads/{}trimming.log"
+
+# Check if jobs are running
+jobs
+
+# Problems: Takes a long time and sometimes it stops. 
+
 
 # The generic trimmomatic command:
 java -jar trimmomatic-0.39.jar PE inputforward.fq.gz inputreverse.fq.gz outputforwardpaired.fq.gz outputforwardunpaired.fq.gz outputreversepaired.fq.gz outputreverseunpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36
@@ -128,7 +201,11 @@ STAR --help
 mkdir starIndex
 ```
 
-4. Run STAR
+4. Run STAR  
+
+1st. Index Mus_Musculus whole genome,
+2nd. Index Samples against Mus_Musculus Index.  
+
 ```{bash, eval=FALSE}
 # Make sure that the unzip folder of Mus_musculus_NCBI_build37.2.tar.gz (Mus_musculus) is in the same directory as environment/analysis folder in this case:  
 

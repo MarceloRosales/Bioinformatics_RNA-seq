@@ -406,9 +406,10 @@ The optins/flags coded were:
 --genomeFastaFiles **Mus_musculus/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa**:  the whole genome of the mouse is in this file. 
 --sjdbGTFfile **Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf**: This lets star know that the next file we are going to give it is a GTF file which is the anotation file of all the transcript that we are going to try to identify with our reads. It may not be really necessary, but it is recommended to usefor more accuracy, specially in de novo transcrip discovery, you would use this basically to take all the reads and map them. 
 
-Whit this files will now map the reads of our samples 
+> STAR will create the index files and save them in the "starIndex" folder. Whit this files compleated, we will now map the reads of our samples 
 
-5. Align reads
+5. Align reads  
+Create a Folder to save the sample reads.   
 
 ```{bash, eval=FALSE}
 # create a new directory to target as output directory.
@@ -417,13 +418,120 @@ mkdir starAligned
 ls
 ```
 
-For aligning there is some issues with the flags `command Z cat` which tells star tha the files were inputting are zipped.  
-The way around it is to (maybe not the best way) gun zip, and the put on the files that we want (treammed reads) in a cat file. (file containig a catalog or list of the files downloaded or to be fed to the  application).  
+For aligning, there are some issues with the flags `command Z cat` which tells star that the files we're inputting are zipped.  
+The way around it is to (maybe not the best way) `gunzip` flag (command/app). The way to use this is to do/perform the command beforehand, and then input on the files that we want, which it would be something like  `treammedReads/[]` in a cat file. (file containing a catalog or list of the files downloaded or to be fed to the  application).   
+To create a cat file see [Cat command in Linux](https://linuxize.com/post/linux-cat-command/#:~:text=To%20create%20a%20new%20file,D%20to%20save%20the%20file.) or see [video](https://youtu.be/4EW0VewOb5Q)   
+
+```{bash, eval=FALSE}
+cat > filenames.txt
+
+# Type or copy paste.
+
+mPDL_RNA7D_Ko1_S1_L001_R1_001_1P
+mPDL_RNA7D_Ko1_S1_L001_R1_001_2P
+mPDL_RNA7D_Ko2_S1_L001_R2_001_1P
+mPDL_RNA7D_Ko2_S1_L001_R2_001_2P
+
+# press control +D to save 
+
+# Also, might need to instal pigz
+
+conda install -c conda-forge pigz
+
+```
+
+
+mPDL_RNA7D_Ko1_S1_L001_R1_001_1P
+mPDL_RNA7D_Ko1_S1_L001_R1_001_1U
+mPDL_RNA7D_Ko1_S1_L001_R1_001_2P
+mPDL_RNA7D_Ko1_S1_L001_R1_001_2U
+mPDL_RNA7D_Ko2_S1_L001_R2_001_1P
+mPDL_RNA7D_Ko2_S1_L001_R2_001_1U
+mPDL_RNA7D_Ko2_S1_L001_R2_001_2P
+mPDL_RNA7D_Ko2_S1_L001_R2_001_2U
+
+
+mPDL_RNA7D_Ko1_S1_L001_R1_001_1P
+mPDL_RNA7D_Ko1_S1_L001_R1_001_2P
+mPDL_RNA7D_Ko2_S1_L001_R2_001_1P
+mPDL_RNA7D_Ko2_S1_L001_R2_001_2P
+
+changed to match filenames.txt 
+
+mPDL_RNA7D_Ko1_1P
+mPDL_RNA7D_Ko1_2P
+mPDL_RNA7D_Ko2_1P
+mPDL_RNA7D_Ko2_2P
+
 
 
 ```{bash, eval=FALSE}
-cat Filename.txt | parallel -j 1 "gunzip trimmedReads/{}_*P.gz && 
+# Original
+cat filenames2.txt | parallel -j 2 "gunzip trimmedReads/{}_*P.gz && STAR --runThreadN 32 --genomeDir starIndex --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --outSAMtype BAM SortedByCoordinate && pigz trimmedReads/{}_*P"
+
+# ERROR
+# zsh:1: no matches found: trimmedReads/mPDL_RNA7D_Ko1_*P.gz
+# zsh:1: no matches found: trimmedReads/mPDL_RNA7D_Ko2_*P.gz
+
+# zsh:1: no matches found: trimmedReads/mPDL_RNA7D_Ko1_*P.gz
+# zsh:1: no matches found: trimmedReads/mPDL_RNA7D_Ko2_*P.gz
+
+# With no extensions. 
+
+cat filenames2.txt | parallel -j 2 "gunzip trimmedReads/{}_*P && STAR --runThreadN 32 --genomeDir starIndex --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --outSAMtype BAM SortedByCoordinate && pigz trimmedReads/{}_*P"
+
+# ERROR
+#gunzip: trimmedReads/mPDL_RNA7D_Ko1_1P: unknown suffix -- ignored
+#gunzip: trimmedReads/mPDL_RNA7D_Ko1_2P: unknown suffix -- ignored
+#gunzip: trimmedReads/mPDL_RNA7D_Ko2_1P: unknown suffix -- ignored
+#gunzip: trimmedReads/mPDL_RNA7D_Ko2_2P: unknown suffix -- ignored
+
+cat filenames2.txt | parallel -j 2 "STAR --runThreadN 32 --genomeDir starIndex --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --outSAMtype BAM SortedByCoordinate && pigz trimmedReads/{}_*P"
+
+
+# 
+cat filenames2.txt | parallel -j 2 "gunzip trimmedReads/{}_*P.gz && STAR --runThreadN 32 --genomeDir starIndex --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --outSAMtype BAM SortedByCoordinate && pigz trimmedReads/{}_*P"
+
+# No gunzip 
+cat filenames2.txt | parallel -j 2 "STAR --runThreadN 32 --genomeDir starIndex --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --outSAMtype BAM SortedByCoordinate && pigz trimmedReads/{}_*P"
+
+##  NOT WORKING... OPTIONS:
+
+# 1. FIRST convert all .*P files to gz () and do it in the background (use & at the end of line).
+pigz trimmedReads/*P &
+# Check
+bg 1
+
+# to see if it is working 
+jobs
+# [1]    running    pigz trimmedReads/*P
+
+# to see Process type
+top # see commad "pigz" "STAR" if running. also top 
+
+# To stop control + Z
+# To exit control + C
+
+# Now all P files are gz. run code.
+
+cat filenames2.txt | parallel -j 2 "gunzip trimmedReads/{}_*P.gz && STAR --runThreadN 32 --genomeDir starIndex --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --outSAMtype BAM SortedByCoordinate && pigz trimmedReads/{}_*P" &
+
+
+# Found better code.
+
+cat filenames2.txt | parallel -j 2 "parallel gunzip :::  trimmedReads/{}_*P.gz && STAR --runThreadN 64 --genomeLoad LoadAndKeep --genomeDir starIndex/ --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --limitBAMsortRAM 5000000000 --outSAMtype BAM SortedByCoordinate --outReadsUnmapped Fastx && pigz trimmedReads/{}_*P" &
+
+# I there is no need to unzip
+
+cat filenames2.txt | parallel -j 2 "STAR --runThreadN 64 --genomeLoad LoadAndKeep --genomeDir starIndex/ --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --limitBAMsortRAM 5000000000 --outSAMtype BAM SortedByCoordinate --outReadsUnmapped Fastx && pigz trimmedReads/{}_*P"
+
+
+
+
+STAR --runThreadN 32 --genomeDir starIndex --readFilesIn trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1P trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/mPDL_RNA7D_Ko1_S1_L001_R1_001 --outSAMtype BAM SortedByCoordinate
 ```
+
+
 
 
 SAM is human readable, BAM is compress binary version (for CPU to read), 
@@ -432,8 +540,50 @@ SAM is human readable, BAM is compress binary version (for CPU to read),
 
 
 
+## Feature counts.
+
+[video](https://youtu.be/hX9vCII__Ok?list=PL-0fKymgD8L8qW7SQDaEf3lrSyUkEkR1k)  
 
 
+
+```{bash, eval=FALSE}
+
+
+# Install subreads.
+
+conda install subread
+
+# count
+
+featureCounts -h
+
+cd "/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02/Mus_musculus/NCBI/build37.2/Annotation/Archives/archive-2015-07-17-14-32-40/Genes/"
+
+head genes.gtf
+
+# GTF file has gene_id (sametimes is doesnt work!), and transcipt_id. This two are going to be used to label genes.  in the fearuresCounts -h you can see the code to input the *_id.
+
+# make a count Directoru
+
+cd "/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02"
+
+mkdir readCounts
+
+# Read counts
+# as .txt
+featureCounts -T 8 -a Mus_musculus/NCBI/build37.2/Annotation/Archives/archive-2015-07-17-14-32-40/Genes/genes.gtf -g `transcript_id` -o readCounts/readCounts.txt starAlign/*.bam
+
+# as .csv?
+featureCounts -T 8 -a Mus_musculus/NCBI/build37.2/Annotation/Archives/archive-2015-07-17-14-32-40/Genes/genes.gtf -g `transcript_id` -o readCounts/readCounts.csv starAlign/*.bam
+
+# make the report
+cd readCounts
+
+multiqc .
+
+
+
+```
 
 
 

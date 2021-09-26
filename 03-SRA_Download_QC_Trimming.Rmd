@@ -519,11 +519,36 @@ cat filenames2.txt | parallel -j 2 "gunzip trimmedReads/{}_*P.gz && STAR --runTh
 
 # Found better code.
 
-cat filenames2.txt | parallel -j 2 "parallel gunzip :::  trimmedReads/{}_*P.gz && STAR --runThreadN 64 --genomeLoad LoadAndKeep --genomeDir starIndex/ --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --limitBAMsortRAM 5000000000 --outSAMtype BAM SortedByCoordinate --outReadsUnmapped Fastx && pigz trimmedReads/{}_*P" &
+cat filenames2.txt | parallel -j 2 "parallel gunzip ::: trimmedReads/{}_*P.gz && STAR --runThreadN 64 --genomeLoad LoadAndKeep --genomeDir starIndex/ --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --limitBAMsortRAM 5000000000 --outSAMtype BAM SortedByCoordinate --outReadsUnmapped Fastx && pigz trimmedReads/{}_*P" &
 
 # I there is no need to unzip
 
 cat filenames2.txt | parallel -j 2 "STAR --runThreadN 64 --genomeLoad LoadAndKeep --genomeDir starIndex/ --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --limitBAMsortRAM 5000000000 --outSAMtype BAM SortedByCoordinate --outReadsUnmapped Fastx && pigz trimmedReads/{}_*P"
+
+# ERROR
+
+# Shared memory error: 4, errno: Invalid argument(22)
+# EXITING because of FATAL ERROR: problems with shared memory: error from shmget() or shm_open().
+# SOLUTION: check shared memory settings as explained in STAR manual, OR run STAR with --genomeLoad NoSharedMemory to avoid using shared memory
+
+cat filenames2.txt | parallel -j 2 "STAR --runThreadN 64 --genomeLoad NoSharedMemory --genomeDir starIndex/ --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --limitBAMsortRAM 5000000000 --outSAMtype BAM SortedByCoordinate --outReadsUnmapped Fastx"
+
+# ERROR
+# BAMoutput.cpp:27:BAMoutput: exiting because of *OUTPUT FILE* error: could not create output file starAligned/mPDL_RNA7D_Ko2_STARtmp//BAMsort/49/2
+# SOLUTION: check that the path exists and you have write permission for this file. Also check ulimit -n and increase it to allow more open files.
+
+ulimit -n
+#2560
+
+ulimit -n 100000
+
+fg1 #? What us tgus for?
+
+cat filenames2.txt | parallel -j 2 "STAR --runThreadN 64 --genomeLoad NoSharedMemory --genomeDir starIndex/ --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --limitBAMsortRAM 5000000000 --outSAMtype BAM SortedByCoordinate --outReadsUnmapped Fastx"
+
+cat filenames2.txt | parallel -j 1 "STAR --runThreadN 64 --genomeLoad NoSharedMemory --genomeDir starIndex/ --readFilesIn trimmedReads/{}_1P trimmedReads/{}_2P --outFilterIntronMotifs RemoveNoncanonical --outFileNamePrefix starAligned/{} --limitBAMsortRAM 5000000000 --outSAMtype BAM SortedByCoordinate --outReadsUnmapped Fastx"
+
+
 
 
 

@@ -64,7 +64,6 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -290,7 +289,7 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb67-14"><a href="methods.html#cb67-14" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> rawReads</span>
 <span id="cb67-15"><a href="methods.html#cb67-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb67-16"><a href="methods.html#cb67-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Download files from webpage source. (one by one)</span></span>
-<span id="cb67-17"><a href="methods.html#cb67-17" aria-hidden="true" tabindex="-1"></a><span class="ex">fastq-dump</span> <span class="at">--gzip</span> <span class="at">--split-file</span> mPDL_RNA7D_Ko1 <span class="kw">&amp;</span></span>
+<span id="cb67-17"><a href="methods.html#cb67-17" aria-hidden="true" tabindex="-1"></a><span class="ex">fastq-dump</span> --gzip --split-file mPDL_RNA7D_Ko1 <span class="kw">&amp;</span></span>
 <span id="cb67-18"><a href="methods.html#cb67-18" aria-hidden="true" tabindex="-1"></a><span class="co"># The &amp; indicates to run in the background. To see the jobs in the bkg.</span></span>
 <span id="cb67-19"><a href="methods.html#cb67-19" aria-hidden="true" tabindex="-1"></a><span class="bu">jobs</span></span>
 <span id="cb67-20"><a href="methods.html#cb67-20" aria-hidden="true" tabindex="-1"></a></span>
@@ -301,16 +300,16 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb67-25"><a href="methods.html#cb67-25" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install multiqc</span></code></pre></div>
 <div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="methods.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some git preferences for git contributions.  </span></span>
 <span id="cb68-2"><a href="methods.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
-<span id="cb68-3"><a href="methods.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--list</span></span>
+<span id="cb68-3"><a href="methods.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config --list</span>
 <span id="cb68-4"><a href="methods.html#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="co"># set git email</span></span>
 <span id="cb68-5"><a href="methods.html#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config user.email <span class="st">&quot;email@example.com&quot;</span></span>
 <span id="cb68-6"><a href="methods.html#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="co"># confirm emal</span></span>
-<span id="cb68-7"><a href="methods.html#cb68-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email</span>
+<span id="cb68-7"><a href="methods.html#cb68-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config --global user.email</span>
 <span id="cb68-8"><a href="methods.html#cb68-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-9"><a href="methods.html#cb68-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-10"><a href="methods.html#cb68-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-11"><a href="methods.html#cb68-11" aria-hidden="true" tabindex="-1"></a><span class="co"># For the rna-seq_test environment. </span></span>
-<span id="cb68-12"><a href="methods.html#cb68-12" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> /usr/local/anaconda3/bin/activate <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
+<span id="cb68-12"><a href="methods.html#cb68-12" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> <span class="ex">/usr/local/anaconda3/bin/activate</span> <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
 <span id="cb68-13"><a href="methods.html#cb68-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-14"><a href="methods.html#cb68-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-15"><a href="methods.html#cb68-15" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/Trial02&quot;</span></span>
@@ -319,8 +318,8 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb68-18"><a href="methods.html#cb68-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-19"><a href="methods.html#cb68-19" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> rawFastQC </span>
 <span id="cb68-20"><a href="methods.html#cb68-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-21"><a href="methods.html#cb68-21" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> <span class="at">-t</span> 64 rawReads/<span class="pp">*</span>fastq.gz <span class="at">-o</span> rawFastQC</span>
-<span id="cb68-22"><a href="methods.html#cb68-22" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> rawReads/<span class="pp">*</span>fastq.gz <span class="at">-o</span> rawFastQC</span>
+<span id="cb68-21"><a href="methods.html#cb68-21" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> -t 64 rawReads/*fastq.gz -o rawFastQC</span>
+<span id="cb68-22"><a href="methods.html#cb68-22" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> rawReads/*fastq.gz -o rawFastQC</span>
 <span id="cb68-23"><a href="methods.html#cb68-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-24"><a href="methods.html#cb68-24" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> rawFastQC</span>
 <span id="cb68-25"><a href="methods.html#cb68-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
@@ -353,12 +352,12 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb68-52"><a href="methods.html#cb68-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Trimmomatic </span></span>
 <span id="cb68-53"><a href="methods.html#cb68-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-54"><a href="methods.html#cb68-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Original (one by one)</span></span>
-<span id="cb68-55"><a href="methods.html#cb68-55" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE <span class="at">-threads</span> 5 rawReads/mPDL_RNA7D_Ko1_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_2.fastq.gz <span class="at">-baseout</span> trimmedReads/mPDL_RNA7D_Ko1 ILLUMINACLIP:truSeq-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="dv">2</span><span class="op">&gt;</span> trimmedReads/mPDL_RNA7D_Ko1trimming.log</span>
+<span id="cb68-55"><a href="methods.html#cb68-55" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE -threads 5 rawReads/mPDL_RNA7D_Ko1_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1 ILLUMINACLIP:truSeq-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="op">2&gt;</span> trimmedReads/mPDL_RNA7D_Ko1trimming.log</span>
 <span id="cb68-56"><a href="methods.html#cb68-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-57"><a href="methods.html#cb68-57" aria-hidden="true" tabindex="-1"></a><span class="co">#???????????? HOw to determing leading, trailing and minimun length</span></span>
 <span id="cb68-58"><a href="methods.html#cb68-58" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-59"><a href="methods.html#cb68-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Original (all automatically)</span></span>
-<span id="cb68-60"><a href="methods.html#cb68-60" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames2.txt <span class="kw">|</span> <span class="ex">parallel</span> <span class="at">-j</span> 4 <span class="st">&quot;trimmomatic PE -threads 5 rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:truSeq-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2&gt; trimmedReads/{}trimming.log&quot;</span></span>
+<span id="cb68-60"><a href="methods.html#cb68-60" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames2.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 4 <span class="st">&quot;trimmomatic PE -threads 5 rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:truSeq-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2&gt; trimmedReads/{}trimming.log&quot;</span></span>
 <span id="cb68-61"><a href="methods.html#cb68-61" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-62"><a href="methods.html#cb68-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if jobs are running</span></span>
 <span id="cb68-63"><a href="methods.html#cb68-63" aria-hidden="true" tabindex="-1"></a><span class="bu">jobs</span></span>
@@ -367,21 +366,21 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb68-66"><a href="methods.html#cb68-66" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-67"><a href="methods.html#cb68-67" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-68"><a href="methods.html#cb68-68" aria-hidden="true" tabindex="-1"></a><span class="co"># The generic trimmomatic command:</span></span>
-<span id="cb68-69"><a href="methods.html#cb68-69" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> trimmomatic-0.39.jar PE inputforward.fq.gz inputreverse.fq.gz outputforwardpaired.fq.gz outputforwardunpaired.fq.gz outputreversepaired.fq.gz outputreverseunpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36</span>
+<span id="cb68-69"><a href="methods.html#cb68-69" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> -jar trimmomatic-0.39.jar PE inputforward.fq.gz inputreverse.fq.gz outputforwardpaired.fq.gz outputforwardunpaired.fq.gz outputreversepaired.fq.gz outputreverseunpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36</span>
 <span id="cb68-70"><a href="methods.html#cb68-70" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-71"><a href="methods.html#cb68-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Try 03 SUCCESS!!!?</span></span>
-<span id="cb68-72"><a href="methods.html#cb68-72" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz <span class="at">-baseout</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="dv">2</span><span class="op">&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span>
+<span id="cb68-72"><a href="methods.html#cb68-72" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="op">2&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span>
 <span id="cb68-73"><a href="methods.html#cb68-73" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-74"><a href="methods.html#cb68-74" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-75"><a href="methods.html#cb68-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample 1 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)</span></span>
 <span id="cb68-76"><a href="methods.html#cb68-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-77"><a href="methods.html#cb68-77" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz <span class="at">-baseout</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="dv">2</span><span class="op">&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span>
+<span id="cb68-77"><a href="methods.html#cb68-77" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko1_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko1_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko1_S1_L001_R1_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="op">2&gt;</span> trimmedReads/mPDL_RNA7D_Ko1_S1_L001trimming.log</span>
 <span id="cb68-78"><a href="methods.html#cb68-78" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-79"><a href="methods.html#cb68-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample 2 Success!!!!???? error but TrimmomaticPE: Completed successfully message.  # error in TruSeq3-PE.fa (No such file or directory)... Change to TruSeq3-PE-2.fa (not tested yet)</span></span>
-<span id="cb68-80"><a href="methods.html#cb68-80" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko2_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko2_S1_L001_R2_001_2.fastq.gz <span class="at">-baseout</span> trimmedReads/mPDL_RNA7D_Ko2_S1_L001_R2_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="dv">2</span><span class="op">&gt;</span> trimmedReads/mPDL_RNA7D_Ko2_S1_L001trimming.log</span>
+<span id="cb68-80"><a href="methods.html#cb68-80" aria-hidden="true" tabindex="-1"></a><span class="ex">trimmomatic</span> PE rawReads/mPDL_RNA7D_Ko2_S1_L001_R1_001_1.fastq.gz rawReads/mPDL_RNA7D_Ko2_S1_L001_R2_001_2.fastq.gz -baseout trimmedReads/mPDL_RNA7D_Ko2_S1_L001_R2_001 ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:36 <span class="op">2&gt;</span> trimmedReads/mPDL_RNA7D_Ko2_S1_L001trimming.log</span>
 <span id="cb68-81"><a href="methods.html#cb68-81" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-82"><a href="methods.html#cb68-82" aria-hidden="true" tabindex="-1"></a><span class="co"># Pipe and loop for all files.</span></span>
-<span id="cb68-83"><a href="methods.html#cb68-83" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames.txt <span class="kw">|</span> <span class="ex">parallel</span> <span class="at">-j</span> 4 <span class="st">&quot;trimmomatic PE rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2&gt; trimmedReads/{}trimming.log&quot;</span> <span class="co">#Not successful. </span></span>
+<span id="cb68-83"><a href="methods.html#cb68-83" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> filenames.txt <span class="kw">|</span> <span class="ex">parallel</span> -j 4 <span class="st">&quot;trimmomatic PE rawReads/{}_1.fastq.gz rawReads/{}_2.fastq.gz -baseout trimmedReads/{} ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:2keepBothReads LEADING:3 TRAILING:3 MINLEN:36 2&gt; trimmedReads/{}trimming.log&quot;</span> #Not successful. </span>
 <span id="cb68-84"><a href="methods.html#cb68-84" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-85"><a href="methods.html#cb68-85" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-86"><a href="methods.html#cb68-86" aria-hidden="true" tabindex="-1"></a><span class="co"># In TrimmedRead run multiqc</span></span>
@@ -396,7 +395,7 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb68-95"><a href="methods.html#cb68-95" aria-hidden="true" tabindex="-1"></a><span class="co"># rm -d trimmedFastQC # Make sure folder is in main folder, if not delete</span></span>
 <span id="cb68-96"><a href="methods.html#cb68-96" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-97"><a href="methods.html#cb68-97" aria-hidden="true" tabindex="-1"></a><span class="co"># Run fastqc... Trimmed files have no file extension. Why???</span></span>
-<span id="cb68-98"><a href="methods.html#cb68-98" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> trimmedReads/<span class="pp">*</span> <span class="at">-o</span> trimmedFastQC</span>
+<span id="cb68-98"><a href="methods.html#cb68-98" aria-hidden="true" tabindex="-1"></a><span class="ex">fastqc</span> trimmedReads/* -o trimmedFastQC</span>
 <span id="cb68-99"><a href="methods.html#cb68-99" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-100"><a href="methods.html#cb68-100" aria-hidden="true" tabindex="-1"></a><span class="co"># .zip and qc html files will be created. Run multiqc</span></span>
 <span id="cb68-101"><a href="methods.html#cb68-101" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> trimmedFastQC</span>
@@ -411,7 +410,7 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <li>Unzip the tar.gz file. FYI: This processes require a long time.</li>
 </ol>
 <div class="sourceCode" id="cb70"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb70-1"><a href="methods.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the correct environment.</span></span>
-<span id="cb70-2"><a href="methods.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> /usr/local/anaconda3/bin/activate <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
+<span id="cb70-2"><a href="methods.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> <span class="ex">/usr/local/anaconda3/bin/activate</span> <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate /usr/local/anaconda3/envs/rna-seq_test</span>
 <span id="cb70-3"><a href="methods.html#cb70-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-4"><a href="methods.html#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the correct folder/directory.   </span></span>
 <span id="cb70-5"><a href="methods.html#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/Volumes/HD-PCFSU3-A/Experiments Data/Genewiz/60-499583816_60-501009934/Result/Mus Musculus/Mus_musculus_NCBI_build37.2.tar.gz&quot;</span></span>
@@ -425,7 +424,7 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <li>Confirm that STAR is installed if not Install STAR.</li>
 </ol>
 <div class="sourceCode" id="cb71"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb71-1"><a href="methods.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure of enviroment.  </span></span>
-<span id="cb71-2"><a href="methods.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> <span class="at">--help</span></span>
+<span id="cb71-2"><a href="methods.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> --help</span>
 <span id="cb71-3"><a href="methods.html#cb71-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb71-4"><a href="methods.html#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="co">#If not found install.  </span></span>
 <span id="cb71-5"><a href="methods.html#cb71-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install STAR </span>
@@ -434,7 +433,7 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb71-8"><a href="methods.html#cb71-8" aria-hidden="true" tabindex="-1"></a><span class="ex">y</span></span>
 <span id="cb71-9"><a href="methods.html#cb71-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb71-10"><a href="methods.html#cb71-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Check again. Long list of flags.  </span></span>
-<span id="cb71-11"><a href="methods.html#cb71-11" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> <span class="at">--help</span></span>
+<span id="cb71-11"><a href="methods.html#cb71-11" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> --help</span>
 <span id="cb71-12"><a href="methods.html#cb71-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb71-13"><a href="methods.html#cb71-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create directory for starIndex. </span></span>
 <span id="cb71-14"><a href="methods.html#cb71-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> starIndex</span></code></pre></div>
@@ -449,7 +448,7 @@ mPDL_RNA7D_Ko2_2.fastq.gz</p>
 <span id="cb72-4"><a href="methods.html#cb72-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb72-5"><a href="methods.html#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Run STAR. Takes long time. wait until  ..... finished successfully message appears. if not rerun again. </span></span>
 <span id="cb72-6"><a href="methods.html#cb72-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-7"><a href="methods.html#cb72-7" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> <span class="at">--runThreadN</span> 64 <span class="at">--runMode</span> genomeGenerate <span class="at">--genomeDir</span> starIndex <span class="at">--genomeFastaFiles</span> Mus_musculus/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa <span class="at">--sjdbGTFfile</span> Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf</span></code></pre></div>
+<span id="cb72-7"><a href="methods.html#cb72-7" aria-hidden="true" tabindex="-1"></a><span class="ex">STAR</span> --runThreadN 64 --runMode genomeGenerate --genomeDir starIndex --genomeFastaFiles Mus_musculus/NCBI/build37.2/Sequence/WholeGenomeFasta/genome.fa --sjdbGTFfile Mus_musculus/NCBI/build37.2/Annotation/Genes/genes.gtf</span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Align reads</li>
 </ol>

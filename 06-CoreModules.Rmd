@@ -3,7 +3,7 @@
 Base on the South Dakota State University analysis protocol
 
 ```{r, eval=FALSE}
-# Steven Xijin Ge  South Dakota State University
+
 
 
 ################################################################

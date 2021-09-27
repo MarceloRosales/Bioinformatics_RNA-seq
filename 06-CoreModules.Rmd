@@ -1,11 +1,11 @@
-#  R code modules to be used for stand-alone analysis.
+# R code modules to be used for stand-alone analysis.
 
-Base on the South Dakota State University analysis protocol
+Base on the South Dakota State University analysis protocol  
+
+## Install packages
+
 
 ```{r, eval=FALSE}
-
-
-
 ################################################################
 # Install packages
 ################################################################
@@ -52,8 +52,11 @@ if(length(new.bio.packages)){
 # suc = unlist ( lapply(list.of.bio.packages, require, character.only = TRUE) )
 # if(sum(suc) < length(list.of.bio.packages) )
 #	cat ("\n\nWarnning!!!!!! These Bioconductor packages cannot be loaded:", list.of.bio.packages[!suc] )
+```
 
+## Global variables  
 
+```{r, eval=FALSE}
 ################################################################
 # Global variables
 ################################################################
@@ -93,7 +96,11 @@ colorChoices = setNames(1:dim(heatColors)[1],rownames(heatColors)) # for pull do
 speciesChoice = list()
 speciesChoice <- append( setNames( "NEW","**NEW SPECIES**"), speciesChoice  )
 speciesChoice <- append( setNames( "BestMatch","Best matching species"), speciesChoice  )
+```
 
+## Read data and pre-process  
+
+```{r, eval=FALSE}
 ################################################################
 # Read data and pre-process
 ################################################################
@@ -619,7 +626,11 @@ geneBarPlotError <- function() {
 	
 	p2
 }
+```
 
+## Hierarchical clustering  
+
+```{r, eval=FALSE}
 ################################################################
 # Hierarchical clustering
 ################################################################
@@ -866,8 +877,11 @@ heatmapPlotly <- function () {
 	ggplotly(p) %>% 
 		layout(margin = list(b = 150,l=200))  # prevent cutoff of sample names
 }
+```
 
+## PCA  
 
+```{r, eval=FALSE}
 ################################################################
 # PCA
 ################################################################
@@ -1209,9 +1223,12 @@ readCountsBias <- function( ){
 	if(is.null(tem)) return( "No bias detected") else
 	return( tem )
 		  
-} 
+}
+```
 
+## K-means clustering  
 
+```{r, eval=FALSE}
 ################################################################
 # K-means clustering
 ################################################################
@@ -1541,8 +1558,11 @@ KmeansGO <- function() {
 	results$Cluster[which( duplicated(results$Cluster) ) ] <- ""
 	results
   }
+```
 
+## Differential expression  
 
+```{r, eval=FALSE}
 ################################################################
 # Differential expression
 ################################################################
@@ -3226,8 +3246,11 @@ stringDB_network_link <- function(){
 			tem = paste(tem2,tem )
 			return(tem)	
 }
+```
 
+## Pathway analysis  
 
+```{r, eval=FALSE}
 ################################################################
 # Pathway analysis
 ################################################################
@@ -3840,7 +3863,11 @@ pathwayListData  <- function(){
 
 
 }
+```
 
+## Genome-wide view  
+
+```{r, eval=FALSE}
 ################################################################
 # Genome-wide view
 ################################################################
@@ -4198,7 +4225,11 @@ genomePlotDataPre <- function( ){
 
 	return( GEanalysisResults )
 }
+```
 
+## Biclustering  
+
+```{r, eval=FALSE}
 ################################################################
 # Biclustering
 ################################################################
@@ -4300,7 +4331,11 @@ geneListBclustGO <- function( ){
 			results1[,-1]			
 
 }
+```
 
+## Co-expression network  
+
+```{r, eval=FALSE}
 ################################################################
 # Co-expression network
 ################################################################

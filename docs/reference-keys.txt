@@ -68,6 +68,7 @@ heatmap-normalization
 ma-plots
 eastern-new-mexico-university-enmu-method
 r-code-modules-to-be-used-for-stand-alone-analysis.
+local-installation
 install-packages
 global-variables
 read-data-and-pre-process

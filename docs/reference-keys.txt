@@ -67,6 +67,7 @@ volcano-plot
 heatmap-normalization
 ma-plots
 eastern-new-mexico-university-enmu-method
+r-code-modules-to-be-used-for-stand-alone-analysis.
 wgcna-rna-seq-blog
 WGCNA
 wgcna-rpackage-installation-procedure.
